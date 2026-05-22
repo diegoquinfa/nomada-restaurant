@@ -14,11 +14,6 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "NÓMADA Cocina Fusión | Delivery Gourmet en Cartagena" },
-      {
-        name: "description",
-        content:
-          "Cocina fusión gourmet en Cartagena. Almuerzos desde $23.000 y platos artesanales para delivery. Arroces, pastas, mariscos y grill — probá NÓMADA.",
-      },
       { name: "robots", content: "index, follow" },
       { name: "og:type", content: "website" },
       { name: "og:locale", content: "es_CO" },

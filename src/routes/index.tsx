@@ -7,7 +7,18 @@ import { HomeMenu } from "#/modules/pages/home/sections/home-menu";
 import { HomeSchedule } from "#/modules/pages/home/sections/home-shedule";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/")({ component: Home });
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      {
+        name: "description",
+        content:
+          "NÓMADA Cocina Fusión — cocina oculta en Cartagena. Almuerzos desde $23.000, arroces, pastas, mariscos y grill. Delivery gourmet con sabores fusión. Pedí por WhatsApp.",
+      },
+    ],
+  }),
+  component: Home,
+});
 
 function Home() {
   return (
