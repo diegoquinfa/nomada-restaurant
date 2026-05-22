@@ -46,8 +46,8 @@ export function HomeHero() {
 
         {/* Subheadline */}
         <h1 className="animate-fade-in-up [animation-delay:500ms] animation-duration-[800ms] font-serif italic text-nomada-cream/70 text-lg md:text-xl leading-relaxed mt-4 text-balance">
-          Una cocina oculta creada para transformar el delivery en una
-          experiencia gourmet
+          Un restaurante cocina oculta creado para transformar el delivery en
+          una experiencia gourmet en Cartagena
         </h1>
 
         {/* CTAs */}
