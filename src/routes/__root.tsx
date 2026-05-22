@@ -6,7 +6,7 @@ import appCss from "../styles.css?url";
 import { Navbar } from "#/modules/navigation/components/navbar";
 import { Footer } from "#/modules/navigation/components/footer";
 
-const SITE_URL = "https://nomadacartagena.com";
+const SITE_URL = process.env.SITE_URL ?? "https://nomadacartagena.com";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -23,7 +23,10 @@ export const Route = createRootRoute({
       { name: "og:type", content: "website" },
       { name: "og:locale", content: "es_CO" },
       { name: "og:site_name", content: "NÓMADA Cocina Fusión" },
-      { name: "og:title", content: "NÓMADA Cocina Fusión — Delivery Gourmet en Cartagena" },
+      {
+        name: "og:title",
+        content: "NÓMADA Cocina Fusión — Delivery Gourmet en Cartagena",
+      },
       {
         name: "og:description",
         content:
@@ -32,7 +35,10 @@ export const Route = createRootRoute({
       { name: "og:image", content: `${SITE_URL}/images/open_graph.webp` },
       { name: "og:url", content: SITE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "NÓMADA Cocina Fusión — Delivery Gourmet en Cartagena" },
+      {
+        name: "twitter:title",
+        content: "NÓMADA Cocina Fusión — Delivery Gourmet en Cartagena",
+      },
       {
         name: "twitter:description",
         content:
