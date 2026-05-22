@@ -42,7 +42,7 @@ export const Route = createRootRoute({
       { name: "twitter:image", content: `${SITE_URL}/images/open_graph.webp` },
     ],
     links: [
-      { rel: "stylesheet", href: appCss },
+      { rel: "stylesheet", href: appCss, fetchpriority: "high" },
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       { rel: "canonical", href: SITE_URL },
     ],
