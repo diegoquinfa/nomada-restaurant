@@ -12,7 +12,7 @@ export function Footer() {
   }, []);
 
   return (
-    <footer className="bg-nomada-deep border-t border-nomada-gold/15 py-12">
+    <footer className="bg-nomada-deep border-t border-nomada-gold/15 pt-12 pb-20 mdn:pb-12">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Brand */}
@@ -111,7 +111,7 @@ export function Footer() {
           <p className="font-sans text-nomada-cream/25 text-[11px] tracking-[0.15em] text-center">
             © {year} NÓMADA. Todos los derechos reservados.
           </p>
-          <p className="font-sans text-nomada-cream/20 text-[10px] tracking-[0.1em]">
+          <p className="font-sans text-nomada-cream/20 text-[10px] tracking-widest">
             Hecho por{" "}
             <a
               href="https://diegoquinfa.lat"
@@ -121,7 +121,7 @@ export function Footer() {
             >
               Diego Quintana Fajardo
             </a>{" "}
-            | Ingeniero de Software
+            | Ingeniero de Sistemas y Computación
           </p>
         </div>
       </div>
