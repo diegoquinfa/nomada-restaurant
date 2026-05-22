@@ -24,6 +24,11 @@ const config = defineConfig({
     }),
     tailwindcss(),
     tanstackStart({
+      server: {
+        build: {
+          inlineCss: true,
+        },
+      },
       prerender: {
         enabled: true,
         autoSubfolderIndex: true,

@@ -1,8 +1,8 @@
+import "../styles.css";
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 
-import appCss from "../styles.css?url";
 import { Navbar } from "#/modules/navigation/components/navbar";
 import { Footer } from "#/modules/navigation/components/footer";
 
@@ -42,8 +42,6 @@ export const Route = createRootRoute({
       { name: "twitter:image", content: `${SITE_URL}/images/open_graph.webp` },
     ],
     links: [
-      { rel: "preload", href: appCss, as: "style" },
-      { rel: "stylesheet", href: appCss, fetchpriority: "high" },
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       { rel: "canonical", href: SITE_URL },
     ],
