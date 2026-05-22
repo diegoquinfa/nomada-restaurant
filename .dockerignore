@@ -1,0 +1,11 @@
+.git/
+.gitignore
+node_modules/
+.output/
+.agents/
+.atl/
+.vscode/
+README.md
+pnpm-lock.yaml
+skills-lock.json
+.cta.json
