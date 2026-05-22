@@ -6,6 +6,5 @@ node_modules/
 .atl/
 .vscode/
 README.md
-pnpm-lock.yaml
 skills-lock.json
 .cta.json
