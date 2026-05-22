@@ -107,9 +107,21 @@ export function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-nomada-gold/10 mt-8 pt-8">
+        <div className="border-t border-nomada-gold/10 mt-8 pt-8 flex flex-col items-center gap-1">
           <p className="font-sans text-nomada-cream/25 text-[11px] tracking-[0.15em] text-center">
             © {year} NÓMADA. Todos los derechos reservados.
+          </p>
+          <p className="font-sans text-nomada-cream/20 text-[10px] tracking-[0.1em]">
+            Hecho por{" "}
+            <a
+              href="https://diegoquinfa.lat"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-nomada-gold/40 hover:text-nomada-gold transition-colors duration-200"
+            >
+              Diego Quintana Fajardo
+            </a>{" "}
+            | Ingeniero de Software
           </p>
         </div>
       </div>
