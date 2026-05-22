@@ -15,6 +15,8 @@ export function HomeHero() {
           alt="Plato gourmet delivery NÓMADA — Cocina Fusión Cartagena"
           className="object-cover object-center w-full h-dvh blur-sm"
           priority
+          fetchPriority="high"
+          fetchpriority="high"
         />
         <div className="absolute inset-0 bg-nomada-primary/80" />
       </div>
@@ -28,15 +30,10 @@ export function HomeHero() {
           <Image
             layout="fullWidth"
             src="/images/logo.webp"
-            alt="NÓMADA Logo"
+            alt="NÓMADA Cocina Fusión"
+            aria-label="NÓMADA Cocina Fusión"
             className="w-max-full"
           />
-          {/*<h1 className="font-serif text-nomada-cream text-7xl md:text-9xl tracking-[0.15em] uppercase font-light leading-none">
-            NÓMADA
-          </h1>
-          <p className="font-sans text-nomada-gold text-[10px] tracking-[0.45em] uppercase mt-3">
-            Cocina Fusión
-          </p>*/}
         </div>
 
         {/* Gold divider */}
@@ -48,10 +45,10 @@ export function HomeHero() {
         </h2>
 
         {/* Subheadline */}
-        <p className="animate-fade-in-up [animation-delay:500ms] animation-duration-[800ms] font-serif italic text-nomada-cream/70 text-lg md:text-xl leading-relaxed mt-4 text-balance">
+        <h1 className="animate-fade-in-up [animation-delay:500ms] animation-duration-[800ms] font-serif italic text-nomada-cream/70 text-lg md:text-xl leading-relaxed mt-4 text-balance">
           Una cocina oculta creada para transformar el delivery en una
-          experiencia
-        </p>
+          experiencia gourmet
+        </h1>
 
         {/* CTAs */}
         <div className="animate-fade-in-up [animation-delay:600ms] animation-duration-[800ms] flex flex-col sm:flex-row items-center gap-4 mt-10">

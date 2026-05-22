@@ -12,9 +12,28 @@ const config = defineConfig({
   resolve: { tsconfigPaths: true },
   plugins: [
     devtools(),
-    nitro({ rollupConfig: { external: [/^@sentry\//] } }),
+    nitro({
+      rollupConfig: { external: [/^@sentry\//] },
+      publicAssets: [
+        {
+          baseURL: "images",
+          dir: "public/images",
+          maxAge: 60 * 60 * 24 * 365, // 1 año
+        },
+      ],
+    }),
     tailwindcss(),
-    tanstackStart(),
+    tanstackStart({
+      prerender: {
+        enabled: true,
+        autoSubfolderIndex: true,
+        autoStaticPathsDiscovery: true,
+        crawlLinks: true,
+        filter: ({ path }) => !path.startsWith("/dashboard"),
+        retryCount: 2,
+        retryDelay: 1000,
+      },
+    }),
     viteReact(),
     babel({ presets: [reactCompilerPreset()] }),
   ],
