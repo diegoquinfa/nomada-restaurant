@@ -12,7 +12,7 @@ export function Footer() {
   }, []);
 
   return (
-    <footer className="bg-nomada-deep border-t border-nomada-gold/15 pt-12 pb-20 mdn:pb-12">
+    <footer className="bg-nomada-deep border-t border-nomada-gold/15 pt-12 pb-20 md:pb-12">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Brand */}
