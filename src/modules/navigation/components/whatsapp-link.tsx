@@ -1,5 +1,6 @@
 import { cn } from "#/shared/ui/lib/utils";
 import type { AnchorHTMLAttributes } from "react";
+import { useEffect, useState } from "react";
 
 export const WHATSAPP_URL = new URL("https://wa.me/573242503301");
 
@@ -32,8 +33,24 @@ export const WhatsAppLink = ({
 };
 
 export function WhatsAppFAB() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <WhatsAppLink className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-nomada-gold text-nomada-deep px-4 py-3 shadow-lg hover:bg-nomada-cream transition-colors duration-300 md:hidden">
+    <WhatsAppLink
+      className={cn(
+        `fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-nomada-gold text-nomada-deep px-4 py-3 shadow-lg hover:bg-nomada-cream transition-all duration-300 md:hidden ${
+          visible
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-4 pointer-events-none"
+        }`,
+      )}
+    >
       <svg
         width="20"
         height="20"
