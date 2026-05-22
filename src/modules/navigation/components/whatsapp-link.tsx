@@ -1,0 +1,53 @@
+import { cn } from "#/shared/ui/lib/utils";
+import type { AnchorHTMLAttributes } from "react";
+
+export const WHATSAPP_URL = new URL("https://wa.me/573242503301");
+
+type WhatsAppLinkProps = {
+  message?: string;
+} & AnchorHTMLAttributes<HTMLAnchorElement>;
+
+export const WhatsAppLink = ({
+  message = "Hola, quiero vivir la experiencia NÓMADA 🌎",
+  className,
+  children,
+  ...props
+}: WhatsAppLinkProps) => {
+  const queryParams = new URLSearchParams({
+    text: message,
+  });
+
+  return (
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      href={`${WHATSAPP_URL.toString()}?${queryParams.toString()}`}
+      aria-label="Pedir por WhatsApp"
+      className={cn(className)}
+      {...props}
+    >
+      {children}
+    </a>
+  );
+};
+
+export function WhatsAppFAB() {
+  return (
+    <WhatsAppLink className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-nomada-gold text-nomada-deep px-4 py-3 shadow-lg hover:bg-nomada-cream transition-colors duration-300 md:hidden">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        aria-hidden="true"
+      >
+        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+      </svg>
+      <span className="font-sans text-[11px] tracking-[0.2em] uppercase">
+        Pedir ahora
+      </span>
+    </WhatsAppLink>
+  );
+}

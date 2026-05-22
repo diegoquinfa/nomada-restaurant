@@ -1,0 +1,94 @@
+@import "tailwindcss";
+@plugin '@tailwindcss/typography';
+@import "@fontsource-variable/dm-sans";
+@import "@fontsource-variable/cormorant";
+
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+    /* NÓMADA Brand Colors */
+    --color-primary: #3e4a36;
+    --color-cream: #f0e8d5;
+    --color-earth: #7a4a2e;
+    --color-gold: #c9a84c;
+    --color-deep: #2a3a2d;
+
+    /* Semantic tokens */
+    --background: var(--color-primary);
+    --foreground: var(--color-cream);
+    --card: #334637;
+    --card-foreground: var(--color-cream);
+    --popover: var(--color-deep);
+    --popover-foreground: var(--color-cream);
+    --primary: var(--color-gold);
+    --primary-foreground: var(--color-deep);
+    --secondary: var(--color-earth);
+    --secondary-foreground: var(--color-cream);
+    --muted: #4a6350;
+    --muted-foreground: #c5bfb0;
+    --accent: var(--color-earth);
+    --accent-foreground: var(--color-cream);
+    --destructive: oklch(0.577 0.245 27.325);
+    --destructive-foreground: oklch(0.985 0 0);
+    --border: rgba(201, 168, 76, 0.25);
+    --input: rgba(201, 168, 76, 0.15);
+    --ring: var(--color-gold);
+    --radius: 0.125rem;
+
+    /* Nomada specific extras */
+    --section-cream: var(--color-cream);
+    --section-deep: var(--color-deep);
+    --gold-divider: rgba(201, 168, 76, 0.4);
+}
+
+@theme inline {
+    --font-sans: "DM Sans Variable", system-ui, sans-serif;
+    --font-serif: "Cormorant Variable", Georgia, serif;
+    --font-mono: "Courier New", monospace;
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --radius-sm: calc(var(--radius));
+    --radius-md: calc(var(--radius));
+    --radius-lg: calc(var(--radius));
+    --radius-xl: calc(var(--radius));
+
+    /* Brand color utilities */
+    --color-nomada-primary: #3d5240;
+    --color-nomada-cream: #f0e8d5;
+    --color-nomada-earth: #7a4a2e;
+    --color-nomada-gold: #c9a84c;
+    --color-nomada-deep: #2a3a2d;
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px;
+    }
+}
