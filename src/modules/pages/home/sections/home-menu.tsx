@@ -260,7 +260,7 @@ function DishCard({ dish }: { dish: Dish }) {
           )}
         </div>
       ) : (
-        <div className="relative aspect-4/3 overflow-hidden bg-gradient-to-br from-nomada-primary to-nomada-deep flex items-center justify-center">
+        <div className="relative aspect-4/3 overflow-hidden bg-linear-to-br from-nomada-primary to-nomada-deep flex items-center justify-center">
           <span className="font-serif text-nomada-cream/60 text-sm text-center px-4">
             {dish.name}
           </span>
@@ -299,6 +299,20 @@ export function HomeMenu() {
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  // Auto-scroll the active mobile tab into view horizontally
+  useEffect(() => {
+    const activeTab = document.querySelector(
+      `[data-category="${activeId}"]`,
+    ) as HTMLElement | null;
+    if (activeTab) {
+      activeTab.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  }, [activeId]);
+
   return (
     <section className="bg-nomada-primary py-24 md:py-36">
       <div className="max-w-6xl mx-auto px-6">
@@ -317,12 +331,13 @@ export function HomeMenu() {
         </div>
 
         {/* Mobile: sticky horizontal scrollable bar */}
-        <div className="sticky top-[72px] z-40 bg-nomada-primary/95 backdrop-blur-sm border-b border-nomada-gold/20 mb-12 -mx-6 px-6 lg:mx-0 lg:px-0 lg:hidden overflow-x-auto">
+        <div className="sticky top-18 z-40 bg-nomada-primary/95 backdrop-blur-sm border-b border-nomada-gold/20 mb-12 -mx-6 px-6 lg:mx-0 lg:px-0 lg:hidden overflow-x-auto">
           <div className="flex gap-0 pb-0">
             {categories.map((cat) => (
               <button
                 type="button"
                 key={cat.id}
+                data-category={cat.id}
                 onClick={() => scrollToCategory(cat.id)}
                 className={cn(
                   `font-sans text-[11px] tracking-[0.25em] uppercase px-6 py-4 border-b-2 transition-all duration-200 whitespace-nowrap ${
@@ -341,7 +356,7 @@ export function HomeMenu() {
         {/* Desktop + Mobile content layout */}
         <div className="flex gap-12">
           {/* Desktop sidebar (hidden on mobile) */}
-          <aside className="hidden lg:block sticky top-[100px] self-start w-[180px] shrink-0">
+          <aside className="hidden lg:block sticky top-25 self-start w-45 shrink-0">
             <nav className="flex flex-col gap-1">
               {categories.map((cat) => (
                 <button
