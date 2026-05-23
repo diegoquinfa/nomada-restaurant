@@ -18,7 +18,7 @@ const config = defineConfig({
         {
           baseURL: "images",
           dir: "public/images",
-          maxAge: 60 * 60 * 24 * 1, // 1 dia
+          maxAge: 60 * 60 * 24 * 0.5, // medio día
         },
       ],
     }),
@@ -28,10 +28,6 @@ const config = defineConfig({
         build: {
           inlineCss: true,
         },
-        host: "0.0.0.0",
-      },
-      prerender: {
-        enabled: false,
       },
     }),
     viteReact(),
