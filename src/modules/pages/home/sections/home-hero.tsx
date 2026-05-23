@@ -66,7 +66,7 @@ export function HomeHero() {
 
         {/* Categories */}
         <div className="animate-fade-in [animation-delay:800ms] animation-duration-[600ms] flex flex-wrap justify-center gap-x-5 gap-y-2 mt-12">
-          {["Arroces", "Pastas", "Mariscos", "Grill"].map((cat, i) => (
+          {["Entradas y Arroces", "Recomendados del Chef", "Pastas", "Caseritos del Chef"].map((cat, i) => (
             <span key={cat} className="flex items-center gap-5">
               <span className="font-sans text-nomada-gold text-[10px] tracking-[0.35em] uppercase">
                 {cat}

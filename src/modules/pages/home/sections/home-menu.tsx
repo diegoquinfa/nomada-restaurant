@@ -27,8 +27,8 @@ function formatPrice(price: number | null): string {
 
 const categories: Category[] = [
   {
-    id: "entradas",
-    label: "Entradas",
+    id: "entradas-y-arroces",
+    label: "Entradas y Arroces",
     dishes: [
       {
         name: "Calamar Crocante & Acevichado",
@@ -39,12 +39,6 @@ const categories: Category[] = [
         is_coming_soon: false,
         image: "/images/dishes/entradas/calamar-crocante-acevichado.webp",
       },
-    ],
-  },
-  {
-    id: "arroces",
-    label: "Arroces",
-    dishes: [
       {
         name: "Arroz Salteado Caribeño",
         description:

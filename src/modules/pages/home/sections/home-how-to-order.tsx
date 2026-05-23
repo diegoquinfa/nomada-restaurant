@@ -5,7 +5,7 @@ const steps = [
     number: "01",
     title: "Explora el menú",
     description:
-      "Navega por nuestras categorías y elige los platos que más te llamen. Arroces, pastas, mariscos o grill.",
+      "Navega por nuestras categorías y elige los platos que más te llamen. Entradas y Arroces, Recomendados del Chef, Pastas, Caseritos del Chef y más.",
     icon: (
       <svg
         width="24"
