@@ -334,7 +334,7 @@ export function HomeMenu() {
         {/* Mobile: sticky horizontal scrollable bar */}
         <div
           ref={tabBarRef}
-          className="sticky top-18 z-30 bg-nomada-primary/95 backdrop-blur-sm border-b border-nomada-gold/20 mb-12 -mx-6 px-6 lg:mx-0 lg:px-0 lg:hidden overflow-x-auto"
+          className="sticky top-17.5 z-30 bg-nomada-primary/95 backdrop-blur-sm border-b border-nomada-gold/20 mb-12 -mx-6 px-6 lg:mx-0 lg:px-0 lg:hidden overflow-x-auto"
         >
           <div className="flex gap-0 pb-0">
             {categories.map((cat) => (
