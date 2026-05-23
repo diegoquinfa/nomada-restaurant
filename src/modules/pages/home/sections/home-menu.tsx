@@ -396,6 +396,11 @@ export function HomeMenu() {
                   <h3 className="font-serif text-nomada-gold text-3xl md:text-4xl font-light tracking-wide text-center">
                     {cat.label}
                   </h3>
+                  {cat.id === "caseritos-del-chef" && (
+                    <p className="font-sans text-nomada-gold/60 text-[10px] tracking-[0.3em] uppercase text-center mt-2">
+                      Disponible 11:00 am — 2:00 pm
+                    </p>
+                  )}
                   {activeId === cat.id && (
                     <div className="absolute -bottom-px left-1/2 -translate-x-1/2 w-8 h-0.5 bg-nomada-gold rounded-full" />
                   )}
