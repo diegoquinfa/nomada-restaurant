@@ -194,7 +194,7 @@ function useScrollSpy(categoryIds: string[]) {
     const observers: Map<string, IntersectionObserver> = new Map();
 
     const observerOptions: IntersectionObserverInit = {
-      rootMargin: "-100px 0px -40% 0px",
+      rootMargin: "-100px 0px -10% 0px",
       threshold: 0,
     };
 
@@ -295,20 +295,6 @@ export function HomeMenu() {
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // Auto-scroll the active mobile tab into view horizontally
-  useEffect(() => {
-    const activeTab = document.querySelector(
-      `[data-category="${activeId}"]`,
-    ) as HTMLElement | null;
-    if (activeTab) {
-      activeTab.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
-      });
-    }
-  }, [activeId]);
-
   return (
     <section className="bg-nomada-primary py-24 md:py-36">
       <div className="max-w-6xl mx-auto px-6">
@@ -327,7 +313,7 @@ export function HomeMenu() {
         </div>
 
         {/* Mobile: sticky horizontal scrollable bar */}
-        <div className="sticky top-18 z-40 bg-nomada-primary/95 backdrop-blur-sm border-b border-nomada-gold/20 mb-12 -mx-6 px-6 lg:mx-0 lg:px-0 lg:hidden overflow-x-auto">
+        <div className="sticky top-18 z-30 bg-nomada-primary/95 backdrop-blur-sm border-b border-nomada-gold/20 mb-12 -mx-6 px-6 lg:mx-0 lg:px-0 lg:hidden overflow-x-auto">
           <div className="flex gap-0 pb-0">
             {categories.map((cat) => (
               <button
@@ -352,7 +338,7 @@ export function HomeMenu() {
         {/* Desktop + Mobile content layout */}
         <div className="flex gap-12">
           {/* Desktop sidebar (hidden on mobile) */}
-          <aside className="hidden lg:block sticky top-25 self-start w-45 shrink-0">
+          <aside className="hidden lg:block sticky top-25 z-30 self-start w-45 shrink-0">
             <nav className="flex flex-col gap-1">
               {categories.map((cat) => (
                 <button
@@ -387,7 +373,7 @@ export function HomeMenu() {
               <section
                 key={cat.id}
                 id={`cat-${cat.id}`}
-                className="scroll-mt-35"
+                className="scroll-mt-[116px]"
               >
                 {/* Decorative header */}
                 <div className="relative mb-8 pb-6 border-b border-nomada-gold/30">
