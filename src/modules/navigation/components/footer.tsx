@@ -112,7 +112,7 @@ export function Footer() {
             © {year} NÓMADA. Todos los derechos reservados.
           </p>
           <p className="font-sans text-nomada-cream/20 text-[10px] tracking-widest">
-            Hecho por{" "}
+            Página desarrollada por{" "}
             <a
               href="https://diegoquinfa.lat"
               target="_blank"
