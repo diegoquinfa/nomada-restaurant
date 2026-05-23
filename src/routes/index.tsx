@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "NÓMADA Cocina Fusión — cocina oculta en Cartagena. Entradas, pastas, arroces y más. Delivery gourmet con sabores fusión. Pedí por WhatsApp.",
+          "NÓMADA Cocina Fusión — Almuerzos desde $23.000, arroces y pastas. Delivery gourmet con sabores fusión. Cocina oculta, Cartagena. Pide por WhatsApp.",
       },
     ],
   }),
