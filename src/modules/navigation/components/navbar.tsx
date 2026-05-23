@@ -25,6 +25,11 @@ export function Navbar() {
 
   const handleClose = () => setMenuOpen(false);
 
+  // Toggle body class for WhatsAppFAB z-index
+  useEffect(() => {
+    document.body.classList.toggle("nav-menu-open", menuOpen);
+  }, [menuOpen]);
+
   return (
     <>
       <header

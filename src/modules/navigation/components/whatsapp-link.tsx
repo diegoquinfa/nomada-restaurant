@@ -34,6 +34,7 @@ export const WhatsAppLink = ({
 
 export function WhatsAppFAB() {
   const [visible, setVisible] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 60);
@@ -41,10 +42,20 @@ export function WhatsAppFAB() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setMenuOpen(document.body.classList.contains("nav-menu-open"));
+    });
+    observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <WhatsAppLink
       className={cn(
-        `fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-nomada-gold text-nomada-deep px-4 py-3 shadow-lg hover:bg-nomada-cream transition-all duration-300 md:hidden ${
+        `fixed bottom-6 right-6 flex items-center gap-3 bg-nomada-gold text-nomada-deep px-4 py-3 shadow-lg hover:bg-nomada-cream transition-all duration-300 md:hidden ${
+          menuOpen ? "z-30" : "z-50"
+        } ${
           visible
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-4 pointer-events-none"
