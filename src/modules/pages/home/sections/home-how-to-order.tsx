@@ -138,6 +138,43 @@ export function HomeHowToOrder() {
             Hacer mi pedido
           </WhatsAppLink>
         </div>
+
+        {/* FAQ Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: [
+                {
+                  "@type": "Question",
+                  name: "¿Cómo hago un pedido en NÓMADA?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Explora nuestro menú, escríbenos por WhatsApp con tu pedido y dirección de entrega, y recibe en casa. Respondemos de inmediato.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "¿Cuál es el horario de atención?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Lunes a jueves de 11:00 a 14:00 y de 18:00 a 22:00. Viernes a domingo de 11:00 a 22:00.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "¿Hacen delivery en Cartagena?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Sí, ofrecemos delivery a domicilio en toda Cartagena. Los pedidos se reciben hasta 30 minutos antes del cierre.",
+                  },
+                },
+              ],
+            }),
+          }}
+        />
       </div>
     </section>
   );
