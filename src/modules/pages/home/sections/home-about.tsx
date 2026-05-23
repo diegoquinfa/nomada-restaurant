@@ -9,7 +9,7 @@ export function HomeAbout() {
           <div className="relative">
             <div className="relative aspect-4/5 overflow-hidden">
               <Image
-                src="/images/banner-about.webp"
+                src="/images/assets/banner-about.webp"
                 alt="Cocina artesanal NÓMADA — preparación gourmet en Cartagena"
                 layout="fullWidth"
                 className="object-cover object-center"
@@ -19,7 +19,7 @@ export function HomeAbout() {
               <div className="absolute inset-0 border border-nomada-gold/20" />
             </div>
             {/* Floating badge */}
-            <div className="absolute -bottom-5 -right-4 md:-right-6 bg-nomada-earth px-5 py-3 border border-nomada-earth">
+            <div className="absolute -bottom-5 -right-1 md:-right-6 bg-nomada-earth px-5 py-3 border border-nomada-earth">
               <p className="font-sans text-nomada-cream text-[10px] tracking-[0.3em] uppercase">
                 Cocina oculta · Cartagena
               </p>

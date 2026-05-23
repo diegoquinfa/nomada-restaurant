@@ -11,11 +11,9 @@ export function HomeHero() {
       <div className="absolute inset-0 w-full h-min-dvh -z-10">
         <Image
           layout="fullWidth"
-          src="/images/hero-bg.webp"
+          src="/images/assets/hero-bg.webp"
           alt="Plato gourmet delivery NÓMADA — Cocina Fusión Cartagena"
           className="object-cover object-center w-full h-dvh blur-sm"
-          priority
-          fetchPriority="high"
           fetchpriority="high"
         />
         <div className="absolute inset-0 bg-nomada-primary/80" />
@@ -33,6 +31,7 @@ export function HomeHero() {
             alt="NÓMADA Cocina Fusión"
             aria-label="NÓMADA Cocina Fusión"
             className="w-max-full"
+            fetchpriority="high"
           />
         </div>
 
