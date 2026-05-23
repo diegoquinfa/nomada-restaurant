@@ -1,7 +1,7 @@
 import { WhatsAppLink } from "#/modules/navigation/components/whatsapp-link";
 import { cn } from "#/shared/ui/lib/utils";
 import { Image } from "@unpic/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Badge = "Favorito" | "Nuevo" | "Temporada" | null;
 
@@ -191,12 +191,116 @@ const badgeStyles: Record<NonNullable<Badge>, string> = {
   Temporada: "border border-nomada-gold text-nomada-gold",
 };
 
+// ─── Hook: IntersectionObserver scroll tracker ─────────────────────────────
+
+function useScrollSpy(categoryIds: string[]) {
+  const [activeId, setActiveId] = useState(categoryIds[0]);
+
+  useEffect(() => {
+    const observers: Map<string, IntersectionObserver> = new Map();
+
+    const observerOptions: IntersectionObserverInit = {
+      rootMargin: "-100px 0px -40% 0px",
+      threshold: 0,
+    };
+
+    categoryIds.forEach((id) => {
+      const el = document.getElementById(`cat-${id}`);
+      if (!el) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(id);
+          }
+        });
+      }, observerOptions);
+
+      observer.observe(el);
+      observers.set(id, observer);
+    });
+
+    return () => {
+      observers.forEach((obs) => {
+        obs.disconnect();
+      });
+    };
+  }, [categoryIds]);
+
+  return activeId;
+}
+
+// ─── Dish Card ─────────────────────────────────────────────────────────────
+
+function DishCard({ dish }: { dish: Dish }) {
+  return (
+    <article
+      className={cn(
+        "group flex flex-col border border-nomada-gold/15 hover:border-nomada-gold/35 transition-colors duration-300 bg-nomada-deep/30",
+        dish.is_coming_soon ? "opacity-60" : "",
+      )}
+    >
+      {dish.image && !dish.is_coming_soon ? (
+        <div className="relative aspect-4/3 overflow-hidden">
+          <Image
+            src={dish.image}
+            alt={`${dish.name} — delivery gourmet Cartagena NÓMADA`}
+            layout="fullWidth"
+            className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+          {dish.badge && (
+            <span
+              className={cn(
+                `absolute top-3 left-3 font-sans text-[9px] tracking-[0.2em] uppercase px-2.5 py-1 ${badgeStyles[dish.badge]}`,
+              )}
+            >
+              {dish.badge}
+            </span>
+          )}
+        </div>
+      ) : (
+        <div className="relative aspect-4/3 overflow-hidden bg-gradient-to-br from-nomada-primary to-nomada-deep flex items-center justify-center">
+          <span className="font-serif text-nomada-cream/60 text-sm text-center px-4">
+            {dish.name}
+          </span>
+        </div>
+      )}
+      <div className="flex flex-col gap-2 p-5 flex-1">
+        <div className="flex items-start justify-between gap-4">
+          <h3 className="font-serif text-nomada-cream text-[17px] leading-snug">
+            {dish.name}
+          </h3>
+          <span className="font-serif text-nomada-gold text-[16px] shrink-0">
+            {dish.is_coming_soon ? "Próximamente" : formatPrice(dish.price)}
+          </span>
+        </div>
+        {dish.description?.trim() && (
+          <p
+            className="font-sans text-nomada-earth/90 text-[13px] leading-relaxed"
+            style={{ color: "#c4a07a" }}
+          >
+            {dish.description}
+          </p>
+        )}
+      </div>
+    </article>
+  );
+}
+
+// ─── Section ───────────────────────────────────────────────────────────────
+
 export function HomeMenu() {
-  const [activeCategory, setActiveCategory] = useState("entradas");
-  const current = categories.find((c) => c?.id === activeCategory);
+  const categoryIds = categories.map((c) => c.id);
+  const activeId = useScrollSpy(categoryIds);
+
+  const scrollToCategory = (id: string) => {
+    const el = document.getElementById(`cat-${id}`);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
-    <section id="menu" className="bg-nomada-primary py-24 md:py-36">
+    <section className="bg-nomada-primary py-24 md:py-36">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-14">
@@ -210,92 +314,90 @@ export function HomeMenu() {
           <h2 className="font-serif text-nomada-cream text-4xl md:text-5xl font-light leading-tight">
             La carta
           </h2>
-          <p className="font-serif italic text-nomada-cream/60 text-xl mt-3">
-            Una selección pensada para sorprenderte
-          </p>
         </div>
 
-        {/* Category tabs — scrollable on mobile */}
-        <div className="flex gap-0 border-b border-nomada-gold/20 mb-12 overflow-x-auto pb-0 -mx-6 px-6 md:mx-0 md:px-0 md:justify-center">
-          {categories.map((cat) => (
-            <button
-              type="button"
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={cn(
-                `font-sans text-[11px] tracking-[0.25em] uppercase px-6 py-4 border-b-2 transition-all duration-200 whitespace-nowrap ${
-                  activeCategory === cat.id
-                    ? "border-nomada-gold text-nomada-gold"
-                    : "border-transparent text-nomada-cream/50 hover:text-nomada-cream/80"
-                }`,
-              )}
-            >
-              {cat.label}
-            </button>
-          ))}
+        {/* Mobile: sticky horizontal scrollable bar */}
+        <div className="sticky top-[72px] z-40 bg-nomada-primary/95 backdrop-blur-sm border-b border-nomada-gold/20 mb-12 -mx-6 px-6 lg:mx-0 lg:px-0 lg:hidden overflow-x-auto">
+          <div className="flex gap-0 pb-0">
+            {categories.map((cat) => (
+              <button
+                type="button"
+                key={cat.id}
+                onClick={() => scrollToCategory(cat.id)}
+                className={cn(
+                  `font-sans text-[11px] tracking-[0.25em] uppercase px-6 py-4 border-b-2 transition-all duration-200 whitespace-nowrap ${
+                    activeId === cat.id
+                      ? "border-nomada-gold text-nomada-gold"
+                      : "border-transparent text-nomada-cream/50 hover:text-nomada-cream/80"
+                  }`,
+                )}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Dishes grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {current?.dishes.map((dish) => (
-            <article
-              key={dish.name}
-              className={cn(
-                "group flex flex-col border border-nomada-gold/15 hover:border-nomada-gold/35 transition-colors duration-300 bg-nomada-deep/30",
-                dish.is_coming_soon ? "opacity-60" : "",
-              )}
-            >
-              {/* Image con aspect-ratio fijo para que midan todas igual */}
-              {dish.image && !dish.is_coming_soon ? (
-                <div className="relative aspect-4/3 overflow-hidden">
-                  <Image
-                    src={dish.image}
-                    alt={`${dish.name} — delivery gourmet Cartagena NÓMADA`}
-                    layout="fullWidth"
-                    className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        {/* Desktop + Mobile content layout */}
+        <div className="flex gap-12">
+          {/* Desktop sidebar (hidden on mobile) */}
+          <aside className="hidden lg:block sticky top-[100px] self-start w-[180px] shrink-0">
+            <nav className="flex flex-col gap-1">
+              {categories.map((cat) => (
+                <button
+                  type="button"
+                  key={cat.id}
+                  onClick={() => scrollToCategory(cat.id)}
+                  className={cn(
+                    `text-left font-sans text-[11px] tracking-[0.2em] uppercase px-3 py-3 border-l-2 transition-all duration-200 flex items-center gap-3 ${
+                      activeId === cat.id
+                        ? "border-nomada-gold text-nomada-gold"
+                        : "border-transparent text-nomada-cream/40 hover:text-nomada-cream/70 hover:border-nomada-gold/30"
+                    }`,
+                  )}
+                >
+                  <span
+                    className={cn(
+                      "w-1.5 h-1.5 rounded-full shrink-0 transition-colors duration-200",
+                      activeId === cat.id
+                        ? "bg-nomada-gold"
+                        : "bg-nomada-cream/20",
+                    )}
                   />
-                  {dish.badge && (
-                    <span
-                      className={cn(
-                        `absolute top-3 left-3 font-sans text-[9px] tracking-[0.2em] uppercase px-2.5 py-1 ${badgeStyles[dish.badge]}`,
-                      )}
-                    >
-                      {dish.badge}
-                    </span>
+                  {cat.label}
+                </button>
+              ))}
+            </nav>
+          </aside>
+
+          {/* Content — stacked sections with decorative headers */}
+          <div className="flex-1 space-y-24">
+            {categories.map((cat) => (
+              <section
+                key={cat.id}
+                id={`cat-${cat.id}`}
+                className="scroll-mt-35"
+              >
+                {/* Decorative header */}
+                <div className="relative mb-8 pb-6 border-b border-nomada-gold/30">
+                  <div className="absolute bottom-0 left-0 w-16 h-px bg-nomada-gold" />
+                  <div className="absolute bottom-0 right-0 w-16 h-px bg-nomada-gold" />
+                  <h3 className="font-serif text-nomada-gold text-3xl md:text-4xl font-light tracking-wide text-center">
+                    {cat.label}
+                  </h3>
+                  {activeId === cat.id && (
+                    <div className="absolute -bottom-px left-1/2 -translate-x-1/2 w-8 h-0.5 bg-nomada-gold rounded-full" />
                   )}
                 </div>
-              ) : (
-                <div className="relative aspect-4/3 overflow-hidden bg-gradient-to-br from-nomada-primary to-nomada-deep flex items-center justify-center">
-                  <span className="font-serif text-nomada-cream/60 text-sm text-center px-4">
-                    {dish.name}
-                  </span>
-                </div>
-              )}
 
-              {/* Info */}
-              <div className="flex flex-col gap-2 p-5 flex-1">
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="font-serif text-nomada-cream text-[17px] leading-snug">
-                    {dish.name}
-                  </h3>
-                  <span className="font-serif text-nomada-gold text-[16px] shrink-0">
-                    {dish.is_coming_soon
-                      ? "Próximamente"
-                      : formatPrice(dish.price)}
-                  </span>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {cat.dishes.map((dish) => (
+                    <DishCard key={dish.name} dish={dish} />
+                  ))}
                 </div>
-                {dish.description?.trim() && (
-                  <p
-                    className="font-sans text-nomada-earth/90 text-[13px] leading-relaxed"
-                    style={{ color: "#c4a07a" }}
-                  >
-                    {dish.description}
-                  </p>
-                )}
-              </div>
-            </article>
-          ))}
+              </section>
+            ))}
+          </div>
         </div>
 
         {/* CTA */}
