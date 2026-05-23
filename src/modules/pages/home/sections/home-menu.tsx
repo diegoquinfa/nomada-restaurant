@@ -1,7 +1,7 @@
 import { WhatsAppLink } from "#/modules/navigation/components/whatsapp-link";
 import { cn } from "#/shared/ui/lib/utils";
 import { Image } from "@unpic/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Badge = "Favorito" | "Nuevo" | "Temporada" | null;
 
@@ -289,6 +289,25 @@ function DishCard({ dish }: { dish: Dish }) {
 export function HomeMenu() {
   const categoryIds = categories.map((c) => c.id);
   const activeId = useScrollSpy(categoryIds);
+  const tabBarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const tabBar = tabBarRef.current;
+    const activeBtn = tabBar?.querySelector<HTMLElement>(
+      `[data-category="${activeId}"]`,
+    );
+    if (!tabBar || !activeBtn) return;
+
+    // Calcular posición para centrar el botón dentro del contenedor
+    const btnLeft = activeBtn.offsetLeft;
+    const btnWidth = activeBtn.offsetWidth;
+    const barWidth = tabBar.offsetWidth;
+
+    tabBar.scrollTo({
+      left: btnLeft - barWidth / 2 + btnWidth / 2,
+      behavior: "smooth",
+    });
+  }, [activeId]);
 
   const scrollToCategory = (id: string) => {
     const el = document.getElementById(`cat-${id}`);
@@ -313,7 +332,10 @@ export function HomeMenu() {
         </div>
 
         {/* Mobile: sticky horizontal scrollable bar */}
-        <div className="sticky top-18 z-30 bg-nomada-primary/95 backdrop-blur-sm border-b border-nomada-gold/20 mb-12 -mx-6 px-6 lg:mx-0 lg:px-0 lg:hidden overflow-x-auto">
+        <div
+          ref={tabBarRef}
+          className="sticky top-18 z-30 bg-nomada-primary/95 backdrop-blur-sm border-b border-nomada-gold/20 mb-12 -mx-6 px-6 lg:mx-0 lg:px-0 lg:hidden overflow-x-auto"
+        >
           <div className="flex gap-0 pb-0">
             {categories.map((cat) => (
               <button
