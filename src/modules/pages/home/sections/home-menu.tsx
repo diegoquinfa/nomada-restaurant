@@ -30,52 +30,159 @@ const categories: Category[] = [
     id: "entradas",
     label: "Entradas",
     dishes: [
-      { name: "Calamar Crocante & Acevichado", description: "Anillas de calamar apanadas acompañadas de mayonesa acevichada.", price: 18000, badge: null, is_coming_soon: false, image: "/images/dishes/entradas/calamar-crocante-acevichado.webp" }
-    ]
+      {
+        name: "Calamar Crocante & Acevichado",
+        description:
+          "Anillas de calamar apanadas acompañadas de mayonesa acevichada.",
+        price: 18000,
+        badge: null,
+        is_coming_soon: false,
+        image: "/images/dishes/entradas/calamar-crocante-acevichado.webp",
+      },
+    ],
   },
   {
     id: "arroces",
     label: "Arroces",
     dishes: [
-      { name: "Arroz Salteado Caribeño", description: "Arroz de coco frito salteado, con vegetales, chorizo argentino, chicharrón, lomo fino, y pechuga.", price: 37000, badge: null, is_coming_soon: false, image: "/images/dishes/arroces/arroz-salteado-caribeno.webp" }
-    ]
+      {
+        name: "Arroz Salteado Caribeño",
+        description:
+          "Arroz de coco frito salteado, con vegetales, chorizo argentino, chicharrón, lomo fino, y pechuga.",
+        price: 37000,
+        badge: null,
+        is_coming_soon: false,
+        image: "/images/dishes/arroces/arroz-salteado-caribeno.webp",
+      },
+    ],
   },
   {
     id: "recomendados-del-chef",
     label: "Recomendados del Chef",
     dishes: [
-      { name: "Jalea Caribeña", description: "Mariscos apanados crocantes, mayonesa acevichada, ensalada peruana y cascos de papa criolla.", price: 45000, badge: null, is_coming_soon: false, image: "/images/dishes/recomendados-del-chef/jalea-caribena.webp" },
-      { name: "Costilla BBQ Roadhouse", description: "Costillas St. Louis en salsa BBQ, cascos de papa criolla y ensalada de la casa.", price: 45000, badge: null, is_coming_soon: false, image: "/images/dishes/recomendados-del-chef/costilla-bbq-roadhouse.webp" },
-      { name: "Lomo Tres Pimientas", description: "Lomo fino en costra de pimientas acompañado de papas francesa y ensalada.", price: 35000, badge: null, is_coming_soon: false, image: "/images/dishes/recomendados-del-chef/lomo-tres-pimientas.webp" }
-    ]
+      {
+        name: "Jalea Caribeña",
+        description:
+          "Mariscos apanados crocantes, mayonesa acevichada, ensalada peruana y cascos de papa criolla.",
+        price: 45000,
+        badge: null,
+        is_coming_soon: false,
+        image: "/images/dishes/recomendados-del-chef/jalea-caribena.webp",
+      },
+      {
+        name: "Costilla BBQ Roadhouse",
+        description:
+          "Costillas St. Louis en salsa BBQ, cascos de papa criolla y ensalada de la casa.",
+        price: 45000,
+        badge: null,
+        is_coming_soon: false,
+        image:
+          "/images/dishes/recomendados-del-chef/costilla-bbq-roadhouse.webp",
+      },
+      {
+        name: "Lomo Tres Pimientas",
+        description:
+          "Lomo fino en costra de pimientas acompañado de papas francesa y ensalada.",
+        price: 35000,
+        badge: null,
+        is_coming_soon: false,
+        image: "/images/dishes/recomendados-del-chef/lomo-tres-pimientas.webp",
+      },
+    ],
   },
   {
     id: "pastas",
     label: "Pastas",
     dishes: [
-      { name: "Fettuccine Huancaína & Camarones", description: "", price: 35000, badge: null, is_coming_soon: false, image: "/images/dishes/pastas/fettuccine-huancaina-camarones.webp" },
-      { name: "Pasta Cremosa Ajo & Parmesano con Pollo", description: "", price: 35000, badge: null, is_coming_soon: false, image: "/images/dishes/pastas/pasta-cremosa-ajo-parmesano-pollo.webp" },
-      { name: "Fettuccine Pesto & Pistacho con Lomo", description: "", price: 35000, badge: null, is_coming_soon: false, image: "/images/dishes/pastas/fettuccine-pesto-pistacho-lomo.webp" }
-    ]
+      {
+        name: "Fettuccine Huancaína & Camarones",
+        description: "",
+        price: 35000,
+        badge: null,
+        is_coming_soon: false,
+        image: "/images/dishes/pastas/fettuccine-huancaina-camarones.webp",
+      },
+      {
+        name: "Pasta Cremosa Ajo & Parmesano con Pollo",
+        description: "",
+        price: 35000,
+        badge: null,
+        is_coming_soon: false,
+        image: "/images/dishes/pastas/pasta-cremosa-ajo-parmesano-pollo.webp",
+      },
+      {
+        name: "Fettuccine Pesto & Pistacho con Lomo",
+        description: "",
+        price: 35000,
+        badge: null,
+        is_coming_soon: false,
+        image: "/images/dishes/pastas/fettuccine-pesto-pistacho-lomo.webp",
+      },
+    ],
   },
   {
     id: "caseritos-del-chef",
     label: "Caseritos del Chef (Lunes a Viernes)",
     dishes: [
-      { name: "Fusión Criolla", description: "Pechuga en salsa stroganoff, acompañada de Arroz salteado.", price: 23000, badge: null, is_coming_soon: false, image: "/images/dishes/caseritos-del-chef/fusion-criolla.webp" },
-      { name: "Perú Urbano", description: "Lomo fino saltado, acompañado de Arroz salteado, cascos de papa criolla y ensalada de la casa.", price: 23000, badge: null, is_coming_soon: false, image: "/images/dishes/caseritos-del-chef/peru-urbano.webp" },
-      { name: "Galeón Caribe", description: "Cubos de pescado apanado, en salsa de mango picante, acompañado de arroz salteado, patacones y ensalada de la casa.", price: 23000, badge: null, is_coming_soon: false, image: "/images/dishes/caseritos-del-chef/galeon-caribe.webp" }
-    ]
+      {
+        name: "Fusión Criolla",
+        description:
+          "Pechuga en salsa stroganoff, acompañada de Arroz salteado.",
+        price: 23000,
+        badge: null,
+        is_coming_soon: false,
+        image: "/images/dishes/caseritos-del-chef/fusion-criolla.webp",
+      },
+      {
+        name: "Perú Urbano",
+        description:
+          "Lomo fino saltado, acompañado de Arroz salteado, cascos de papa criolla y ensalada de la casa.",
+        price: 23000,
+        badge: null,
+        is_coming_soon: false,
+        image: "/images/dishes/caseritos-del-chef/peru-urbano.webp",
+      },
+      {
+        name: "Galeón Caribe",
+        description:
+          "Cubos de pescado apanado, en salsa de mango picante, acompañado de arroz salteado, patacones y ensalada de la casa.",
+        price: 23000,
+        badge: null,
+        is_coming_soon: false,
+        image: "/images/dishes/caseritos-del-chef/galeon-caribe.webp",
+      },
+    ],
   },
   {
     id: "proximamente",
     label: "Próximamente",
     dishes: [
-      { name: "Milanesa Caribeña Cremosa", description: "Milanesa de cerdo crocante, salsa de ajo cremosa, queso provolone gratinado, papas a la francesa y ensalada.", price: null, badge: null, is_coming_soon: true },
-      { name: "Hamburguesa de Camarón", description: "Camarón crocante, salsa de mango picante, alioli de aguacate y eneldo, mix de lechuga, tomate asado encurtido pan brioche de orégano y papas a la francesa.", price: null, badge: null, is_coming_soon: true },
-      { name: "Hamburguesa Cartagenera", description: "Carne angus artesanal, chicharron crocante, queso costeño, tocineta y cebolla caramelizada en reducción de panela, salsa de la casa en pan brioche de orégano y papas a la francesa.", price: null, badge: null, is_coming_soon: true }
-    ]
-  }
+      {
+        name: "Milanesa Caribeña Cremosa",
+        description:
+          "Milanesa de cerdo crocante, salsa de ajo cremosa, queso provolone gratinado, papas a la francesa y ensalada.",
+        price: null,
+        badge: null,
+        is_coming_soon: true,
+      },
+      {
+        name: "Hamburguesa de Camarón",
+        description:
+          "Camarón crocante, salsa de mango picante, alioli de aguacate y eneldo, mix de lechuga, tomate asado encurtido pan brioche de orégano y papas a la francesa.",
+        price: null,
+        badge: null,
+        is_coming_soon: true,
+      },
+      {
+        name: "Hamburguesa Cartagenera",
+        description:
+          "Carne angus artesanal, chicharron crocante, queso costeño, tocineta y cebolla caramelizada en reducción de panela, salsa de la casa en pan brioche de orégano y papas a la francesa.",
+        price: null,
+        badge: null,
+        is_coming_soon: true,
+      },
+    ],
+  },
 ];
 
 const badgeStyles: Record<NonNullable<Badge>, string> = {
@@ -135,7 +242,7 @@ export function HomeMenu() {
               key={dish.name}
               className={cn(
                 "group flex flex-col border border-nomada-gold/15 hover:border-nomada-gold/35 transition-colors duration-300 bg-nomada-deep/30",
-                dish.is_coming_soon ? "opacity-60" : ""
+                dish.is_coming_soon ? "opacity-60" : "",
               )}
             >
               {/* Image con aspect-ratio fijo para que midan todas igual */}
@@ -145,7 +252,7 @@ export function HomeMenu() {
                     src={dish.image}
                     alt={`${dish.name} — delivery gourmet Cartagena NÓMADA`}
                     layout="fullWidth"
-                    className="w-full h-full object-cover object-bottom group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   {dish.badge && (
@@ -161,7 +268,7 @@ export function HomeMenu() {
               ) : (
                 <div className="relative aspect-4/3 overflow-hidden bg-gradient-to-br from-nomada-primary to-nomada-deep flex items-center justify-center">
                   <span className="font-serif text-nomada-cream/60 text-sm text-center px-4">
-                    {dish.is_coming_soon ? "" : dish.name}
+                    {dish.name}
                   </span>
                 </div>
               )}
@@ -173,7 +280,9 @@ export function HomeMenu() {
                     {dish.name}
                   </h3>
                   <span className="font-serif text-nomada-gold text-[16px] shrink-0">
-                    {dish.is_coming_soon ? "Próximamente" : formatPrice(dish.price)}
+                    {dish.is_coming_soon
+                      ? "Próximamente"
+                      : formatPrice(dish.price)}
                   </span>
                 </div>
                 {dish.description?.trim() && (
