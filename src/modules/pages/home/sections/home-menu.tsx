@@ -264,9 +264,9 @@ function DishCard({ dish }: { dish: Dish }) {
       )}
       <div className="flex flex-col gap-2 p-5 flex-1">
         <div className="flex items-start justify-between gap-4">
-          <h3 className="font-serif text-nomada-cream text-[17px] leading-snug">
+          <h4 className="font-serif text-nomada-cream text-[17px] leading-snug">
             {dish.name}
-          </h3>
+          </h4>
           <span className="font-serif text-nomada-gold text-[16px] shrink-0">
             {dish.is_coming_soon ? "Próximamente" : formatPrice(dish.price)}
           </span>
