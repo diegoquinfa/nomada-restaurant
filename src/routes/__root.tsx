@@ -69,6 +69,27 @@ export const Route = createRootRoute({
             latitude: 10.391,
             longitude: -75.514,
           },
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+              opens: "11:00",
+              closes: "14:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+              opens: "18:00",
+              closes: "22:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Friday", "Saturday", "Sunday"],
+              opens: "11:00",
+              closes: "22:00",
+            },
+          ],
+          sameAs: ["https://www.instagram.com/nomadarestaurante"],
         }),
       },
     ],

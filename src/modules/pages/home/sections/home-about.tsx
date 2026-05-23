@@ -11,7 +11,9 @@ export function HomeAbout() {
               <Image
                 src="/images/assets/banner-about.webp"
                 alt="Cocina artesanal NÓMADA — preparación gourmet en Cartagena"
-                layout="fullWidth"
+                layout="constrained"
+                width={800}
+                height={1000}
                 className="object-cover object-center"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />

@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "NÓMADA Cocina Fusión — cocina oculta en Cartagena. Entradas y Arroces, Recomendados del Chef, Pastas, Caseritos del Chef y más. Delivery gourmet con sabores fusión. Pedí por WhatsApp.",
+          "NÓMADA Cocina Fusión — cocina oculta en Cartagena. Entradas, pastas, arroces y más. Delivery gourmet con sabores fusión. Pedí por WhatsApp.",
       },
     ],
   }),

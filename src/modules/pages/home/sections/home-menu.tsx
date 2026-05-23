@@ -239,7 +239,9 @@ function DishCard({ dish }: { dish: Dish }) {
           <Image
             src={dish.image}
             alt={`${dish.name} — delivery gourmet Cartagena NÓMADA`}
-            layout="fullWidth"
+            layout="constrained"
+            width={640}
+            height={480}
             className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />

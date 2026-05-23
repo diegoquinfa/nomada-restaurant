@@ -10,10 +10,12 @@ export function HomeHero() {
     >
       <div className="absolute inset-0 w-full h-min-dvh -z-10">
         <Image
-          layout="fullWidth"
+          layout="constrained"
           src="/images/assets/hero-bg.webp"
           alt="Plato gourmet delivery NÓMADA — Cocina Fusión Cartagena"
           className="object-cover object-center w-full h-dvh blur-sm"
+          width={1920}
+          height={1080}
           fetchpriority="high"
         />
         <div className="absolute inset-0 bg-nomada-primary/80" />
@@ -26,11 +28,13 @@ export function HomeHero() {
             Cartagena de Indias
           </p>
           <Image
-            layout="fullWidth"
+            layout="constrained"
             src="/images/logo.webp"
             alt="NÓMADA Cocina Fusión"
             aria-label="NÓMADA Cocina Fusión"
             className="w-max-full"
+            width={280}
+            height={90}
             fetchpriority="high"
           />
         </div>
@@ -39,15 +43,15 @@ export function HomeHero() {
         <div className="animate-fade-in [animation-delay:300ms] animation-duration-[600ms] w-10 h-px bg-nomada-gold/70 my-7" />
 
         {/* Headline */}
-        <h2 className="animate-fade-in-up [animation-delay:400ms] animation-duration-[800ms] font-serif text-nomada-cream text-2xl md:text-3xl font-light leading-relaxed text-balance">
+        <h1 className="animate-fade-in-up [animation-delay:400ms] animation-duration-[800ms] font-serif text-nomada-cream text-2xl md:text-3xl font-light leading-relaxed text-balance">
           Bienvenidos a la experiencia NÓMADA
-        </h2>
+        </h1>
 
         {/* Subheadline */}
-        <h1 className="animate-fade-in-up [animation-delay:500ms] animation-duration-[800ms] font-serif italic text-nomada-cream/70 text-lg md:text-xl leading-relaxed mt-4 text-balance">
+        <p className="animate-fade-in-up [animation-delay:500ms] animation-duration-[800ms] font-serif italic text-nomada-cream/70 text-lg md:text-xl leading-relaxed mt-4 text-balance">
           Un restaurante cocina oculta creado para transformar el delivery en
           una experiencia gourmet en Cartagena
-        </h1>
+        </p>
 
         {/* CTAs */}
         <div className="animate-fade-in-up [animation-delay:600ms] animation-duration-[800ms] flex flex-col sm:flex-row items-center gap-4 mt-10">
@@ -66,7 +70,12 @@ export function HomeHero() {
 
         {/* Categories */}
         <div className="animate-fade-in [animation-delay:800ms] animation-duration-[600ms] flex flex-wrap justify-center gap-x-5 gap-y-2 mt-12">
-          {["Entradas y Arroces", "Recomendados del Chef", "Pastas", "Caseritos del Chef"].map((cat, i) => (
+          {[
+            "Entradas y Arroces",
+            "Recomendados del Chef",
+            "Pastas",
+            "Caseritos del Chef",
+          ].map((cat, i) => (
             <span key={cat} className="flex items-center gap-5">
               <span className="font-sans text-nomada-gold text-[10px] tracking-[0.35em] uppercase">
                 {cat}
