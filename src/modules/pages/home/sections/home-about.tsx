@@ -39,8 +39,7 @@ export function HomeAbout() {
             </div>
 
             <h2 className="font-serif text-nomada-cream text-4xl md:text-5xl font-light leading-tight text-balance">
-              Un sueño hecho
-              <br />
+              Un sueño hecho <br />
               <span className="italic">con el corazón</span>
             </h2>
 
