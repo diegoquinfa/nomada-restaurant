@@ -18,7 +18,7 @@ const config = defineConfig({
         {
           baseURL: "images",
           dir: "public/images",
-          maxAge: 60 * 60 * 24 * 365, // 1 año
+          maxAge: 60 * 60 * 24 * 1, // 1 año
         },
       ],
     }),
@@ -30,13 +30,7 @@ const config = defineConfig({
         },
       },
       prerender: {
-        enabled: true,
-        autoSubfolderIndex: true,
-        autoStaticPathsDiscovery: true,
-        crawlLinks: true,
-        filter: ({ path }) => !path.startsWith("/dashboard"),
-        retryCount: 2,
-        retryDelay: 1000,
+        enabled: false,
       },
     }),
     viteReact(),
