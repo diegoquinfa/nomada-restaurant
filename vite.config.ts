@@ -18,7 +18,7 @@ const config = defineConfig({
         {
           baseURL: "images",
           dir: "public/images",
-          maxAge: 60 * 60 * 24 * 1, // 1 año
+          maxAge: 60 * 60 * 24 * 1, // 1 dia
         },
       ],
     }),
@@ -28,6 +28,7 @@ const config = defineConfig({
         build: {
           inlineCss: true,
         },
+        host: "0.0.0.0",
       },
       prerender: {
         enabled: false,
