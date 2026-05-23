@@ -142,6 +142,7 @@ export function HomeHowToOrder() {
         {/* FAQ Structured Data */}
         <script
           type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted sanitized HTML
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
