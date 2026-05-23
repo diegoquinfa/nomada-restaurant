@@ -8,8 +8,9 @@ type Badge = "Favorito" | "Nuevo" | "Temporada" | null;
 interface Dish {
   name: string;
   description: string;
-  price: string;
+  price: number | null;
   badge: Badge;
+  is_coming_soon: boolean;
   image?: string;
 }
 
@@ -19,147 +20,62 @@ interface Category {
   dishes: Dish[];
 }
 
+function formatPrice(price: number | null): string {
+  if (price === null) return "";
+  return `$${price.toLocaleString("es-CO")}`;
+}
+
 const categories: Category[] = [
   {
-    id: "almuerzos",
-    label: "Almuerzos",
+    id: "entradas",
+    label: "Entradas",
     dishes: [
-      {
-        name: "Almuerzo ejecutivo NÓMADA",
-        description:
-          "Plato del día con proteína, arroz, ensalada fresca y acompañante",
-        price: "$23.000",
-        badge: "Favorito",
-        image: "/images/dishes/almuerzo.png",
-      },
-      {
-        name: "Almuerzo del día",
-        description:
-          "Opción variada que cambia diariamente — pregúntanos por la sugerencia",
-        price: "$23.000",
-        badge: null,
-      },
-      {
-        name: "Almuerzo ligero",
-        description:
-          "Ensalada completa con proteína a elección y aderezo de la casa",
-        price: "$23.000",
-        badge: "Nuevo",
-      },
-    ],
+      { name: "Calamar Crocante & Acevichado", description: "Anillas de calamar apanadas acompañadas de mayonesa acevichada.", price: 18000, badge: null, is_coming_soon: false, image: "/images/dishes/entradas/calamar-crocante-acevichado.webp" }
+    ]
   },
   {
     id: "arroces",
     label: "Arroces",
     dishes: [
-      {
-        name: "Arroz salteado caribeño",
-        description:
-          "Arroz salteado con vegetales, proteína fresca y toque de hierbas caribeñas",
-        price: "$42.000",
-        badge: null,
-        image: "/images/dishes/arroz-salteado-caribeño.webp",
-      },
-      {
-        name: "Arroz cremoso de champiñones",
-        description:
-          "Hongos silvestres, parmesano reggiano, aceite de trufa negra",
-        price: "$38.000",
-        badge: "Nuevo",
-      },
-      {
-        name: "Arroz negro al tinto",
-        description:
-          "Tinta de calamar, vino tinto reducido, alioli de ajo negro, calamares salteados",
-        price: "$44.000",
-        badge: null,
-      },
-    ],
+      { name: "Arroz Salteado Caribeño", description: "Arroz de coco frito salteado, con vegetales, chorizo argentino, chicharrón, lomo fino, y pechuga.", price: 37000, badge: null, is_coming_soon: false, image: "/images/dishes/arroces/arroz-salteado-caribeno.webp" }
+    ]
+  },
+  {
+    id: "recomendados-del-chef",
+    label: "Recomendados del Chef",
+    dishes: [
+      { name: "Jalea Caribeña", description: "Mariscos apanados crocantes, mayonesa acevichada, ensalada peruana y cascos de papa criolla.", price: 45000, badge: null, is_coming_soon: false, image: "/images/dishes/recomendados-del-chef/jalea-caribena.webp" },
+      { name: "Costilla BBQ Roadhouse", description: "Costillas St. Louis en salsa BBQ, cascos de papa criolla y ensalada de la casa.", price: 45000, badge: null, is_coming_soon: false, image: "/images/dishes/recomendados-del-chef/costilla-bbq-roadhouse.webp" },
+      { name: "Lomo Tres Pimientas", description: "Lomo fino en costra de pimientas acompañado de papas francesa y ensalada.", price: 35000, badge: null, is_coming_soon: false, image: "/images/dishes/recomendados-del-chef/lomo-tres-pimientas.webp" }
+    ]
   },
   {
     id: "pastas",
     label: "Pastas",
     dishes: [
-      {
-        name: "Pastas con camarones",
-        description:
-          "Pasta salteada con camarones, ajo, aceite de oliva y toque de ají dulce",
-        price: "$44.000",
-        badge: null,
-        image: "/images/dishes/pastas-camarones.webp",
-      },
-      {
-        name: "Linguine ai frutti di mare",
-        description:
-          "Mariscos mixtos, bisque ligero de langostinos, perejil fresco, ají caribe",
-        price: "$46.000",
-        badge: null,
-      },
-      {
-        name: "Cacio e Pepe fusión",
-        description:
-          "Spaghetti, pecorino, pimienta negra, toque de mantequilla de hierbas",
-        price: "$34.000",
-        badge: "Nuevo",
-      },
-    ],
+      { name: "Fettuccine Huancaína & Camarones", description: "", price: 35000, badge: null, is_coming_soon: false, image: "/images/dishes/pastas/fettuccine-huancaina-camarones.webp" },
+      { name: "Pasta Cremosa Ajo & Parmesano con Pollo", description: "", price: 35000, badge: null, is_coming_soon: false, image: "/images/dishes/pastas/pasta-cremosa-ajo-parmesano-pollo.webp" },
+      { name: "Fettuccine Pesto & Pistacho con Lomo", description: "", price: 35000, badge: null, is_coming_soon: false, image: "/images/dishes/pastas/fettuccine-pesto-pistacho-lomo.webp" }
+    ]
   },
   {
-    id: "mariscos",
-    label: "Mariscos",
+    id: "caseritos-del-chef",
+    label: "Caseritos del Chef (Lunes a Viernes)",
     dishes: [
-      {
-        name: "Jalea de mariscos",
-        description:
-          "Mariscos mixtos crocantes, salsa de la casa, acompañados de patacones y ensalada",
-        price: "$38.000",
-        badge: null,
-        image: "/images/dishes/jalea-mariscos.webp",
-      },
-      {
-        name: "Camarones al ajillo caribeño",
-        description:
-          "Mantequilla de ajo, ají dulce, patacones crocantes, hierbas frescas",
-        price: "$44.000",
-        badge: "Temporada",
-      },
-      {
-        name: "Pulpo a la brasa",
-        description:
-          "Pulpo tierno, papas confitadas, pimentón ahumado, aceite de albahaca",
-        price: "$52.000",
-        badge: null,
-      },
-    ],
+      { name: "Fusión Criolla", description: "Pechuga en salsa stroganoff, acompañada de Arroz salteado.", price: 23000, badge: null, is_coming_soon: false, image: "/images/dishes/caseritos-del-chef/fusion-criolla.webp" },
+      { name: "Perú Urbano", description: "Lomo fino saltado, acompañado de Arroz salteado, cascos de papa criolla y ensalada de la casa.", price: 23000, badge: null, is_coming_soon: false, image: "/images/dishes/caseritos-del-chef/peru-urbano.webp" },
+      { name: "Galeón Caribe", description: "Cubos de pescado apanado, en salsa de mango picante, acompañado de arroz salteado, patacones y ensalada de la casa.", price: 23000, badge: null, is_coming_soon: false, image: "/images/dishes/caseritos-del-chef/galeon-caribe.webp" }
+    ]
   },
   {
-    id: "grill",
-    label: "Grill",
+    id: "proximamente",
+    label: "Próximamente",
     dishes: [
-      {
-        name: "Lomo a las tres pimientas",
-        description:
-          "Lomo de res sellado, salsa de tres pimientas, papas rústicas y vegetales salteados",
-        price: "$52.000",
-        badge: null,
-        image: "/images/dishes/lomo-tres-pimientas.webp",
-      },
-      {
-        name: "Pollo BBQ fusión",
-        description:
-          "Glaseado de tamarindo y miel, ensalada de mango verde y cilantro",
-        price: "$38.000",
-        badge: "Nuevo",
-      },
-      {
-        name: "Costilla lenta de res",
-        description:
-          "8 horas de cocción, salsa de vino tinto reducido, puré rústico",
-        price: "$62.000",
-        badge: "Favorito",
-      },
-    ],
-  },
+      { name: "Milanesa Caribeña Cremosa", description: "Milanesa de cerdo crocante, salsa de ajo cremosa, queso provolone gratinado, papas a la francesa y ensalada.", price: null, badge: null, is_coming_soon: true },
+      { name: "Hamburguesa de Camarón", description: "Camarón crocante, salsa de mango picante, alioli de aguacate y eneldo, mix de lechuga, tomate asado encurtido pan brioche de orégano y papas a la francesa.", price: null, badge: null, is_coming_soon: true },
+      { name: "Hamburguesa Cartagenera", description: "Carne angus artesanal, chicharron crocante, queso costeño, tocineta y cebolla caramelizada en reducción de panela, salsa de la casa en pan brioche de orégano y papas a la francesa.", price: null, badge: null, is_coming_soon: true }
+    ]
+  }
 ];
 
 const badgeStyles: Record<NonNullable<Badge>, string> = {
@@ -169,7 +85,7 @@ const badgeStyles: Record<NonNullable<Badge>, string> = {
 };
 
 export function HomeMenu() {
-  const [activeCategory, setActiveCategory] = useState("almuerzos");
+  const [activeCategory, setActiveCategory] = useState("entradas");
   const current = categories.find((c) => c?.id === activeCategory);
 
   return (
@@ -217,10 +133,13 @@ export function HomeMenu() {
           {current?.dishes.map((dish) => (
             <article
               key={dish.name}
-              className="group flex flex-col border border-nomada-gold/15 hover:border-nomada-gold/35 transition-colors duration-300 bg-nomada-deep/30"
+              className={cn(
+                "group flex flex-col border border-nomada-gold/15 hover:border-nomada-gold/35 transition-colors duration-300 bg-nomada-deep/30",
+                dish.is_coming_soon ? "opacity-60" : ""
+              )}
             >
               {/* Image con aspect-ratio fijo para que midan todas igual */}
-              {dish.image ? (
+              {dish.image && !dish.is_coming_soon ? (
                 <div className="relative aspect-4/3 overflow-hidden">
                   <Image
                     src={dish.image}
@@ -240,17 +159,11 @@ export function HomeMenu() {
                   )}
                 </div>
               ) : (
-                dish.badge && (
-                  <div className="px-5 pt-5">
-                    <span
-                      className={cn(
-                        `inline-block font-sans text-[9px] tracking-[0.2em] uppercase px-2.5 py-1 ${badgeStyles[dish.badge]}`,
-                      )}
-                    >
-                      {dish.badge}
-                    </span>
-                  </div>
-                )
+                <div className="relative aspect-4/3 overflow-hidden bg-gradient-to-br from-nomada-primary to-nomada-deep flex items-center justify-center">
+                  <span className="font-serif text-nomada-cream/60 text-sm text-center px-4">
+                    {dish.is_coming_soon ? "" : dish.name}
+                  </span>
+                </div>
               )}
 
               {/* Info */}
@@ -260,15 +173,17 @@ export function HomeMenu() {
                     {dish.name}
                   </h3>
                   <span className="font-serif text-nomada-gold text-[16px] shrink-0">
-                    {dish.price}
+                    {dish.is_coming_soon ? "Próximamente" : formatPrice(dish.price)}
                   </span>
                 </div>
-                <p
-                  className="font-sans text-nomada-earth/90 text-[13px] leading-relaxed"
-                  style={{ color: "#c4a07a" }}
-                >
-                  {dish.description}
-                </p>
+                {dish.description?.trim() && (
+                  <p
+                    className="font-sans text-nomada-earth/90 text-[13px] leading-relaxed"
+                    style={{ color: "#c4a07a" }}
+                  >
+                    {dish.description}
+                  </p>
+                )}
               </div>
             </article>
           ))}
