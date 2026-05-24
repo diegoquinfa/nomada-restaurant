@@ -235,7 +235,12 @@ function DishCard({ dish }: { dish: Dish }) {
       )}
     >
       {dish.image && !dish.is_coming_soon ? (
-        <div className="relative aspect-4/3 overflow-hidden bg-cover bg-center bg-no-repeat">
+        <div
+          className="relative aspect-4/3 overflow-hidden bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(/images/assets/bg-wood.webp)`,
+          }}
+        >
           <Image
             src={dish.image}
             alt={`${dish.name} — delivery gourmet Cartagena NÓMADA`}
@@ -264,10 +269,15 @@ function DishCard({ dish }: { dish: Dish }) {
       )}
       <div className="flex flex-col gap-2 p-5 flex-1">
         <div className="flex items-start justify-between gap-4">
-          <h4 className="font-serif text-nomada-cream text-[17px] leading-snug">
+          <h4 className="font-serif text-nomada-cream text-[20px] md:text-xl leading-snug">
             {dish.name}
           </h4>
-          <span className="font-serif text-nomada-gold text-[16px] shrink-0">
+          <span
+            className={cn(
+              "font-serif text-nomada-gold  shrink-0",
+              dish.is_coming_soon ? "text-[16px]" : "text-[20px] font-bold",
+            )}
+          >
             {dish.is_coming_soon ? "Próximamente" : formatPrice(dish.price)}
           </span>
         </div>
@@ -395,17 +405,17 @@ export function HomeMenu() {
               <section
                 key={cat.id}
                 id={`cat-${cat.id}`}
-                className="scroll-mt-[116px]"
+                className="scroll-mt-29"
               >
                 {/* Decorative header */}
                 <div className="relative mb-8 pb-6 border-b border-nomada-gold/30">
                   <div className="absolute bottom-0 left-0 w-16 h-px bg-nomada-gold" />
                   <div className="absolute bottom-0 right-0 w-16 h-px bg-nomada-gold" />
-                  <h3 className="font-serif text-nomada-gold text-3xl md:text-4xl font-light tracking-wide text-center">
+                  <h3 className="font-serif text-nomada-gold text-3xl md:text-4xl font-light tracking-wide text-center text-balance">
                     {cat.label}
                   </h3>
                   {cat.id === "caseritos-del-chef" && (
-                    <p className="font-sans text-nomada-gold/60 text-[10px] tracking-[0.3em] uppercase text-center mt-2">
+                    <p className="font-sans text-nomada-gold/60 text-[10px] tracking-[0.3em] font-bold uppercase text-center mt-2">
                       Disponible 11:00 am — 2:00 pm
                     </p>
                   )}
