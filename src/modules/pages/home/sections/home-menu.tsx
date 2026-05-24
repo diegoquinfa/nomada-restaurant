@@ -325,7 +325,7 @@ export function HomeMenu() {
   };
 
   return (
-    <section id="menu" className="bg-nomada-primary py-24 md:py-36">
+    <section className="bg-nomada-primary py-24 md:py-36">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-14">
@@ -336,9 +336,21 @@ export function HomeMenu() {
             </span>
             <div className="w-8 h-px bg-nomada-gold/60" />
           </div>
-          <h2 className="font-serif text-nomada-cream text-4xl md:text-5xl font-light leading-tight">
+          <h2
+            id="menu"
+            className="font-serif text-nomada-cream text-4xl md:text-5xl font-light leading-tight"
+          >
             La carta
           </h2>
+          <p className="font-sans text-nomada-cream/50 text-[12px] md:text-[13px] leading-relaxed mt-4 max-w-xl text-balance">
+            Trabajamos bajo pedidos programados por franja horaria para asegurar
+            calidad, frescura y tiempos precisos. Más información en nuestro
+            canal de{" "}
+            <WhatsAppLink className="text-nomada-gold hover:text-nomada-cream transition-colors underline underline-offset-2">
+              WhatsApp
+            </WhatsAppLink>
+            .
+          </p>
         </div>
 
         {/* Mobile: sticky horizontal scrollable bar */}
