@@ -1,4 +1,4 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow:
-Sitemap: https://nomada.diegoquinfa.lat/sitemap.xml
+Sitemap: https://nomadarestaurantectg.com/sitemap.xml
