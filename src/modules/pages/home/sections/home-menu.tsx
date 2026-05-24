@@ -191,12 +191,15 @@ function useScrollSpy(categoryIds: string[]) {
   const [activeId, setActiveId] = useState(categoryIds[0]);
 
   useEffect(() => {
-    const observers: Map<string, IntersectionObserver> = new Map();
+    // Map para saber qué secciones están actualmente visibles
+    const visibleSections = new Map<string, number>(); // id → top position
 
     const observerOptions: IntersectionObserverInit = {
-      rootMargin: "-100px 0px -10% 0px",
+      rootMargin: "-100px 0px -40% 0px", // ← reducir el área inferior
       threshold: 0,
     };
+
+    const observers: Map<string, IntersectionObserver> = new Map();
 
     categoryIds.forEach((id) => {
       const el = document.getElementById(`cat-${id}`);
@@ -205,9 +208,19 @@ function useScrollSpy(categoryIds: string[]) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveId(id);
+            visibleSections.set(id, entry.boundingClientRect.top);
+          } else {
+            visibleSections.delete(id);
           }
         });
+
+        // De todas las secciones visibles, activar la que está más arriba
+        if (visibleSections.size > 0) {
+          const topId = [...visibleSections.entries()].sort(
+            ([, a], [, b]) => a - b,
+          )[0][0];
+          setActiveId(topId);
+        }
       }, observerOptions);
 
       observer.observe(el);
@@ -422,7 +435,7 @@ export function HomeMenu() {
               <section
                 key={cat.id}
                 id={`cat-${cat.id}`}
-                className="scroll-mt-29"
+                className="scroll-mt-5"
               >
                 {/* Decorative header */}
                 <div className="relative mb-8 pb-6 border-b border-nomada-gold/30">
