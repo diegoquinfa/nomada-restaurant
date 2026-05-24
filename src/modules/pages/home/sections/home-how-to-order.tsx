@@ -131,9 +131,21 @@ export function HomeHowToOrder() {
           ))}
         </div>
 
-        {/* Delivery time + CTA */}
-        {/* Ajustado el margen y padding superior en mobile (mt-8 pt-8) */}
-        <div className="flex flex-col items-center gap-6 mt-8 md:mt-14 border-t border-nomada-gold/15 pt-8 md:pt-14">
+        {/* Pre-order notice */}
+        <div className="flex flex-col items-center text-center mt-8 md:mt-14 border-t border-nomada-gold/15 pt-8 md:pt-14">
+          <p className="font-sans text-nomada-cream/60 text-[13px] leading-relaxed max-w-xl text-balance">
+            Trabajamos bajo pedidos programados por franja horaria para asegurar
+            calidad, frescura y tiempos precisos, más información en nuestro
+            canal de{" "}
+            <WhatsAppLink className="text-nomada-gold hover:text-nomada-cream transition-colors underline underline-offset-2">
+              WhatsApp
+            </WhatsAppLink>
+            .
+          </p>
+        </div>
+
+        {/* CTA */}
+        <div className="flex flex-col items-center gap-6 mt-8">
           <WhatsAppLink className="font-sans text-nomada-deep text-[12px] tracking-[0.3em] uppercase bg-nomada-gold px-12 py-5 hover:bg-nomada-cream transition-colors duration-300 w-full sm:w-auto text-center">
             Hacer mi pedido
           </WhatsAppLink>
@@ -161,7 +173,7 @@ export function HomeHowToOrder() {
                   name: "¿Cuál es el horario de atención?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Lunes a jueves de 11:00 a 14:00 y de 18:00 a 22:00. Viernes a domingo de 11:00 a 22:00.",
+                    text: "Lunes de 11:00 a 14:00 y de 18:00 a 22:00, martes descanso, miércoles a domingo de 11:00 a 14:00 y de 18:00 a 22:00.",
                   },
                 },
                 {
@@ -169,7 +181,7 @@ export function HomeHowToOrder() {
                   name: "¿Hacen delivery en Cartagena?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Sí, ofrecemos delivery a domicilio en toda Cartagena. Los pedidos se reciben hasta 30 minutos antes del cierre.",
+                    text: "Sí, ofrecemos delivery a domicilio en toda Cartagena. Los pedidos se reciben hasta 30 minutos antes del cierre. Trabajamos bajo pedido con antelación — consultanos por WhatsApp.",
                   },
                 },
               ],
