@@ -73,20 +73,32 @@ export const Route = createRootRoute({
           openingHoursSpecification: [
             {
               "@type": "OpeningHoursSpecification",
-              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+              dayOfWeek: ["Monday"],
               opens: "11:00",
               closes: "14:00",
             },
             {
               "@type": "OpeningHoursSpecification",
-              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+              dayOfWeek: ["Monday"],
               opens: "18:00",
               closes: "22:00",
             },
             {
               "@type": "OpeningHoursSpecification",
-              dayOfWeek: ["Friday", "Saturday", "Sunday"],
+              dayOfWeek: ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
               opens: "11:00",
+              closes: "14:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+              opens: "18:00",
+              closes: "22:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+              opens: "18:00",
               closes: "22:00",
             },
           ],

@@ -1,13 +1,18 @@
 const scheduleRows = [
   {
-    days: "Lunes – Jueves",
+    days: "Lunes",
     hours: ["11:00 – 14:00", "18:00 – 22:00"],
     note: "Dos turnos",
   },
   {
-    days: "Viernes – Domingo",
-    hours: ["11:00 – 22:00"],
-    note: "Corrido",
+    days: "Martes",
+    hours: [],
+    note: "Descanso",
+  },
+  {
+    days: "Miércoles – Domingo",
+    hours: ["11:00 – 14:00", "18:00 – 22:00"],
+    note: "Dos turnos",
   },
 ];
 
