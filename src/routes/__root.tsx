@@ -7,7 +7,7 @@ import { Navbar } from "#/modules/navigation/components/navbar";
 import { Footer } from "#/modules/navigation/components/footer";
 import { NotFound } from "#/modules/pages/not-found";
 
-const SITE_URL = process.env.SITE_URL ?? "https://nomadacartagenactg.com";
+const SITE_URL = process.env.SITE_URL ?? "https://nomadarestaurantectg.com";
 
 export const Route = createRootRoute({
   head: () => ({
