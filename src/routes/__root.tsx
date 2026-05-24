@@ -123,6 +123,11 @@ export const Route = createRootRoute({
           sameAs: ["https://www.instagram.com/nomadarestaurante"],
         }),
       },
+      {
+        src: "https://analytics.ahrefs.com/analytics.js",
+        "data-key": "env4VTxl3idmVtPOX7+Z8w",
+        async: true,
+      },
     ],
   }),
   shellComponent: RootDocument,
