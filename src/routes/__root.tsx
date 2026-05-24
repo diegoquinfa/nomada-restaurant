@@ -7,7 +7,7 @@ import { Navbar } from "#/modules/navigation/components/navbar";
 import { Footer } from "#/modules/navigation/components/footer";
 import { NotFound } from "#/modules/pages/not-found";
 
-const SITE_URL = process.env.SITE_URL ?? "https://nomadacartagena.com";
+const SITE_URL = process.env.SITE_URL ?? "https://nomadacartagenactg.com";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -85,19 +85,37 @@ export const Route = createRootRoute({
             },
             {
               "@type": "OpeningHoursSpecification",
-              dayOfWeek: ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+              dayOfWeek: [
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday",
+              ],
               opens: "11:00",
               closes: "14:00",
             },
             {
               "@type": "OpeningHoursSpecification",
-              dayOfWeek: ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+              dayOfWeek: [
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday",
+              ],
               opens: "18:00",
               closes: "22:00",
             },
             {
               "@type": "OpeningHoursSpecification",
-              dayOfWeek: ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+              dayOfWeek: [
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday",
+              ],
               opens: "18:00",
               closes: "22:00",
             },
