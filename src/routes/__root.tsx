@@ -6,6 +6,7 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import { Navbar } from "#/modules/navigation/components/navbar";
 import { Footer } from "#/modules/navigation/components/footer";
 import { NotFound } from "#/modules/pages/not-found";
+import { PostHogProvider, PostHogPageView } from "#/modules/analytics/posthog-provider";
 
 const SITE_URL = process.env.SITE_URL ?? "https://nomadarestaurantectg.com";
 
@@ -141,9 +142,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <Navbar />
-        {children}
-        <Footer />
+        <PostHogProvider>
+          <PostHogPageView />
+          <Navbar />
+          {children}
+          <Footer />
+        </PostHogProvider>
         <TanStackDevtools
           config={{
             position: "bottom-right",
