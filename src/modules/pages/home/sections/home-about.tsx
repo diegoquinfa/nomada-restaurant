@@ -2,7 +2,7 @@ import { Image } from "@unpic/react";
 
 export function HomeAbout() {
   return (
-    <section id="nosotros" className="bg-nomada-primary py-24 md:py-36">
+    <section id="nosotros" className="bg-nomada-primary py-12">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
           {/* Image column */}

@@ -66,7 +66,7 @@ const steps = [
 export function HomeHowToOrder() {
   return (
     // Reducido de py-24 a py-12 en mobile para compactar el inicio y fin de la sección
-    <section id="como-pedir" className="bg-nomada-deep py-12 md:py-36">
+    <section id="como-pedir" className="bg-nomada-deep py-12">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         {/* Reducido el margen inferior del encabezado en mobile (mb-10) */}
