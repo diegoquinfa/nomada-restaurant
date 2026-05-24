@@ -191,12 +191,15 @@ function useScrollSpy(categoryIds: string[]) {
   const [activeId, setActiveId] = useState(categoryIds[0]);
 
   useEffect(() => {
-    const observers: Map<string, IntersectionObserver> = new Map();
+    // Map para saber qué secciones están actualmente visibles
+    const visibleSections = new Map<string, number>(); // id → top position
 
     const observerOptions: IntersectionObserverInit = {
-      rootMargin: "-100px 0px -10% 0px",
+      rootMargin: "-100px 0px -40% 0px", // ← reducir el área inferior
       threshold: 0,
     };
+
+    const observers: Map<string, IntersectionObserver> = new Map();
 
     categoryIds.forEach((id) => {
       const el = document.getElementById(`cat-${id}`);
@@ -205,9 +208,19 @@ function useScrollSpy(categoryIds: string[]) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveId(id);
+            visibleSections.set(id, entry.boundingClientRect.top);
+          } else {
+            visibleSections.delete(id);
           }
         });
+
+        // De todas las secciones visibles, activar la que está más arriba
+        if (visibleSections.size > 0) {
+          const topId = [...visibleSections.entries()].sort(
+            ([, a], [, b]) => a - b,
+          )[0][0];
+          setActiveId(topId);
+        }
       }, observerOptions);
 
       observer.observe(el);
@@ -235,7 +248,12 @@ function DishCard({ dish }: { dish: Dish }) {
       )}
     >
       {dish.image && !dish.is_coming_soon ? (
-        <div className="relative aspect-4/3 overflow-hidden bg-cover bg-center bg-no-repeat">
+        <div
+          className="relative aspect-4/3 overflow-hidden bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(/images/assets/bg-wood.webp)`,
+          }}
+        >
           <Image
             src={dish.image}
             alt={`${dish.name} — delivery gourmet Cartagena NÓMADA`}
@@ -262,12 +280,22 @@ function DishCard({ dish }: { dish: Dish }) {
           </span>
         </div>
       )}
-      <div className="flex flex-col gap-2 p-5 flex-1">
-        <div className="flex items-start justify-between gap-4">
-          <h4 className="font-serif text-nomada-cream text-[17px] leading-snug">
+      <div className="flex flex-col gap-4 md:gap-4 p-5 flex-1">
+        <div
+          className={cn(
+            "flex items-start justify-between",
+            dish.is_coming_soon ? "flex-col" : "flex-col md:flex-row md:gap-3",
+          )}
+        >
+          <h4 className="font-serif text-nomada-cream text-[20px] md:text-xl leading-snug text-pretty">
             {dish.name}
           </h4>
-          <span className="font-serif text-nomada-gold text-[16px] shrink-0">
+          <span
+            className={cn(
+              "font-serif text-nomada-gold  shrink-0",
+              dish.is_coming_soon ? "text-[16px]" : "text-[20px] font-bold",
+            )}
+          >
             {dish.is_coming_soon ? "Próximamente" : formatPrice(dish.price)}
           </span>
         </div>
@@ -315,13 +343,16 @@ export function HomeMenu() {
   };
 
   return (
-    <section id="menu" className="bg-nomada-primary py-24 md:py-36">
+    <section className="bg-nomada-primary py-12">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-14">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-8 h-px bg-nomada-gold/60" />
-            <span className="font-sans text-nomada-gold text-[10px] tracking-[0.4em] uppercase">
+            <span
+              id="menu"
+              className="font-sans text-nomada-gold text-[10px] tracking-[0.4em] uppercase"
+            >
               Nuestra carta
             </span>
             <div className="w-8 h-px bg-nomada-gold/60" />
@@ -329,6 +360,15 @@ export function HomeMenu() {
           <h2 className="font-serif text-nomada-cream text-4xl md:text-5xl font-light leading-tight">
             La carta
           </h2>
+          <p className="font-sans text-nomada-cream/50 text-[12px] md:text-[13px] leading-relaxed mt-4 max-w-xl text-balance">
+            Trabajamos bajo pedidos programados por franja horaria para asegurar
+            calidad, frescura y tiempos precisos. Más información en nuestro
+            canal de{" "}
+            <WhatsAppLink className="text-nomada-gold hover:text-nomada-cream transition-colors underline underline-offset-2">
+              WhatsApp
+            </WhatsAppLink>
+            .
+          </p>
         </div>
 
         {/* Mobile: sticky horizontal scrollable bar */}
@@ -395,17 +435,17 @@ export function HomeMenu() {
               <section
                 key={cat.id}
                 id={`cat-${cat.id}`}
-                className="scroll-mt-[116px]"
+                className="scroll-mt-5"
               >
                 {/* Decorative header */}
                 <div className="relative mb-8 pb-6 border-b border-nomada-gold/30">
                   <div className="absolute bottom-0 left-0 w-16 h-px bg-nomada-gold" />
                   <div className="absolute bottom-0 right-0 w-16 h-px bg-nomada-gold" />
-                  <h3 className="font-serif text-nomada-gold text-3xl md:text-4xl font-light tracking-wide text-center">
+                  <h3 className="font-serif text-nomada-gold text-3xl md:text-4xl font-light tracking-wide text-center text-balance">
                     {cat.label}
                   </h3>
                   {cat.id === "caseritos-del-chef" && (
-                    <p className="font-sans text-nomada-gold/60 text-[10px] tracking-[0.3em] uppercase text-center mt-2">
+                    <p className="font-sans text-nomada-gold/60 text-[10px] tracking-[0.3em] font-bold uppercase text-center mt-2">
                       Disponible 11:00 am — 2:00 pm
                     </p>
                   )}
