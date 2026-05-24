@@ -315,7 +315,7 @@ export function HomeMenu() {
   };
 
   return (
-    <section className="bg-nomada-primary py-24 md:py-36">
+    <section id="menu" className="bg-nomada-primary py-24 md:py-36">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-14">
