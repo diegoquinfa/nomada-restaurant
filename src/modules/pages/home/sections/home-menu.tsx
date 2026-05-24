@@ -235,7 +235,7 @@ function DishCard({ dish }: { dish: Dish }) {
       )}
     >
       {dish.image && !dish.is_coming_soon ? (
-        <div className="relative aspect-4/3 overflow-hidden">
+        <div className="relative aspect-4/3 overflow-hidden bg-cover bg-center bg-no-repeat">
           <Image
             src={dish.image}
             alt={`${dish.name} — delivery gourmet Cartagena NÓMADA`}
