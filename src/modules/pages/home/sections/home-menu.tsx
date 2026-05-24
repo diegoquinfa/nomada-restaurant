@@ -331,15 +331,15 @@ export function HomeMenu() {
         <div className="flex flex-col items-center text-center mb-14">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-8 h-px bg-nomada-gold/60" />
-            <span className="font-sans text-nomada-gold text-[10px] tracking-[0.4em] uppercase">
+            <span
+              id="menu"
+              className="font-sans text-nomada-gold text-[10px] tracking-[0.4em] uppercase"
+            >
               Nuestra carta
             </span>
             <div className="w-8 h-px bg-nomada-gold/60" />
           </div>
-          <h2
-            id="menu"
-            className="font-serif text-nomada-cream text-4xl md:text-5xl font-light leading-tight"
-          >
+          <h2 className="font-serif text-nomada-cream text-4xl md:text-5xl font-light leading-tight">
             La carta
           </h2>
           <p className="font-sans text-nomada-cream/50 text-[12px] md:text-[13px] leading-relaxed mt-4 max-w-xl text-balance">
