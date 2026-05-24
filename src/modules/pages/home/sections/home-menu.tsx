@@ -267,9 +267,14 @@ function DishCard({ dish }: { dish: Dish }) {
           </span>
         </div>
       )}
-      <div className="flex flex-col gap-2 p-5 flex-1">
-        <div className="flex items-start justify-between gap-4">
-          <h4 className="font-serif text-nomada-cream text-[20px] md:text-xl leading-snug">
+      <div className="flex flex-col gap-4 md:gap-4 p-5 flex-1">
+        <div
+          className={cn(
+            "flex items-start justify-between",
+            dish.is_coming_soon ? "flex-col" : "flex-col md:flex-row md:gap-3",
+          )}
+        >
+          <h4 className="font-serif text-nomada-cream text-[20px] md:text-xl leading-snug text-pretty">
             {dish.name}
           </h4>
           <span
