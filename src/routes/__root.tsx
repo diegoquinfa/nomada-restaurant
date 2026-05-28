@@ -1,15 +1,14 @@
 import "../styles.css";
-import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
-
-import { Navbar } from "#/modules/navigation/components/navbar";
-import { Footer } from "#/modules/navigation/components/footer";
-import { NotFound } from "#/modules/pages/not-found";
+import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import {
-  PostHogProvider,
   PostHogPageView,
+  PostHogProvider,
 } from "#/modules/analytics/posthog-provider";
+import { Footer } from "#/modules/navigation/components/footer";
+import { Navbar } from "#/modules/navigation/components/navbar";
+import { NotFound } from "#/modules/pages/not-found";
 
 const SITE_URL =
   (import.meta.env.VITE_SITE_URL as string) ??

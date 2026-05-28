@@ -1,6 +1,6 @@
-import { WhatsAppLink } from "#/modules/navigation/components/whatsapp-link";
 import { Link } from "@tanstack/react-router";
 import { Image } from "@unpic/react";
+import { WhatsAppLink } from "#/modules/navigation/components/whatsapp-link";
 
 export function HomeHero() {
   return (

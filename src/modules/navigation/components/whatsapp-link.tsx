@@ -1,6 +1,6 @@
-import { cn } from "#/shared/ui/lib/utils";
 import type { AnchorHTMLAttributes } from "react";
 import { useEffect, useState, useSyncExternalStore } from "react";
+import { cn } from "#/shared/ui/lib/utils";
 
 export const WHATSAPP_URL = new URL("https://wa.me/573242503301");
 

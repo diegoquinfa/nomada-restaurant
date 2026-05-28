@@ -1,7 +1,7 @@
-import { WhatsAppLink } from "#/modules/navigation/components/whatsapp-link";
-import { cn } from "#/shared/ui/lib/utils";
 import { Image } from "@unpic/react";
 import { useEffect, useRef, useState } from "react";
+import { WhatsAppLink } from "#/modules/navigation/components/whatsapp-link";
+import { cn } from "#/shared/ui/lib/utils";
 
 type Badge = "Favorito" | "Nuevo" | "Temporada" | null;
 

@@ -1,6 +1,6 @@
+import { useRouterState } from "@tanstack/react-router";
 import posthog from "posthog-js";
 import { useEffect } from "react";
-import { useRouterState } from "@tanstack/react-router";
 
 const POSTHOG_KEY = import.meta.env.VITE_POSTHOG_KEY as string;
 const POSTHOG_HOST = import.meta.env.VITE_POSTHOG_HOST as string;

@@ -1,9 +1,9 @@
-import { cn } from "#/shared/ui/lib/utils";
 import { Link } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
-import { WhatsAppLink } from "./whatsapp-link";
-import { scrollToHash } from "../utils/scroll-to-hash";
 import { Image } from "@unpic/react";
+import { useEffect, useState } from "react";
+import { cn } from "#/shared/ui/lib/utils";
+import { scrollToHash } from "../utils/scroll-to-hash";
+import { WhatsAppLink } from "./whatsapp-link";
 
 const navLinks = [
   { label: "Nosotros", href: "nosotros" },
