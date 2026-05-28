@@ -24,7 +24,7 @@ export function PostHogPageView() {
     posthog.capture("$pageview", {
       $current_url: window.location.href,
     });
-  }, [location.pathname, location.search]);
+  }, [location]);
 
   return null;
 }

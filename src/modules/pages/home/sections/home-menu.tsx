@@ -191,15 +191,29 @@ function useScrollSpy(categoryIds: string[]) {
   const [activeId, setActiveId] = useState(categoryIds[0]);
 
   useEffect(() => {
-    // Map para saber qué secciones están actualmente visibles
-    const visibleSections = new Map<string, number>(); // id → top position
+    const visibleSections = new Map<string, number>();
+    const observers = new Map<string, IntersectionObserver>();
 
     const observerOptions: IntersectionObserverInit = {
-      rootMargin: "-100px 0px -40% 0px", // ← reducir el área inferior
+      rootMargin: "-100px 0px -40% 0px",
       threshold: 0,
     };
 
-    const observers: Map<string, IntersectionObserver> = new Map();
+    const updateActiveId = () => {
+      if (visibleSections.size === 0) return;
+
+      let topId: string | null = null;
+      let minTop = Infinity;
+
+      visibleSections.forEach((top, id) => {
+        if (top < minTop) {
+          minTop = top;
+          topId = id;
+        }
+      });
+
+      if (topId) setActiveId(topId);
+    };
 
     categoryIds.forEach((id) => {
       const el = document.getElementById(`cat-${id}`);
@@ -214,13 +228,7 @@ function useScrollSpy(categoryIds: string[]) {
           }
         });
 
-        // De todas las secciones visibles, activar la que está más arriba
-        if (visibleSections.size > 0) {
-          const topId = [...visibleSections.entries()].sort(
-            ([, a], [, b]) => a - b,
-          )[0][0];
-          setActiveId(topId);
-        }
+        updateActiveId();
       }, observerOptions);
 
       observer.observe(el);
@@ -228,9 +236,7 @@ function useScrollSpy(categoryIds: string[]) {
     });
 
     return () => {
-      observers.forEach((obs) => {
-        obs.disconnect();
-      });
+      observers.forEach((obs) => obs.disconnect());
     };
   }, [categoryIds]);
 
@@ -446,7 +452,7 @@ export function HomeMenu() {
                   </h3>
                   {cat.id === "caseritos-del-chef" && (
                     <p className="font-sans text-nomada-gold/60 text-[10px] tracking-[0.3em] font-bold uppercase text-center mt-2">
-                      Disponible 11:00 am — 2:00 pm
+                      Disponible 11:00 am - 2:00 pm
                     </p>
                   )}
                   {activeId === cat.id && (

@@ -8,7 +8,7 @@ import { Footer } from "#/modules/navigation/components/footer";
 import { NotFound } from "#/modules/pages/not-found";
 import { PostHogProvider, PostHogPageView } from "#/modules/analytics/posthog-provider";
 
-const SITE_URL = process.env.SITE_URL ?? "https://nomadarestaurantectg.com";
+const SITE_URL = process.env.SITE_URL;
 
 export const Route = createRootRoute({
   head: () => ({

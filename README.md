@@ -1,5 +1,7 @@
 # NÓMADA Cocina Fusión
 
+[![React Doctor](https://www.react.doctor/share/badge?p=web_nomada&s=100&w=0&f=0)](https://www.react.doctor/share?p=web_nomada&s=100&w=0&f=0)
+
 Official landing page for **NÓMADA Fusión Cocina**, a gourmet ghost kitchen delivery brand based in Cartagena de Indias, Colombia.
 
 NÓMADA was created with the idea of transforming food delivery into an experience through bold flavors, fusion cuisine, and a brand identity inspired by travel, exploration, and handcrafted detail.

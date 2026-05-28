@@ -17,7 +17,7 @@ export function HomeContact() {
             Contacto
           </h2>
           <p className="font-sans text-nomada-cream/60 text-[15px] leading-relaxed mt-4 max-w-md text-balance">
-            Pedidos, consultas, pedidos especiales. Escríbenos cuando quieras —
+            Pedidos, consultas, pedidos especiales. Escríbenos cuando quieras -
             estamos aquí.
           </p>
         </div>

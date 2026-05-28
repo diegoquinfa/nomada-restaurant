@@ -96,7 +96,7 @@ export function HomeHowToOrder() {
             >
               {/* Circle with number */}
               {/* Reducido el margen inferior del icono en mobile (mb-4) */}
-              <div className="relative z-10 w-20 h-20 border border-nomada-gold/40 flex items-center justify-center mb-4 md:mb-6 bg-nomada-deep">
+              <div className="relative z-10 size-20 border border-nomada-gold/40 flex items-center justify-center mb-4 md:mb-6 bg-nomada-deep">
                 <span className="text-nomada-gold">{step.icon}</span>
               </div>
 
@@ -154,7 +154,7 @@ export function HomeHowToOrder() {
         {/* FAQ Structured Data */}
         <script
           type="application/ld+json"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted sanitized HTML
+          // react-doctor-disable-next-line react-doctor/no-danger
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",

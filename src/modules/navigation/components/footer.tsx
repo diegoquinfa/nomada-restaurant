@@ -1,15 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { WhatsAppLink } from "./whatsapp-link";
 import { scrollToHash } from "../utils/scroll-to-hash";
 import { Image } from "@unpic/react";
 
 export function Footer() {
-  const [year, setYear] = useState<number | undefined>(undefined);
-
-  useEffect(() => {
-    setYear(new Date().getFullYear());
-  }, []);
+  const [year] = useState(() => new Date().getFullYear());
 
   return (
     <footer className="bg-nomada-deep border-t border-nomada-gold/15 pt-12 pb-20 md:pb-12">

@@ -1,0 +1,15 @@
+{
+  "ignore": {
+    "files": [".agents/**", "src/shared/ui/**"],
+    "rules": ["deslop/unused-dependency", "deslop/unused-file"],
+    "overrides": [
+      {
+        "files": ["src/routes/__root.tsx"],
+        "rules": ["react-doctor/only-export-components"]
+      }
+    ]
+  },
+  "rules": {
+    "react-doctor/no-array-index-as-key": "error"
+  }
+}

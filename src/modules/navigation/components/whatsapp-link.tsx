@@ -1,6 +1,6 @@
 import { cn } from "#/shared/ui/lib/utils";
 import type { AnchorHTMLAttributes } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 
 export const WHATSAPP_URL = new URL("https://wa.me/573242503301");
 
@@ -32,22 +32,27 @@ export const WhatsAppLink = ({
   );
 };
 
+function subscribe(callback: () => void) {
+  const observer = new MutationObserver(callback);
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+  return () => observer.disconnect();
+}
+
+function getSnapshot() {
+  return document.body.classList.contains("nav-menu-open");
+}
+
 export function WhatsAppFAB() {
   const [visible, setVisible] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const menuOpen = useSyncExternalStore(subscribe, getSnapshot, () => false);
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 60);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
-      setMenuOpen(document.body.classList.contains("nav-menu-open"));
-    });
-    observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
-    return () => observer.disconnect();
   }, []);
 
   return (

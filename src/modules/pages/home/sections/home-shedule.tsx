@@ -84,7 +84,7 @@ export function HomeSchedule() {
             </h3>
             <div className="flex flex-col gap-3 mb-8">
               <div className="flex items-center gap-3">
-                <div className="w-1.5 h-1.5 bg-nomada-earth shrink-0" />
+                <div className="size-1.5 bg-nomada-earth shrink-0" />
                 <span className="font-sans text-nomada-deep text-[15px]">
                   Toda Cartagena
                 </span>
