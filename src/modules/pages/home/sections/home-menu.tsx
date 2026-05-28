@@ -236,7 +236,9 @@ function useScrollSpy(categoryIds: string[]) {
     });
 
     return () => {
-      observers.forEach((obs) => obs.disconnect());
+      observers.forEach((obs) => {
+        obs.disconnect();
+      });
     };
   }, [categoryIds]);
 

@@ -6,9 +6,16 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import { Navbar } from "#/modules/navigation/components/navbar";
 import { Footer } from "#/modules/navigation/components/footer";
 import { NotFound } from "#/modules/pages/not-found";
-import { PostHogProvider, PostHogPageView } from "#/modules/analytics/posthog-provider";
+import {
+  PostHogProvider,
+  PostHogPageView,
+} from "#/modules/analytics/posthog-provider";
 
-const SITE_URL = process.env.SITE_URL;
+const SITE_URL =
+  (import.meta.env.VITE_SITE_URL as string) ??
+  "https://nomadarestaurantectg.com";
+
+console.log({ SITE_URL });
 
 export const Route = createRootRoute({
   head: () => ({

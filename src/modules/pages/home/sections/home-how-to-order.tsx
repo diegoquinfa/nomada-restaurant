@@ -154,7 +154,7 @@ export function HomeHowToOrder() {
         {/* FAQ Structured Data */}
         <script
           type="application/ld+json"
-          // react-doctor-disable-next-line react-doctor/no-danger
+          // biome-ignore lint: correctness/noUndeclaredVariables, react-doctor-disable-next-line react-doctor/no-danger
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",

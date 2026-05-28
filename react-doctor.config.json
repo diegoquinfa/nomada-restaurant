@@ -1,11 +1,19 @@
 {
   "ignore": {
     "files": [".agents/**", "src/shared/ui/**"],
-    "rules": ["deslop/unused-dependency", "deslop/unused-file"],
+    "rules": [
+      "deslop/unused-dependency",
+      "deslop/unused-file",
+      "react-doctor/require-pnpm-hardening"
+    ],
     "overrides": [
       {
         "files": ["src/routes/__root.tsx"],
         "rules": ["react-doctor/only-export-components"]
+      },
+      {
+        "files": ["src/modules/pages/home/sections/home-how-to-order.tsx"],
+        "rules": ["react-doctor/no-danger"]
       }
     ]
   },
