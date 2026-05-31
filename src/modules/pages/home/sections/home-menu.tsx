@@ -475,7 +475,7 @@ export function HomeMenu() {
         {/* CTA */}
         <div className="flex justify-center mt-14">
           <WhatsAppLink className="font-sans text-nomada-deep text-[11px] tracking-[0.25em] uppercase bg-nomada-gold px-10 py-4 hover:bg-nomada-cream transition-colors duration-300">
-            Ver menú completo por WhatsApp
+            Pedir domicilio por WhatsApp
           </WhatsAppLink>
         </div>
       </div>
