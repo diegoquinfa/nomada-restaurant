@@ -110,9 +110,9 @@ export function Footer() {
           <p className="font-sans text-nomada-cream/20 text-[10px] tracking-widest">
             Página desarrollada por{" "}
             <a
-              href="https://diegoquinfa.lat"
+              href="https://diegoquinfa.lat?utm_source=nomada&utm_medium=footer&utm_campaign=site_credit"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener"
               className="text-nomada-gold/40 hover:text-nomada-gold transition-colors duration-200"
             >
               Diego Quintana Fajardo
