@@ -120,8 +120,7 @@ const categories: Category[] = [
     dishes: [
       {
         name: "Fusión Criolla",
-        description:
-          "Pechuga en salsa stroganoff, acompañada de Arroz salteado.",
+        description: "Pechuga en salsa teriyaki, acompañada de Arroz salteado.",
         price: 23000,
         badge: null,
         is_coming_soon: false,
