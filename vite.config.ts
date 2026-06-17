@@ -8,6 +8,10 @@ import { defineConfig } from "vite";
 
 const config = defineConfig({
   resolve: { tsconfigPaths: true },
+  test: {
+    environment: "jsdom",
+    globals: false,
+  },
   plugins: [
     devtools(),
     nitro({

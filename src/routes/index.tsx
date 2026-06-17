@@ -6,6 +6,7 @@ import { HomeHero } from "#/modules/pages/home/sections/home-hero";
 import { HomeHowToOrder } from "#/modules/pages/home/sections/home-how-to-order";
 import { HomeMenu } from "#/modules/pages/home/sections/home-menu";
 import { HomeSchedule } from "#/modules/pages/home/sections/home-shedule";
+import { PromoPopup } from "#/modules/promo/components/promo-popup";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,6 +31,7 @@ function Home() {
       <HomeSchedule />
       <HomeContact />
       <WhatsAppFAB />
+      <PromoPopup />
     </main>
   );
 }
