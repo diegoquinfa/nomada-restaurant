@@ -20,7 +20,7 @@ RUN pnpm build
 # ============================================================
 # Stage 2: Production — Nitro standalone server
 # ============================================================
-FROM node:22-alpine AS production
+FROM node:24-alpine AS production
 
 ENV NODE_ENV=production
 ENV PORT=3000
