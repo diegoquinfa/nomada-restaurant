@@ -1,5 +1,6 @@
-import { Image } from "@unpic/react";
+import { PromoStoriesCarousel } from "#/modules/promo/components/promo-stories-carousel.tsx";
 import { usePromoPopupVisibility } from "#/modules/promo/hooks/use-promo-popup-visibility.ts";
+import { aggregatePromoSlides } from "#/modules/promo/lib/promo-slides.ts";
 import {
   Dialog,
   DialogContent,
@@ -8,7 +9,10 @@ import {
 } from "#/shared/ui/components/dialog.tsx";
 
 export function PromoPopup() {
-  const { open, dismiss } = usePromoPopupVisibility();
+  const { open, activePromos, dismiss } = usePromoPopupVisibility();
+  const slides = aggregatePromoSlides(activePromos);
+
+  if (slides.length === 0) return null;
 
   return (
     <Dialog
@@ -18,22 +22,15 @@ export function PromoPopup() {
       }}
     >
       <DialogContent
-        aria-label="Promo Mundialista Nómada"
+        aria-label="Promo Nómada"
         className="max-w-sm border-none bg-transparent p-0 shadow-none"
       >
-        <DialogTitle className="sr-only">Nueva Burguer</DialogTitle>
+        <DialogTitle className="sr-only">Promociones Nómada</DialogTitle>
         <DialogDescription className="sr-only">
-          Hamburguesa de camarón llena de sabores inolvidables, ¿te atreverias a
-          probar?
+          Promociones activas del día
         </DialogDescription>
-        <Image
-          layout="constrained"
-          src="/images/promo/promo-0002.webp"
-          alt="Hamburguesa de camarón llena de sabores inolvidables"
-          width={1125}
-          height={2000}
-          className="max-h-[85vh] w-auto rounded-lg"
-        />
+
+        <PromoStoriesCarousel slides={slides} />
       </DialogContent>
     </Dialog>
   );

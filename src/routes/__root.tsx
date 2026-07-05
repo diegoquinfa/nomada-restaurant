@@ -1,4 +1,5 @@
 import "../styles.css";
+import "@blossom-carousel/react/style.css";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
