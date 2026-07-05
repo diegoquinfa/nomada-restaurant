@@ -33,7 +33,7 @@ export const Route = createRootRoute({
       {
         name: "og:description",
         content:
-          "Cocina oculta fusión en Cartagena. Platos artesanales, almuerzos desde $23.000. Pedí por WhatsApp.",
+          "Cocina oculta fusión en Cartagena. Platos artesanales, almuerzos desde $23.000. Pide por WhatsApp.",
       },
       { name: "og:image", content: `${SITE_URL}/images/open_graph.webp` },
       { name: "og:url", content: SITE_URL },
