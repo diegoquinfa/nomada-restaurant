@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 const PROMO_POPUP_STORAGE_KEY = "nomada:promo-popup-last-shown";
-export const PROMO_POPUP_REAPPEAR_MS = 60 * 60 * 1000; // 1h
+export const PROMO_POPUP_REAPPEAR_MS = 0 * 60 * 1000; // 1h
 
 export function usePromoPopupVisibility() {
   const [open, setOpen] = useState(false);

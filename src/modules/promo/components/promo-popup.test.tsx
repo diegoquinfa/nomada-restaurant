@@ -24,7 +24,7 @@ describe("PromoPopup", () => {
     });
 
     const image = screen.getByRole("img") as HTMLImageElement;
-    expect(image.src).toContain("promo-0001.webp");
+    expect(image.src).toContain("promo-0002.webp");
     expect(image.alt.length).toBeGreaterThan(0);
     expect(image.alt.toLowerCase()).toContain("promo");
   });

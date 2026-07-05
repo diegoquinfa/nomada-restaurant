@@ -27,41 +27,17 @@ function formatPrice(price: number | null): string {
 
 const categories: Category[] = [
   {
-    id: "entradas-y-arroces",
-    label: "Entradas y Arroces",
-    dishes: [
-      {
-        name: "Calamar Crocante & Acevichado",
-        description:
-          "Anillas de calamar apanadas acompañadas de mayonesa acevichada.",
-        price: 18000,
-        badge: null,
-        is_coming_soon: false,
-        image: "/images/dishes/entradas/calamar-crocante-acevichado.webp",
-      },
-      {
-        name: "Arroz Salteado Caribeño",
-        description:
-          "Arroz de coco frito salteado, con vegetales, chorizo argentino, chicharrón, lomo fino, y pechuga.",
-        price: 37000,
-        badge: null,
-        is_coming_soon: false,
-        image: "/images/dishes/arroces/arroz-salteado-caribeno.webp",
-      },
-    ],
-  },
-  {
     id: "recomendados-del-chef",
     label: "Recomendados del Chef",
     dishes: [
       {
-        name: "Jalea Caribeña",
+        name: "Hamburguesa de Camarón con papas",
         description:
-          "Mariscos apanados crocantes, mayonesa acevichada, ensalada peruana y cascos de papa criolla.",
-        price: 45000,
-        badge: null,
+          "Pan brioche artesanal, disco de camarón apanado súper crujiente, ensalada coleslaw, alioli de eneldo, pepinillos agridulces y cebolla encurtida artesanal. Bañada en nuestra salsa de la casa y acompañada de papas a la francesa.",
+        price: 35000,
+        badge: "Nuevo", // Badge destacado
         is_coming_soon: false,
-        image: "/images/dishes/recomendados-del-chef/jalea-caribena.webp",
+        image: "/images/dishes/recomendados-del-chef/hamburguesa-camaron.webp",
       },
       {
         name: "Costilla BBQ Roadhouse",
@@ -85,9 +61,42 @@ const categories: Category[] = [
     ],
   },
   {
+    id: "reservas-del-chef",
+    label: "Reservas del Chef",
+    dishes: [
+      {
+        name: "Picada Gourmet de Pollo",
+        description:
+          "Tiernos bocados de pechuga de pollo bañados en una cremosa salsa de queso crema y eneldo, acompañados de papas en casco y chicharrón crocante. Servida con alioli de la casa, mayonesa de mango y pico de gallo fresco.",
+        price: 38000,
+        badge: "Nuevo",
+        is_coming_soon: false, // Cambiado a false porque ya está disponible
+        image: "/images/dishes/reservas-del-chef/picada-gourmet-pollo.webp",
+      },
+      {
+        name: "Picada Gourmet de Camarón",
+        description:
+          "Jugosos camarones en una cremosa salsa de queso crema y eneldo, acompañados de papas en casco, chorizo y chicharrón crocante. Servida con alioli de la casa, mayonesa de mango y pico de gallo fresco.",
+        price: 38000,
+        badge: "Nuevo",
+        is_coming_soon: false, // Cambiado a false porque ya está disponible
+        image: "/images/dishes/reservas-del-chef/picada-gourmet-camaron.webp",
+      },
+    ],
+  },
+  {
     id: "pastas",
     label: "Pastas",
     dishes: [
+      {
+        name: "Fettuccine Queso Azul",
+        description:
+          "Crujiente milanesa de cerdo apanada, coronada con fettuccine en una cremosa salsa de queso azul, terminada con queso parmesano y cebolla frita crujiente.",
+        price: 37000,
+        badge: "Nuevo", // Le agregamos el badge de 'Nuevo'
+        is_coming_soon: false,
+        image: "/images/dishes/pastas/fettuccine-queso-azul.webp", // Ruta de imagen sugerida
+      },
       {
         name: "Fettuccine Huancaína & Camarones",
         description: "",
@@ -119,6 +128,16 @@ const categories: Category[] = [
     label: "Caseritos del Chef (Lunes a Viernes)",
     dishes: [
       {
+        name: "Pollo & Champiñones",
+        description:
+          "Jugosos trozos de pollo en una cremosa salsa de champiñones, acompañados de arroz salteado, cascos de papa criolla y ensalada fresca de la casa.",
+        price: 23000,
+        badge: "Nuevo",
+        is_coming_soon: false,
+        image:
+          "/images/dishes/caseritos-del-chef/caserito-pollo-champinones.webp",
+      },
+      {
         name: "Fusión Criolla",
         description: "Pechuga en salsa teriyaki, acompañada de Arroz salteado.",
         price: 23000,
@@ -147,32 +166,17 @@ const categories: Category[] = [
     ],
   },
   {
-    id: "proximamente",
-    label: "Próximamente",
+    id: "entradas-y-arroces",
+    label: "Arroces",
     dishes: [
       {
-        name: "Milanesa Caribeña Cremosa",
+        name: "Arroz Salteado Caribeño",
         description:
-          "Milanesa de cerdo crocante, salsa de ajo cremosa, queso provolone gratinado, papas a la francesa y ensalada.",
-        price: null,
+          "Arroz de coco frito salteado, con vegetales, chorizo argentino, chicharrón, lomo fino, y pechuga.",
+        price: 37000,
         badge: null,
-        is_coming_soon: true,
-      },
-      {
-        name: "Hamburguesa de Camarón",
-        description:
-          "Camarón crocante, salsa de mango picante, alioli de aguacate y eneldo, mix de lechuga, tomate asado encurtido pan brioche de orégano y papas a la francesa.",
-        price: null,
-        badge: null,
-        is_coming_soon: true,
-      },
-      {
-        name: "Hamburguesa Cartagenera",
-        description:
-          "Carne angus artesanal, chicharron crocante, queso costeño, tocineta y cebolla caramelizada en reducción de panela, salsa de la casa en pan brioche de orégano y papas a la francesa.",
-        price: null,
-        badge: null,
-        is_coming_soon: true,
+        is_coming_soon: false,
+        image: "/images/dishes/arroces/arroz-salteado-caribeno.webp",
       },
     ],
   },
@@ -267,7 +271,7 @@ function DishCard({ dish }: { dish: Dish }) {
             layout="constrained"
             width={640}
             height={480}
-            className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
           {dish.badge && (
@@ -288,12 +292,7 @@ function DishCard({ dish }: { dish: Dish }) {
         </div>
       )}
       <div className="flex flex-col gap-4 md:gap-4 p-5 flex-1">
-        <div
-          className={cn(
-            "flex items-start justify-between",
-            dish.is_coming_soon ? "flex-col" : "flex-col md:flex-row md:gap-3",
-          )}
-        >
+        <div className={"flex items-start justify-between flex-col"}>
           <h4 className="font-serif text-nomada-cream text-[20px] md:text-xl leading-snug text-pretty">
             {dish.name}
           </h4>
