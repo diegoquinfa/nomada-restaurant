@@ -15,26 +15,26 @@ export type Promo = {
 };
 
 export const promos: Promo[] = [
+  // {
+  //   id: "menu-domingo",
+  //   images: [
+  //     {
+  //       src: "/images/promo/promo-domingos.webp",
+  //       alt: "Menu del Domingo",
+  //     },
+  //   ],
+  //   activeDays: [6], // Sunday only
+  // },
   {
-    id: "menu-domingo",
+    id: "promo-costillas",
     images: [
       {
-        src: "/images/promo/promo-domingos.webp",
-        alt: "Menu del Domingo",
-      },
-    ],
-    activeDays: [6], // Sunday only
-  },
-  {
-    id: "mundialista",
-    images: [
-      {
-        src: "/images/promo/promo-0002.webp",
-        alt: "Hamburguesa de camarón llena de sabores inolvidables",
+        src: "/images/promo/promo-costillas.webp",
+        alt: "Costillas BBQ Roadhouse",
       },
     ],
     startDate: "2026-07-01T10:00-05:00",
-    endDate: "2026-07-12T23:59-05:00",
-    activeDays: [0, 1, 2, 3, 4, 5, 6], // Sunday only
+    endDate: "2026-07-28T23:59-05:00",
+    activeDays: [5, 6], // Saturday and Sunday only
   },
 ];

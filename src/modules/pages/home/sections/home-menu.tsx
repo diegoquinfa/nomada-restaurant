@@ -42,7 +42,7 @@ const categories: Category[] = [
       {
         name: "Costilla BBQ Roadhouse",
         description:
-          "Costillas St. Louis en salsa BBQ, cascos de papa criolla y ensalada de la casa.",
+          "Costillas de cerdo de cocción lenta, caramelizadas con nuestra salsa BBQ artesanal de café, logrando un equilibrio perfecto entre dulzor, ahumado y especias. Acompañadas de papas a la francesa y ensalada fresca de la casa.",
         price: 45000,
         badge: null,
         is_coming_soon: false,
@@ -148,7 +148,7 @@ const categories: Category[] = [
       {
         name: "Perú Urbano",
         description:
-          "Lomo fino saltado, acompañado de Arroz salteado, cascos de papa criolla y ensalada de la casa.",
+          "Fajitas de res salteado, acompañado de arroz salteado, cascos de papa criolla y ensalada de la casa.",
         price: 23000,
         badge: null,
         is_coming_soon: false,

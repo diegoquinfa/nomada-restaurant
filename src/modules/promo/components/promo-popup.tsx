@@ -23,7 +23,7 @@ export function PromoPopup() {
     >
       <DialogContent
         aria-label="Promo Nómada"
-        className="max-w-sm border-none bg-transparent p-0 shadow-none"
+        className="max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl border-none bg-transparent p-0 shadow-none"
       >
         <DialogTitle className="sr-only">Promociones Nómada</DialogTitle>
         <DialogDescription className="sr-only">
