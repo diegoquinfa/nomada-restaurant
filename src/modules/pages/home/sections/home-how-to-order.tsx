@@ -173,7 +173,7 @@ export function HomeHowToOrder() {
                   name: "¿Cuál es el horario de atención?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Lunes a sábado de 11:00 a 15:00, domingo descanso.",
+                    text: "Lunes a sábado de 11:00 am a 3:00 pm, domingo descanso.",
                   },
                 },
                 {

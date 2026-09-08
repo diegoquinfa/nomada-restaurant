@@ -1,7 +1,7 @@
 const scheduleRows = [
   {
     days: "Lunes – Sábado",
-    hours: ["11:00 – 15:00"],
+    hours: ["11:00 am – 3:00 pm"],
     note: "Horario único",
   },
 ];
