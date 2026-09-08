@@ -11,6 +11,7 @@ interface Dish {
   price: number | null;
   badge: Badge;
   is_coming_soon: boolean;
+  is_hidden?: boolean;
   image?: string;
 }
 
@@ -37,6 +38,7 @@ const categories: Category[] = [
         price: 35000,
         badge: "Nuevo", // Badge destacado
         is_coming_soon: false,
+        is_hidden: true,
         image: "/images/dishes/recomendados-del-chef/hamburguesa-camaron.webp",
       },
       {
@@ -46,6 +48,7 @@ const categories: Category[] = [
         price: 45000,
         badge: null,
         is_coming_soon: false,
+        is_hidden: true,
         image:
           "/images/dishes/recomendados-del-chef/costilla-bbq-roadhouse.webp",
       },
@@ -56,7 +59,16 @@ const categories: Category[] = [
         price: 35000,
         badge: null,
         is_coming_soon: false,
+        is_hidden: true,
         image: "/images/dishes/recomendados-del-chef/lomo-tres-pimientas.webp",
+      },
+      {
+        name: "Pescado Marinero",
+        description:
+          "Jugoso filete de pescado apanado bañado en una rica salsa marinera con mejillones y anillos de calamar, acompañado de auténtico arroz de coco frito, patacones y una ensalada fresca. Una verdadera experiencia caribeña para consentir tu paladar.",
+        price: 30000,
+        badge: null,
+        is_coming_soon: false,
       },
     ],
   },
@@ -81,6 +93,36 @@ const categories: Category[] = [
         badge: "Nuevo",
         is_coming_soon: false, // Cambiado a false porque ya está disponible
         image: "/images/dishes/reservas-del-chef/picada-gourmet-camaron.webp",
+      },
+    ],
+  },
+  {
+    id: "bowls-fusion-fit",
+    label: "Bowls Fusión Fit",
+    dishes: [
+      {
+        name: "Bowl Tradición",
+        description:
+          "El equilibrio perfecto entre lo clásico y lo saludable. Pechuga de pollo al grill sobre una base de arroz del día, con un mix fresco de lechuga crespa, pepino, zanahoria, tomates cherry y maíz desgranado. Nutritivo, ligero y lleno de texturas. Acompañado de una vinagreta ligera de fresa y vinagre balsámico.",
+        price: 28000,
+        badge: null,
+        is_coming_soon: false,
+      },
+      {
+        name: "Bowl Criollo Crocante",
+        description:
+          "Un viaje de sabores contrastantes para consentirte. Chicharrón crujiente y dorado sobre una reconfortante base de arroz del día, acompañado de un mix fresco de lechuga crespa, tomates cherry, pepino, zanahoria y maíz desgranado. La combinación perfecta entre lo tradicional y lo ligero. Acompañado de una vinagreta ligera de fresa y vinagre balsámico.",
+        price: 28000,
+        badge: null,
+        is_coming_soon: false,
+      },
+      {
+        name: "Bowl Mar Caribe",
+        description:
+          "Un viaje directo a la costa con un toque sofisticado y fresco. Delicioso filete de pescado bañado en mantequilla de ajo y limón, servido sobre una base de arroz del día, lechuga crespa, tomates cherry, pepino crujiente, zanahoria y maíz desgranado. El toque final lo pone nuestra vinagreta de fresa y vinagre balsámico, que equilibra a la perfección los sabores dulces y ácidos.",
+        price: 30000,
+        badge: null,
+        is_coming_soon: false,
       },
     ],
   },
@@ -114,12 +156,12 @@ const categories: Category[] = [
         image: "/images/dishes/pastas/pasta-cremosa-ajo-parmesano-pollo.webp",
       },
       {
-        name: "Fettuccine Pesto & Pistacho con Lomo",
-        description: "",
+        name: "Fettuccine Carbonara con Pollo",
+        description:
+          "Un clásico reconfortante con el sello inconfundible de Nómada. Pasta fettuccine al dente envuelta en una cremosa y sedosa salsa carbonara, acompañada de tiernos trozos de pollo jugosos. Una combinación clásica y deliciosa.",
         price: 35000,
         badge: null,
         is_coming_soon: false,
-        image: "/images/dishes/pastas/fettuccine-pesto-pistacho-lomo.webp",
       },
     ],
   },
@@ -139,7 +181,8 @@ const categories: Category[] = [
       },
       {
         name: "Fusión Criolla",
-        description: "Pechuga en salsa teriyaki, acompañada de Arroz salteado.",
+        description:
+          "Pechuga en salsa teriyaki, acompañada de Arroz salteado, cascos de papa criolla y ensalada de la casa.",
         price: 23000,
         badge: null,
         is_coming_soon: false,
@@ -250,6 +293,16 @@ function useScrollSpy(categoryIds: string[]) {
 
 // ─── Dish Card ─────────────────────────────────────────────────────────────
 
+function dishInitials(name: string): string {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
+}
+
 function DishCard({ dish }: { dish: Dish }) {
   return (
     <article
@@ -285,10 +338,28 @@ function DishCard({ dish }: { dish: Dish }) {
           )}
         </div>
       ) : (
-        <div className="relative aspect-4/3 overflow-hidden bg-linear-to-br from-nomada-primary to-nomada-deep flex items-center justify-center">
-          <span className="font-serif text-nomada-cream/60 text-sm text-center px-4">
-            {dish.name}
-          </span>
+        <div
+          className="relative aspect-4/3 overflow-hidden flex items-center justify-center"
+          style={{
+            backgroundImage: `url(/images/assets/bg-wood.webp)`,
+          }}
+        >
+          {/* Overlay de profundidad */}
+          <div className="absolute inset-0 bg-linear-to-br from-nomada-primary/70 via-nomada-deep/85 to-nomada-deep/90" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.45)_100%)]" />
+
+          {/* Plato con monograma */}
+          <div className="relative flex flex-col items-center gap-3 px-6 text-center">
+            <div className="relative size-20 md:size-24 rounded-full border border-nomada-gold/50 flex items-center justify-center transition-transform duration-500 group-hover:scale-105">
+              <div className="absolute inset-1.5 rounded-full border border-nomada-gold/25" />
+              <span className="font-serif text-nomada-cream text-2xl md:text-3xl tracking-[0.05em]">
+                {dishInitials(dish.name)}
+              </span>
+            </div>
+            <span className="font-sans text-nomada-gold text-[9px] tracking-[0.3em] uppercase">
+              Foto próximamente
+            </span>
+          </div>
         </div>
       )}
       <div className="flex flex-col gap-4 md:gap-4 p-5 flex-1">
@@ -321,7 +392,14 @@ function DishCard({ dish }: { dish: Dish }) {
 // ─── Section ───────────────────────────────────────────────────────────────
 
 export function HomeMenu() {
-  const categoryIds = categories.map((c) => c.id);
+  const visibleCategories = categories
+    .map((cat) => ({
+      ...cat,
+      dishes: cat.dishes.filter((dish) => !dish.is_hidden),
+    }))
+    .filter((cat) => cat.dishes.length > 0);
+
+  const categoryIds = visibleCategories.map((c) => c.id);
   const activeId = useScrollSpy(categoryIds);
   const tabBarRef = useRef<HTMLDivElement>(null);
 
@@ -383,7 +461,7 @@ export function HomeMenu() {
           className="sticky top-17.5 z-30 bg-nomada-primary/95 backdrop-blur-sm border-b border-nomada-gold/20 mb-12 -mx-6 px-6 lg:mx-0 lg:px-0 lg:hidden overflow-x-auto"
         >
           <div className="flex gap-0 pb-0">
-            {categories.map((cat) => (
+            {visibleCategories.map((cat) => (
               <button
                 type="button"
                 key={cat.id}
@@ -408,7 +486,7 @@ export function HomeMenu() {
           {/* Desktop sidebar (hidden on mobile) */}
           <aside className="hidden lg:block sticky top-25 z-30 self-start w-45 shrink-0">
             <nav className="flex flex-col gap-1">
-              {categories.map((cat) => (
+              {visibleCategories.map((cat) => (
                 <button
                   type="button"
                   key={cat.id}
@@ -437,7 +515,7 @@ export function HomeMenu() {
 
           {/* Content — stacked sections with decorative headers */}
           <div className="flex-1 space-y-24">
-            {categories.map((cat) => (
+            {visibleCategories.map((cat) => (
               <section
                 key={cat.id}
                 id={`cat-${cat.id}`}
