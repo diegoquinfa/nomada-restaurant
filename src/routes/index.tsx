@@ -6,6 +6,10 @@ import { HomeHero } from "#/modules/pages/home/sections/home-hero";
 import { HomeHowToOrder } from "#/modules/pages/home/sections/home-how-to-order";
 import { HomeMenu } from "#/modules/pages/home/sections/home-menu";
 import { HomeSchedule } from "#/modules/pages/home/sections/home-shedule";
+import {
+  TemporadaStrip,
+  TemporadaTopBar,
+} from "#/modules/pages/home/sections/home-temporada";
 import { PromoPopup } from "#/modules/promo/components/promo-popup";
 
 export const Route = createFileRoute("/")({
@@ -24,7 +28,9 @@ export const Route = createFileRoute("/")({
 function Home() {
   return (
     <main>
+      <TemporadaTopBar />
       <HomeHero />
+      <TemporadaStrip />
       <HomeAbout />
       <HomeMenu />
       <HomeHowToOrder />

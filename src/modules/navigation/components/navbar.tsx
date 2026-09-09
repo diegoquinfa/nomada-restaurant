@@ -40,6 +40,7 @@ export function Navbar() {
               : "bg-transparent"
           }`,
         )}
+        style={{ top: "var(--temporada-bar, 0px)" }}
       >
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo */}
