@@ -423,7 +423,15 @@ export function HomeMenu() {
 
   const scrollToCategory = (id: string) => {
     const el = document.getElementById(`cat-${id}`);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (!el) return;
+
+    const navBottom =
+      document.querySelector("header")?.getBoundingClientRect().bottom ?? 70;
+    const tabHeight = tabBarRef.current?.offsetHeight ?? 0;
+    const top =
+      el.getBoundingClientRect().top + window.scrollY - navBottom - tabHeight;
+
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
   return (
@@ -458,7 +466,7 @@ export function HomeMenu() {
         {/* Mobile: sticky horizontal scrollable bar */}
         <div
           ref={tabBarRef}
-          className="sticky top-17.5 z-30 bg-nomada-primary/95 backdrop-blur-sm border-b border-nomada-gold/20 mb-12 -mx-6 px-6 lg:mx-0 lg:px-0 lg:hidden overflow-x-auto"
+          className="sticky top-[calc(4.375rem+var(--temporada-bar,0px))] z-30 bg-nomada-primary/95 backdrop-blur-sm border-b border-nomada-gold/20 mb-12 -mx-6 px-6 lg:mx-0 lg:px-0 lg:hidden overflow-x-auto"
         >
           <div className="flex gap-0 pb-0">
             {visibleCategories.map((cat) => (
@@ -484,7 +492,7 @@ export function HomeMenu() {
         {/* Desktop + Mobile content layout */}
         <div className="flex gap-12">
           {/* Desktop sidebar (hidden on mobile) */}
-          <aside className="hidden lg:block sticky top-25 z-30 self-start w-45 shrink-0">
+          <aside className="hidden lg:block sticky top-[calc(6.25rem+var(--temporada-bar,0px))] z-30 self-start w-45 shrink-0">
             <nav className="flex flex-col gap-1">
               {visibleCategories.map((cat) => (
                 <button
@@ -519,7 +527,7 @@ export function HomeMenu() {
               <section
                 key={cat.id}
                 id={`cat-${cat.id}`}
-                className="scroll-mt-5"
+                className="scroll-mt-[calc(7.5rem+var(--temporada-bar,0px))] lg:scroll-mt-[calc(6.25rem+var(--temporada-bar,0px))]"
               >
                 {/* Decorative header */}
                 <div className="relative mb-8 pb-6 border-b border-nomada-gold/30">
