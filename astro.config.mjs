@@ -21,6 +21,7 @@ export default defineConfig({
       admin: {
         locales: ["es-419"],
         siteName: "NÓMADA",
+        logo: "/images/logo.webp",
         footerLabel: false,
       },
       plugins: [
