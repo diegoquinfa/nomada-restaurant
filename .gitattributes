@@ -1,0 +1,5 @@
+# Biome expects LF; without this, core.autocrlf=true on Windows checks files out as CRLF and `biome check` fails.
+* text=auto eol=lf
+*.png binary
+*.webp binary
+*.ico binary
