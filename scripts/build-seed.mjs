@@ -1,29 +1,15 @@
-// Builds seed/seed.json from the static model plus content extracted from the legacy TSX sources.
+// Builds seed/seed.json from the static model plus the frozen pre-CMS menu/promo snapshot.
 // Usage: node scripts/build-seed.mjs [--media-base=https://nomadarestaurantectg.com]
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { basename } from "node:path";
-import ts from "typescript";
 import { DAYS, blockTypes, collections, menus, taxonomies } from "./seed/model.mjs";
 
 const mediaBase = (process.argv.find((a) => a.startsWith("--media-base="))?.split("=")[1] ?? "https://nomadarestaurantectg.com").replace(/\/$/, "");
 
 const media = (path, alt) => ({ $media: { url: `${mediaBase}${path}`, filename: basename(path), alt } });
 
-/** Evaluates an exported-style array literal found in a TS/TSX source, between two line anchors. */
-async function extractArray(file, startPattern) {
-  const src = readFileSync(file, "utf8");
-  const start = src.search(startPattern);
-  if (start < 0) throw new Error(`Pattern ${startPattern} not found in ${file}`);
-  const end = src.indexOf("\n];", start) + 3;
-  const literal = src.slice(start, end).replace(startPattern, "export default [");
-  const { outputText } = ts.transpileModule(literal, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } });
-  const mod = await import(`data:text/javascript;base64,${Buffer.from(outputText).toString("base64")}`);
-  return mod.default;
-}
-
-const menuFile = "src/modules/pages/home/sections/home-menu.tsx";
-const categories = await extractArray(menuFile, /const categories: Category\[\] = \[/);
-const promos = await extractArray("src/modules/promo/promos.config.ts", /export const promos: Promo\[\] = \[/);
+// Menu and promos were extracted once from the pre-CMS TSX sources; the CMS is now the source of truth.
+const { categories, promos } = JSON.parse(readFileSync("scripts/seed/legacy-content.json", "utf8"));
 
 // --- dishes ---------------------------------------------------------------
 const dishes = [];
@@ -31,7 +17,7 @@ for (const cat of categories) {
   cat.dishes.forEach((d, i) => {
     const data = { title: d.name, description: d.description, sort_order: (i + 1) * 10, coming_soon: d.is_coming_soon };
     if (d.price !== null) data.price = d.price;
-    if (d.badge) data.badge = d.badge;
+    data.badge = d.badge ?? "Sin etiqueta";
     if (d.image) data.image = media(d.image, d.name);
     dishes.push({
       id: `dish-${cat.id}-${i + 1}`,

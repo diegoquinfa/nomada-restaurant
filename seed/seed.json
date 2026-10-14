@@ -465,8 +465,10 @@
           "slug": "badge",
           "label": "Etiqueta",
           "type": "select",
+          "defaultValue": "Sin etiqueta",
           "validation": {
             "options": [
+              "Sin etiqueta",
               "Favorito",
               "Nuevo",
               "Temporada"
@@ -942,6 +944,7 @@
           "sort_order": 20,
           "coming_soon": false,
           "price": 45000,
+          "badge": "Sin etiqueta",
           "image": {
             "$media": {
               "url": "https://nomadarestaurantectg.com/images/dishes/recomendados-del-chef/costilla-bbq-roadhouse.webp",
@@ -965,6 +968,7 @@
           "sort_order": 30,
           "coming_soon": false,
           "price": 35000,
+          "badge": "Sin etiqueta",
           "image": {
             "$media": {
               "url": "https://nomadarestaurantectg.com/images/dishes/recomendados-del-chef/lomo-tres-pimientas.webp",
@@ -987,7 +991,8 @@
           "description": "Jugoso filete de pescado apanado bañado en una rica salsa marinera con mejillones y anillos de calamar, acompañado de auténtico arroz de coco frito, patacones y una ensalada fresca. Una verdadera experiencia caribeña para consentir tu paladar.",
           "sort_order": 40,
           "coming_soon": false,
-          "price": 30000
+          "price": 30000,
+          "badge": "Sin etiqueta"
         },
         "taxonomies": {
           "menu_category": [
@@ -1051,7 +1056,8 @@
           "description": "El equilibrio perfecto entre lo clásico y lo saludable. Pechuga de pollo al grill sobre una base de arroz del día, con un mix fresco de lechuga crespa, pepino, zanahoria, tomates cherry y maíz desgranado. Nutritivo, ligero y lleno de texturas. Acompañado de una vinagreta ligera de fresa y vinagre balsámico.",
           "sort_order": 10,
           "coming_soon": false,
-          "price": 28000
+          "price": 28000,
+          "badge": "Sin etiqueta"
         },
         "taxonomies": {
           "menu_category": [
@@ -1067,7 +1073,8 @@
           "description": "Un viaje de sabores contrastantes para consentirte. Chicharrón crujiente y dorado sobre una reconfortante base de arroz del día, acompañado de un mix fresco de lechuga crespa, tomates cherry, pepino, zanahoria y maíz desgranado. La combinación perfecta entre lo tradicional y lo ligero. Acompañado de una vinagreta ligera de fresa y vinagre balsámico.",
           "sort_order": 20,
           "coming_soon": false,
-          "price": 28000
+          "price": 28000,
+          "badge": "Sin etiqueta"
         },
         "taxonomies": {
           "menu_category": [
@@ -1083,7 +1090,8 @@
           "description": "Un viaje directo a la costa con un toque sofisticado y fresco. Delicioso filete de pescado bañado en mantequilla de ajo y limón, servido sobre una base de arroz del día, lechuga crespa, tomates cherry, pepino crujiente, zanahoria y maíz desgranado. El toque final lo pone nuestra vinagreta de fresa y vinagre balsámico, que equilibra a la perfección los sabores dulces y ácidos.",
           "sort_order": 30,
           "coming_soon": false,
-          "price": 30000
+          "price": 30000,
+          "badge": "Sin etiqueta"
         },
         "taxonomies": {
           "menu_category": [
@@ -1124,6 +1132,7 @@
           "sort_order": 20,
           "coming_soon": false,
           "price": 35000,
+          "badge": "Sin etiqueta",
           "image": {
             "$media": {
               "url": "https://nomadarestaurantectg.com/images/dishes/pastas/fettuccine-huancaina-camarones.webp",
@@ -1147,6 +1156,7 @@
           "sort_order": 30,
           "coming_soon": false,
           "price": 35000,
+          "badge": "Sin etiqueta",
           "image": {
             "$media": {
               "url": "https://nomadarestaurantectg.com/images/dishes/pastas/pasta-cremosa-ajo-parmesano-pollo.webp",
@@ -1169,7 +1179,8 @@
           "description": "Un clásico reconfortante con el sello inconfundible de Nómada. Pasta fettuccine al dente envuelta en una cremosa y sedosa salsa carbonara, acompañada de tiernos trozos de pollo jugosos. Una combinación clásica y deliciosa.",
           "sort_order": 40,
           "coming_soon": false,
-          "price": 35000
+          "price": 35000,
+          "badge": "Sin etiqueta"
         },
         "taxonomies": {
           "menu_category": [
@@ -1210,6 +1221,7 @@
           "sort_order": 20,
           "coming_soon": false,
           "price": 23000,
+          "badge": "Sin etiqueta",
           "image": {
             "$media": {
               "url": "https://nomadarestaurantectg.com/images/dishes/caseritos-del-chef/fusion-criolla.webp",
@@ -1233,6 +1245,7 @@
           "sort_order": 30,
           "coming_soon": false,
           "price": 23000,
+          "badge": "Sin etiqueta",
           "image": {
             "$media": {
               "url": "https://nomadarestaurantectg.com/images/dishes/caseritos-del-chef/peru-urbano.webp",
@@ -1256,6 +1269,7 @@
           "sort_order": 40,
           "coming_soon": false,
           "price": 23000,
+          "badge": "Sin etiqueta",
           "image": {
             "$media": {
               "url": "https://nomadarestaurantectg.com/images/dishes/caseritos-del-chef/galeon-caribe.webp",
@@ -1279,6 +1293,7 @@
           "sort_order": 10,
           "coming_soon": false,
           "price": 37000,
+          "badge": "Sin etiqueta",
           "image": {
             "$media": {
               "url": "https://nomadarestaurantectg.com/images/dishes/arroces/arroz-salteado-caribeno.webp",

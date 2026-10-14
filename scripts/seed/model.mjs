@@ -136,7 +136,14 @@ export const collections = [
       s("title", "Nombre", { required: true, searchable: true }),
       t("description", "Descripción"),
       { slug: "price", label: "Precio (COP)", type: "integer" },
-      { slug: "badge", label: "Etiqueta", type: "select", validation: { options: ["Favorito", "Nuevo", "Temporada"] } },
+      // The admin select has no empty choice, so "no label" must be an explicit option (the site ignores it).
+      {
+        slug: "badge",
+        label: "Etiqueta",
+        type: "select",
+        defaultValue: "Sin etiqueta",
+        validation: { options: ["Sin etiqueta", "Favorito", "Nuevo", "Temporada"] },
+      },
       { slug: "coming_soon", label: "Muy pronto (sin precio)", type: "boolean", defaultValue: false },
       img("image", "Foto"),
       { slug: "sort_order", label: "Orden dentro de su categoría", type: "integer", indexed: true },
