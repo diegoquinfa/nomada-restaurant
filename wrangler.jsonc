@@ -8,5 +8,6 @@
   "d1_databases": [{ "binding": "DB", "database_name": "nomada-web-db" }],
   "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "nomada-web-media" }],
   "images": { "binding": "IMAGES" },
+  "send_email": [{ "name": "EMAIL" }],
   "triggers": { "crons": ["* * * * *"] }
 }

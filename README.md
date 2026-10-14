@@ -79,6 +79,7 @@ Local setup: create `.dev.vars` with `EMDASH_SITE_URL=http://localhost:3000` (ot
 - Never import `src/lib/site.ts` from a React island (it pulls server-only `emdash` into the client bundle). Use `src/lib/media.ts`.
 - The seed only runs on the first request of an empty database. After that, change the model from the admin (Content Types) or `emdash schema`.
 - `PUBLIC_POSTHOG_*` variables are read at build time.
+- Production email (magic links, invites, recovery) uses Cloudflare Email Sending. The Worker binding is `EMAIL`; the From address is `cms@nomadarestaurantectg.com`. Sending fails until that domain is onboarded under **Compute → Email Service → Email Sending**. After deploy, confirm the provider under **Settings → Email** and send a test. Dev still logs mail to the terminal (`GET /_emdash/api/dev/emails`).
 
 ---
 
