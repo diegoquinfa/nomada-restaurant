@@ -62,17 +62,25 @@ describe("mapCmsPromo", () => {
     });
   });
 
-  it("derives the media URL from the id when src is absent", () => {
+  it("derives the media URL from meta.storageKey when src is absent (the file route is keyed by storage key, not media id)", () => {
     const promo = mapCmsPromo({
       id: "p",
       data: {
         ...baseData,
-        images: [{ image: { id: "media-1", alt: "Alt del medio" } }],
+        images: [
+          {
+            image: {
+              id: "media-1",
+              alt: "Alt del medio",
+              meta: { storageKey: "key-1.webp" },
+            },
+          },
+        ],
       },
     });
 
     expect(promo.images).toEqual([
-      { src: "/_emdash/api/media/file/media-1", alt: "Alt del medio" },
+      { src: "/_emdash/api/media/file/key-1.webp", alt: "Alt del medio" },
     ]);
   });
 

@@ -1,15 +1,15 @@
 ---
 import { getEmDashCollection, getMenu } from "emdash";
-import { getSiteInfo } from "#/lib/site";
-import { PostHogPageView } from "#/modules/analytics/posthog-provider";
-import { Footer } from "#/modules/navigation/components/footer";
-import { Navbar } from "#/modules/navigation/components/navbar";
-import { WhatsAppFAB } from "#/modules/navigation/components/whatsapp-link";
-import { PromoPopup } from "#/modules/promo/components/promo-popup";
+import { getSiteInfo } from "../lib/site";
+import { PostHogPageView } from "../modules/analytics/posthog-provider";
+import { Footer } from "../modules/navigation/components/footer";
+import { Navbar } from "../modules/navigation/components/navbar";
+import { WhatsAppFAB } from "../modules/navigation/components/whatsapp-link";
+import { PromoPopup } from "../modules/promo/components/promo-popup";
 import {
   type CmsPromoEntry,
   mapCmsPromos,
-} from "#/modules/promo/lib/cms-promos";
+} from "../modules/promo/lib/cms-promos";
 
 const [primaryMenu, footerMenu, siteInfo, promoResult] = await Promise.all([
   getMenu("primary"),

@@ -5,8 +5,8 @@
   "compatibility_date": "2026-02-24",
   "compatibility_flags": ["nodejs_compat"],
   "vars": { "EMDASH_SITE_URL": "https://nomadarestaurantectg.com" },
-  "d1_databases": [{ "binding": "DB", "database_name": "nomada-web" }],
-  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "nomada-media" }],
+  "d1_databases": [{ "binding": "DB", "database_name": "nomada-web-db" }],
+  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "nomada-web-media" }],
   "images": { "binding": "IMAGES" },
   "triggers": { "crons": ["* * * * *"] }
 }

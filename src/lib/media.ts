@@ -5,14 +5,19 @@ export type MediaValue = {
   alt?: string;
   width?: number;
   height?: number;
+  meta?: { storageKey?: string };
 };
 
-/** Public URL for a stored media value (works for the internal R2 route). */
+/**
+ * Public URL for a stored media value. The internal file route is keyed by the
+ * storage key ("<id>.webp"), NOT by the media row id, so prefer meta.storageKey.
+ */
 export function mediaUrl(image?: MediaValue | null): string | undefined {
   if (!image) return undefined;
-  return (
-    image.src ?? (image.id ? `/_emdash/api/media/file/${image.id}` : undefined)
-  );
+  if (image.src) return image.src;
+  const key = image.meta?.storageKey;
+  if (key) return `/_emdash/api/media/file/${key}`;
+  return undefined;
 }
 
 export function whatsappHref(
