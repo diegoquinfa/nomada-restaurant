@@ -18,7 +18,11 @@ export default defineConfig({
     emdash({
       database: d1({ binding: "DB" }),
       storage: r2({ binding: "MEDIA" }),
-      admin: { locales: ["es-419"] },
+      admin: {
+        locales: ["es-419"],
+        siteName: "NÓMADA",
+        footerLabel: false,
+      },
       plugins: [
         cloudflareEmail({
           from: { email: "cms@nomadarestaurantectg.com", name: "NÓMADA" },
