@@ -10,7 +10,9 @@ export type MediaValue = {
 /** Public URL for a stored media value (works for the internal R2 route). */
 export function mediaUrl(image?: MediaValue | null): string | undefined {
   if (!image) return undefined;
-  return image.src ?? (image.id ? `/_emdash/api/media/file/${image.id}` : undefined);
+  return (
+    image.src ?? (image.id ? `/_emdash/api/media/file/${image.id}` : undefined)
+  );
 }
 
 export function whatsappHref(

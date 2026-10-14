@@ -31,7 +31,7 @@ const { entries } = await getEmDashCollection("seasonal", {
 });
 const entry = entries[0];
 const copy = entry
-  ? toSeasonalCopy(entry.data as Record<string, unknown>)
+  ? toSeasonalCopy(entry.data as unknown as Record<string, unknown>)
   : null;
 ---
 

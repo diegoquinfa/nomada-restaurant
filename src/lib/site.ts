@@ -23,7 +23,7 @@ const FALLBACK: SiteInfo = {
 /** Contact data edited in the CMS ("Datos del sitio"); falls back to defaults. */
 export async function getSiteInfo(): Promise<SiteInfo> {
   const { entries } = await getEmDashCollection("site_info");
-  const d = entries[0]?.data as Record<string, string> | undefined;
+  const d = entries[0]?.data as unknown as Record<string, string> | undefined;
   if (!d) return FALLBACK;
   return {
     whatsappNumber: d.whatsapp_number || FALLBACK.whatsappNumber,

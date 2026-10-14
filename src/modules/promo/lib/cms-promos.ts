@@ -1,4 +1,4 @@
-import { mediaUrl, type MediaValue } from "#/lib/media.ts";
+import { type MediaValue, mediaUrl } from "#/lib/media.ts";
 import type { Promo, PromoImage } from "#/modules/promo/types.ts";
 
 /** Spanish day names as stored in the CMS `active_days` multiSelect. */
@@ -28,9 +28,7 @@ export function mapActiveDays(raw: unknown): number[] {
   if (!Array.isArray(raw) || raw.length === 0) return [...EVERY_DAY];
 
   return raw
-    .map((value) =>
-      typeof value === "string" ? DAY_INDEX[value] : undefined,
-    )
+    .map((value) => (typeof value === "string" ? DAY_INDEX[value] : undefined))
     .filter((day): day is number => day !== undefined);
 }
 

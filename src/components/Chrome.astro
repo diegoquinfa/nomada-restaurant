@@ -6,7 +6,10 @@ import { Footer } from "#/modules/navigation/components/footer";
 import { Navbar } from "#/modules/navigation/components/navbar";
 import { WhatsAppFAB } from "#/modules/navigation/components/whatsapp-link";
 import { PromoPopup } from "#/modules/promo/components/promo-popup";
-import { mapCmsPromos } from "#/modules/promo/lib/cms-promos";
+import {
+  type CmsPromoEntry,
+  mapCmsPromos,
+} from "#/modules/promo/lib/cms-promos";
 
 const [primaryMenu, footerMenu, siteInfo, promoResult] = await Promise.all([
   getMenu("primary"),
@@ -20,7 +23,7 @@ const toNavLinks = (items: { label: string; url: string }[] = []) =>
 
 const primaryLinks = toNavLinks(primaryMenu?.items);
 const footerLinks = toNavLinks(footerMenu?.items);
-const promos = mapCmsPromos(promoResult.entries);
+const promos = mapCmsPromos(promoResult.entries as unknown as CmsPromoEntry[]);
 ---
 
 <Navbar
