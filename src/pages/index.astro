@@ -4,13 +4,17 @@ import { Blocks } from "emdash/ui";
 import { blockComponents } from "../components/blocks";
 import Chrome from "../components/Chrome.astro";
 import Base from "../layouts/Base.astro";
+import { buildFaqJsonLd } from "../lib/faq";
 
 const { entry: page, error } = await getEmDashEntry("pages", "home");
 if (error) return new Response("No se pudo cargar la página", { status: 500 });
 if (!page) return Astro.rewrite("/404");
+
+const faq = buildFaqJsonLd(page.data.layout);
 ---
 
 <Base>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faq)} />
   <Chrome>
     <main>
       <Blocks value={page.data.layout} components={blockComponents as never /* CMS empty fields arrive as null; renderers guard every optional field */} />

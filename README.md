@@ -47,28 +47,52 @@ This website aims to:
 
 ## Project Architecture
 
-The project is organized using a modular and scalable architecture.
+Astro 6 + [EmDash CMS](https://docs.emdashcms.com) 1.2.0 on Cloudflare Workers (D1 for content, R2 for media).
+All site content lives in the CMS; the code only renders it.
 
 ```txt
-src/
-├── modules/
-│   ├── home/
-│   │   ├── sections/
-│   │   ├── components/
-│   │   ├── types/
-│   │   └── hooks/
-│   │
-│   └── menu/
-│
-├── shared/
-│   ├── ui/
-│   │   ├── components/
-│   │   ├── lib/
-│   │   └── hooks/
-│   ├── hooks/
-│   ├── lib/
-│   └── types/
-│
-├── routes/
-│
-└── styles/
+seed/seed.json            Initial content model + content (generated, do not edit by hand)
+scripts/                  build-seed.mjs + seed/model.mjs (the model: block types, collections, menus)
+src/pages/                index.astro (home = the "home" page entry), 404.astro
+src/components/blocks/    One renderer per CMS block type (map in blocks/index.ts)
+src/components/Chrome.astro   Navbar, footer, WhatsApp button, promo popup
+src/modules/              Interactive React islands (menu, seasonal banner, promos, navigation)
+src/lib/                  site.ts (server data loading), media.ts (client-safe helpers)
+```
+
+### Commands
+
+```bash
+pnpm dev            # http://localhost:3000, admin at /_emdash/admin
+pnpm build
+pnpm check          # biome
+pnpm astro check    # types
+pnpm test
+pnpm seed:build     # regenerate seed/seed.json from scripts/
+pnpm seed:validate
+```
+
+Local setup: open `/_emdash/api/setup/dev-bypass?redirect=/_emdash/admin` once to skip passkey setup in dev and load the seed content.
+
+### Gotchas
+
+- Never import `src/lib/site.ts` from a React island (it pulls server-only `emdash` into the client bundle). Use `src/lib/media.ts`.
+- The seed only runs on the first request of an empty database. After that, change the model from the admin (Content Types) or `emdash schema`.
+- `PUBLIC_POSTHOG_*` variables are read at build time.
+
+---
+
+## Editing content (for non-developers)
+
+Sign in at `/_emdash/admin`.
+
+| I want to… | Go to |
+| --- | --- |
+| Change a price, description or photo | **Platos** → open the dish |
+| Hide a dish without deleting it | **Platos** → set it to *Draft* (back to *Published* to show it) |
+| Add a dish | **Platos** → New, then pick its category |
+| Run a promo on certain days | **Promociones** → set images, dates and active days, then Publish |
+| Update the monthly seasonal dish | **Plato de temporada** |
+| Change opening hours, texts or reorder sections | **Páginas** → Inicio → *Secciones de la página* |
+| Change the WhatsApp number or Instagram | **Datos del sitio** |
+| Edit the menu links | **Menús** |

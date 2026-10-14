@@ -73,6 +73,7 @@ const jsonLd = {
     <meta name="twitter:description" content="Cocina oculta fusión en Cartagena. Platos artesanales, almuerzos desde $23.000." />
     <meta name="twitter:image" content={ogImage} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <slot name="head" />
     <script is:inline async src="https://analytics.ahrefs.com/analytics.js" data-key="env4VTxl3idmVtPOX7+Z8w"></script>
   </head>
   <body>

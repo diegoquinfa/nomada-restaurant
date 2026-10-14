@@ -9,6 +9,7 @@ export default defineConfig({
   output: "server",
   adapter: cloudflare(),
   site: "https://nomadarestaurantectg.com",
+  redirects: { "/home": "/" },
   integrations: [
     react(),
     emdash({
