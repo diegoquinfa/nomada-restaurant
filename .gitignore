@@ -20,3 +20,4 @@ data.db*
 .emdash/
 emdash-env.d.ts
 .astro/
+.dev.vars

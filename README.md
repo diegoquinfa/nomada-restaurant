@@ -72,7 +72,7 @@ pnpm seed:build     # regenerate seed/seed.json from scripts/
 pnpm seed:validate
 ```
 
-Local setup: open `/_emdash/api/setup/dev-bypass?redirect=/_emdash/admin` once to skip passkey setup in dev and load the seed content.
+Local setup: create `.dev.vars` with `EMDASH_SITE_URL=http://localhost:3000` (otherwise `/_emdash/admin` redirects to the production domain from `wrangler.jsonc`, which is a 404 until the domain is switched over). Then open `/_emdash/api/setup/dev-bypass?redirect=/_emdash/admin` once to skip passkey setup in dev and load the seed content.
 
 ### Gotchas
 
