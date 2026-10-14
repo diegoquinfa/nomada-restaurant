@@ -11,3 +11,12 @@ dist-ssr
 .vinxi
 __unconfig*
 todos.json
+# Local Pi runtime state
+.atl/
+
+# EmDash local dev
+uploads/
+data.db*
+.emdash/
+emdash-env.d.ts
+.astro/

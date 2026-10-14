@@ -2,3 +2,8 @@ allowBuilds:
   core-js: true
   esbuild: true
   protobufjs: true
+  sharp: true
+  workerd: true
+minimumReleaseAgeExclude:
+  - miniflare@5.20261006.2-beta
+  - wrangler@4.150.0

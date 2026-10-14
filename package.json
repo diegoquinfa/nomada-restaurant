@@ -6,32 +6,36 @@
     "#/*": "./src/*"
   },
   "scripts": {
-    "dev": "vite dev --port 3000",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev": "astro dev --port 3000",
+    "build": "astro build",
+    "preview": "astro preview",
     "test": "vitest run",
     "format": "biome format",
     "lint": "biome lint",
     "check": "biome check",
+    "seed:build": "node scripts/build-seed.mjs",
+    "seed:validate": "emdash seed seed/seed.json --validate",
     "doctor": "npx react-doctor@latest"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "13.7.0",
+    "@astrojs/react": "5.0.7",
     "@blossom-carousel/react": "^1.3.2",
+    "@cloudflare/kumo": "2.6.0",
+    "@emdash-cms/auth-atproto": "0.2.47",
+    "@emdash-cms/cloudflare": "1.2.0",
     "@fontsource-variable/cormorant": "5.2.8",
     "@fontsource-variable/dm-sans": "5.2.8",
+    "@phosphor-icons/react": "2.1.10",
     "@tailwindcss/vite": "4.1.18",
-    "@tanstack/react-devtools": "latest",
-    "@tanstack/react-router": "latest",
-    "@tanstack/react-router-devtools": "latest",
-    "@tanstack/react-router-ssr-query": "latest",
-    "@tanstack/react-start": "latest",
-    "@tanstack/router-plugin": "1.132.0",
     "@unpic/react": "1.0.2",
+    "astro": "6.4.8",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
+    "emdash": "1.2.0",
+    "kysely": "0.29.6",
     "lucide-react": "0.577.0",
     "next-themes": "0.4.6",
-    "nitro": "latest",
     "posthog-js": "^1.376.0",
     "radix-ui": "1.4.3",
     "react": "19.2.0",
@@ -42,23 +46,24 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.5",
-    "@rolldown/plugin-babel": "0.2.3",
+    "@cloudflare/workers-types": "5.20261013.1",
     "@tailwindcss/typography": "0.5.16",
-    "@tanstack/devtools-vite": "latest",
     "@testing-library/dom": "10.4.1",
     "@testing-library/react": "16.3.0",
     "@types/node": "24.7.0",
     "@types/react": "19.2.0",
     "@types/react-dom": "19.2.0",
-    "@vitejs/plugin-react": "6.0.1",
-    "babel-plugin-react-compiler": "1.0.0",
+    "@vitejs/plugin-react": "^5.2.0",
     "jsdom": "28.1.0",
     "typescript": "6.0.2",
-    "vite": "8.0.0",
-    "vitest": "4.1.5"
+    "vitest": "4.1.5",
+    "wrangler": "4.150.0"
   },
   "packageManager": "pnpm@11.10.0+sha512.0b7f8b98060031904c017e3a41eb187a16d40eeb829b95c4f8cb03681761fc4ab53dd219115b9b447f4dce1a05a214764461e7d3703392a9f32f9511ce8c86c8",
   "engines": {
     "node": ">=24.0.0"
+  },
+  "emdash": {
+    "seed": "seed/seed.json"
   }
 }
