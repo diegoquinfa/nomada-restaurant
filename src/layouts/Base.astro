@@ -1,0 +1,69 @@
+---
+import "../styles.css";
+import "@blossom-carousel/react/style.css";
+import { SITE_URL } from "../lib/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "NÓMADA Cocina Fusión | Delivery Gourmet en Cartagena",
+  description = "NÓMADA Cocina Fusión — Almuerzos desde $23.000, arroces y pastas. Delivery gourmet con sabores fusión. Cocina oculta, Cartagena. Pide por WhatsApp.",
+} = Astro.props;
+
+const ogImage = `${SITE_URL}/images/open_graph.webp`;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  name: "NÓMADA Cocina Fusión",
+  description: "Cocina fusión gourmet en Cartagena. Platos artesanales para delivery.",
+  url: SITE_URL,
+  image: ogImage,
+  servesCuisine: "Fusión",
+  priceRange: "$",
+  telephone: "+57-324-250-3301",
+  address: { "@type": "PostalAddress", addressLocality: "Cartagena", addressCountry: "CO" },
+  geo: { "@type": "GeoCoordinates", latitude: 10.391, longitude: -75.514 },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      opens: "11:00",
+      closes: "15:00",
+    },
+  ],
+  sameAs: ["https://www.instagram.com/nomadarestaurante"],
+};
+---
+
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="canonical" href={SITE_URL} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="NÓMADA Cocina Fusión" />
+    <meta property="og:title" content="NÓMADA Cocina Fusión — Delivery Gourmet en Cartagena" />
+    <meta property="og:description" content="Cocina oculta fusión en Cartagena. Platos artesanales, almuerzos desde $23.000. Pide por WhatsApp." />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={SITE_URL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="NÓMADA Cocina Fusión — Delivery Gourmet en Cartagena" />
+    <meta name="twitter:description" content="Cocina oculta fusión en Cartagena. Platos artesanales, almuerzos desde $23.000." />
+    <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline async src="https://analytics.ahrefs.com/analytics.js" data-key="env4VTxl3idmVtPOX7+Z8w"></script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

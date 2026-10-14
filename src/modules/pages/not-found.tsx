@@ -1,5 +1,3 @@
-import { Link } from "@tanstack/react-router";
-
 export function NotFound() {
   return (
     <section className="bg-nomada-primary min-h-[calc(100vh-200px)] flex flex-col items-center justify-center text-center px-6">
@@ -14,12 +12,12 @@ export function NotFound() {
         Esta página no existe o fue movida. Mejor volvé al inicio y buscá desde
         ahí.
       </p>
-      <Link
-        to="/"
+      <a
+        href="/"
         className="mt-10 font-sans text-nomada-deep text-[11px] tracking-[0.25em] uppercase bg-nomada-gold px-10 py-4 hover:bg-nomada-cream transition-colors duration-300"
       >
         Volver al inicio
-      </Link>
+      </a>
     </section>
   );
 }

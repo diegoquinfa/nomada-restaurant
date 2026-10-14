@@ -1,0 +1,125 @@
+---
+import { type MediaValue, mediaUrl } from "../../lib/site";
+
+type Stat = { value?: string; label?: string };
+
+interface Props {
+  value?: {
+    eyebrow?: string;
+    image?: MediaValue | null;
+    badge?: string;
+    heading_line1?: string;
+    heading_line2?: string;
+    paragraph_intro?: string;
+    paragraph_highlight?: string;
+    paragraph_outro?: string;
+    stats?: Stat[];
+  };
+}
+
+const { value } = Astro.props;
+
+const eyebrow = value?.eyebrow ?? "";
+const image = value?.image ?? null;
+const badge = value?.badge ?? "";
+const headingLine1 = value?.heading_line1 ?? "";
+const headingLine2 = value?.heading_line2 ?? "";
+const paragraphIntro = value?.paragraph_intro ?? "";
+const paragraphHighlight = value?.paragraph_highlight ?? "";
+const paragraphOutro = value?.paragraph_outro ?? "";
+const stats = (value?.stats ?? []).filter((stat) => stat?.value || stat?.label);
+
+const imageUrl = mediaUrl(image);
+---
+
+<section id="nosotros" class="bg-nomada-primary py-12">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+      {/* Image column */}
+      <div class="relative">
+        <div class="relative aspect-4/5 overflow-hidden">
+          {imageUrl && (
+            <img
+              src={imageUrl}
+              alt={image?.alt ?? "Cocina artesanal NÓMADA — preparación gourmet en Cartagena"}
+              width={image?.width ?? 800}
+              height={image?.height ?? 1000}
+              class="object-cover object-center"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          )}
+          {/* Subtle border accent */}
+          <div class="absolute inset-0 border border-nomada-gold/20" />
+        </div>
+        {/* Floating badge */}
+        {badge && (
+          <div class="absolute -bottom-5 -right-1 md:-right-6 bg-nomada-earth px-5 py-3 border border-nomada-earth">
+            <p class="font-sans text-nomada-cream text-[10px] tracking-[0.3em] uppercase">
+              {badge}
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Text column */}
+      <div class="flex flex-col gap-8 md:pt-6">
+        {/* Section label */}
+        {eyebrow && (
+          <div class="flex items-center gap-4">
+            <div class="w-8 h-px bg-nomada-gold/60" />
+            <span class="font-sans text-nomada-gold text-[10px] tracking-[0.4em] uppercase">
+              {eyebrow}
+            </span>
+          </div>
+        )}
+
+        {(headingLine1 || headingLine2) && (
+          <h2 class="font-serif text-nomada-cream text-4xl md:text-5xl font-light leading-tight text-balance">
+            {headingLine1}
+            {headingLine1 && headingLine2 && <br />}
+            {headingLine2 && <span class="italic">{headingLine2}</span>}
+          </h2>
+        )}
+
+        <div class="w-8 h-px bg-nomada-gold/40" />
+
+        {(paragraphIntro || paragraphHighlight || paragraphOutro) && (
+          <div class="flex flex-col gap-5">
+            {paragraphIntro && (
+              <p class="font-sans text-nomada-cream/80 leading-relaxed text-[15px]">
+                {paragraphIntro}
+              </p>
+            )}
+            {paragraphHighlight && (
+              <p class="font-serif italic text-nomada-cream/70 text-xl leading-relaxed">
+                {paragraphHighlight}
+              </p>
+            )}
+            {paragraphOutro && (
+              <p class="font-sans text-nomada-cream/60 leading-relaxed text-[15px]">
+                {paragraphOutro}
+              </p>
+            )}
+          </div>
+        )}
+
+        {/* Stats row */}
+        {stats.length > 0 && (
+          <div class="flex gap-8 pt-2 border-t border-nomada-gold/20">
+            {stats.map((stat, i) => (
+              <>
+                {i > 0 && <div class="w-px bg-nomada-gold/20" />}
+                <div>
+                  <p class="font-serif text-nomada-gold text-3xl">{stat.value}</p>
+                  <p class="font-sans text-nomada-cream/50 text-[11px] tracking-[0.2em] uppercase mt-1">
+                    {stat.label}
+                  </p>
+                </div>
+              </>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

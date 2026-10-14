@@ -1,0 +1,53 @@
+---
+import { getEmDashCollection, getMenu } from "emdash";
+import { getSiteInfo } from "#/lib/site";
+import { PostHogPageView } from "#/modules/analytics/posthog-provider";
+import { Footer } from "#/modules/navigation/components/footer";
+import { Navbar } from "#/modules/navigation/components/navbar";
+import { WhatsAppFAB } from "#/modules/navigation/components/whatsapp-link";
+import { PromoPopup } from "#/modules/promo/components/promo-popup";
+import { mapCmsPromos } from "#/modules/promo/lib/cms-promos";
+
+const [primaryMenu, footerMenu, siteInfo, promoResult] = await Promise.all([
+  getMenu("primary"),
+  getMenu("footer"),
+  getSiteInfo(),
+  getEmDashCollection("promos", { status: "published" }),
+]);
+
+const toNavLinks = (items: { label: string; url: string }[] = []) =>
+  items.map((item) => ({ label: item.label, url: item.url }));
+
+const primaryLinks = toNavLinks(primaryMenu?.items);
+const footerLinks = toNavLinks(footerMenu?.items);
+const promos = mapCmsPromos(promoResult.entries);
+---
+
+<Navbar
+  client:load
+  links={primaryLinks}
+  whatsappNumber={siteInfo.whatsappNumber}
+  whatsappMessage={siteInfo.whatsappMessage}
+/>
+
+<slot />
+
+<Footer
+  client:load
+  links={footerLinks}
+  whatsappNumber={siteInfo.whatsappNumber}
+  whatsappMessage={siteInfo.whatsappMessage}
+  instagramHandle={siteInfo.instagramHandle}
+  location={siteInfo.location}
+  legalName={siteInfo.legalName}
+/>
+
+<WhatsAppFAB
+  client:load
+  whatsappNumber={siteInfo.whatsappNumber}
+  whatsappMessage={siteInfo.whatsappMessage}
+/>
+
+<PromoPopup client:idle promos={promos} />
+
+<PostHogPageView client:load />

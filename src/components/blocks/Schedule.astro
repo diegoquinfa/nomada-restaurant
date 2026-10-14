@@ -1,0 +1,129 @@
+---
+type ScheduleRow = {
+  days?: string;
+  hours?: string;
+  note?: string;
+};
+
+interface Props {
+  value?: {
+    eyebrow?: string;
+    heading?: string;
+    hours_title?: string;
+    rows?: ScheduleRow[];
+    footnote?: string;
+    coverage_title?: string;
+    coverage?: Array<{ name?: string }>;
+  };
+}
+
+const { value } = Astro.props;
+
+const eyebrow = value?.eyebrow ?? "";
+const heading = value?.heading ?? "";
+const hoursTitle = value?.hours_title ?? "";
+const rows = value?.rows ?? [];
+const footnote = value?.footnote ?? "";
+const coverageTitle = value?.coverage_title ?? "";
+const coverage = value?.coverage ?? [];
+
+const hasHoursColumn = Boolean(hoursTitle || rows.length > 0 || footnote);
+const hasCoverageColumn = Boolean(coverageTitle || coverage.length > 0);
+---
+
+<section id="horarios" class="bg-nomada-cream py-12">
+  <div class="max-w-6xl mx-auto px-6">
+    {(eyebrow || heading) && (
+      <div class="flex flex-col items-center text-center mb-16">
+        {eyebrow && (
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-8 h-px bg-nomada-earth/60" />
+            <span class="font-sans text-nomada-earth text-[11px] tracking-[0.4em] uppercase font-semibold">
+              {eyebrow}
+            </span>
+            <div class="w-8 h-px bg-nomada-earth/60" />
+          </div>
+        )}
+        {heading && (
+          <h2 class="font-serif text-nomada-deep text-4xl md:text-5xl font-light leading-tight text-balance">
+            {heading}
+          </h2>
+        )}
+      </div>
+    )}
+
+    <div class="grid md:grid-cols-2 gap-12 md:gap-20">
+      {/* Horario */}
+      {hasHoursColumn && (
+        <div>
+          {hoursTitle && (
+            <h3 class="font-sans text-nomada-earth text-[11px] tracking-[0.4em] uppercase mb-8 font-semibold">
+              {hoursTitle}
+            </h3>
+          )}
+          {rows.length > 0 && (
+            <div class="flex flex-col divide-y divide-nomada-earth/30">
+              {rows.map((row) => (
+                <div class="flex flex-col gap-3 py-6">
+                  <div class="flex items-baseline justify-between gap-4">
+                    {row.days && (
+                      <p class="font-serif text-nomada-deep text-[20px]">
+                        {row.days}
+                      </p>
+                    )}
+                    {row.note && (
+                      <p
+                        class={`font-sans text-[12px] tracking-[0.15em] shrink-0 ${
+                          row.note === "Descanso"
+                            ? "text-nomada-earth/60 italic"
+                            : "text-nomada-earth"
+                        }`}
+                      >
+                        {row.note}
+                      </p>
+                    )}
+                  </div>
+                  {row.hours && (
+                    <div class="flex flex-wrap gap-2">
+                      <span class="font-sans text-nomada-deep text-[14px] tracking-wide bg-nomada-earth/20 border border-nomada-earth/20 px-4 py-1.5">
+                        {row.hours}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+          {footnote && (
+            <p class="font-sans text-nomada-deep/70 text-[13px] leading-relaxed mt-6 border-t border-nomada-earth/30 pt-6">
+              {footnote}
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Cobertura */}
+      {hasCoverageColumn && (
+        <div>
+          {coverageTitle && (
+            <h3 class="font-sans text-nomada-earth text-[11px] tracking-[0.4em] uppercase mb-8 font-semibold">
+              {coverageTitle}
+            </h3>
+          )}
+          {coverage.length > 0 && (
+            <div class="flex flex-col gap-3 mb-8">
+              {coverage.map((zone) => (
+                <div class="flex items-center gap-3">
+                  <div class="size-1.5 bg-nomada-earth shrink-0" />
+                  <span class="font-sans text-nomada-deep text-[15px]">
+                    {zone.name}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+</section>

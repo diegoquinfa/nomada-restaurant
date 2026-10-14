@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { type Promo, promos } from "#/modules/promo/promos.config.ts";
+import type { Promo } from "#/modules/promo/types.ts";
 
 const DISMISS_KEY_PREFIX = "nomada:promo-dismissed:";
 export const PROMO_POPUP_REAPPEAR_MS = 0 * 60 * 1000; // 1 hour
@@ -56,7 +56,7 @@ function isPromoRecentlyDismissed(promo: Promo, now: number): boolean {
   return now - dismissed <= PROMO_POPUP_REAPPEAR_MS;
 }
 
-export function usePromoPopupVisibility() {
+export function usePromoPopupVisibility(promos: Promo[]) {
   const [open, setOpen] = useState(false);
 
   const activePromos = useMemo<Promo[]>(() => {
@@ -67,7 +67,7 @@ export function usePromoPopupVisibility() {
       (promo) =>
         isPromoActive(promo, now) && !isPromoRecentlyDismissed(promo, now),
     );
-  }, []);
+  }, [promos]);
 
   useEffect(() => {
     if (activePromos.length === 0) return;

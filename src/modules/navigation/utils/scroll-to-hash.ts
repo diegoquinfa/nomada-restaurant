@@ -1,10 +1,17 @@
 /**
  * Scroll suavemente a una sección por su hash, con offset del chrome fixed.
  *
- * Resuelve el problema de que TanStack Router no re-navega cuando ya estás
- * en la misma ruta + hash, y también compensa navbar + barra de temporada
- * (el bottom del header ya incluye --temporada-bar).
+ * Sin TanStack Router: cada link lleva un `href` real (por ejemplo
+ * `/#menu`) y el hash se resuelve en el cliente antes de hacer scroll.
  */
+export function hashFromUrl(url: string): string | null {
+  const hashIndex = url.indexOf("#");
+  if (hashIndex === -1) return null;
+
+  const hash = url.slice(hashIndex + 1);
+  return hash.length > 0 ? hash : null;
+}
+
 export function scrollToHash(hash: string) {
   const el = document.getElementById(hash);
   if (!el) return;

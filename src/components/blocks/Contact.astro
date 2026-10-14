@@ -1,0 +1,141 @@
+---
+import { getSiteInfo, whatsappHref } from "../../lib/site";
+
+interface Props {
+  value?: {
+    eyebrow?: string;
+    heading?: string;
+    intro?: string;
+    whatsapp_hint?: string;
+    instagram_hint?: string;
+  };
+}
+
+const { value } = Astro.props;
+
+const eyebrow = value?.eyebrow ?? "";
+const heading = value?.heading ?? "";
+const intro = value?.intro ?? "";
+const whatsappHint = value?.whatsapp_hint ?? "";
+const instagramHint = value?.instagram_hint ?? "";
+
+const info = await getSiteInfo();
+const whatsapp = whatsappHref(info);
+
+// CMS stores the raw number ("573242503301"); display it grouped as +57 324 250 3301.
+const whatsappDigits = info.whatsappNumber.replace(/\D/g, "");
+const whatsappDisplay =
+  whatsappDigits.length === 12
+    ? `+${whatsappDigits.slice(0, 2)} ${whatsappDigits.slice(2, 5)} ${whatsappDigits.slice(5, 8)} ${whatsappDigits.slice(8)}`
+    : `+${whatsappDigits}`;
+
+const instagramHandle = info.instagramHandle.replace(/^@/, "");
+const instagramHref = `https://www.instagram.com/${instagramHandle}`;
+---
+
+<section id="contacto" class="bg-nomada-primary py-12">
+  <div class="max-w-6xl mx-auto px-6">
+    {/* Header */}
+    {(eyebrow || heading || intro) && (
+      <div class="flex flex-col items-center text-center mb-16">
+        {eyebrow && (
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-8 h-px bg-nomada-gold/60" />
+            <span class="font-sans text-nomada-gold text-[10px] tracking-[0.4em] uppercase">
+              {eyebrow}
+            </span>
+            <div class="w-8 h-px bg-nomada-gold/60" />
+          </div>
+        )}
+        {heading && (
+          <h2 class="font-serif text-nomada-cream text-4xl md:text-5xl font-light leading-tight text-balance">
+            {heading}
+          </h2>
+        )}
+        {intro && (
+          <p class="font-sans text-nomada-cream/60 text-[15px] leading-relaxed mt-4 max-w-md text-balance">
+            {intro}
+          </p>
+        )}
+      </div>
+    )}
+
+    <div class="grid gap-12 md:gap-20 max-w-4xl mx-auto">
+      {/* Contact info */}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* WhatsApp */}
+        {info.whatsappNumber && (
+          <a
+            href={whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Pedir por WhatsApp"
+            class="group flex items-start gap-5 p-6 border border-nomada-gold/20 hover:border-nomada-gold/50 transition-colors duration-300"
+          >
+            <div class="text-nomada-gold mt-0.5 shrink-0">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                aria-hidden="true"
+              >
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-sans text-nomada-gold text-[10px] tracking-[0.3em] uppercase mb-1">
+                WhatsApp
+              </p>
+              <p class="font-serif text-nomada-cream text-xl group-hover:text-nomada-gold transition-colors duration-200">
+                {whatsappDisplay}
+              </p>
+              {whatsappHint && (
+                <p class="font-sans text-nomada-cream/40 text-[12px] mt-1">{whatsappHint}</p>
+              )}
+            </div>
+          </a>
+        )}
+
+        {/* Instagram */}
+        {instagramHandle && (
+          <a
+            href={instagramHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex items-start gap-5 p-6 border border-nomada-gold/20 hover:border-nomada-gold/50 transition-colors duration-300"
+          >
+            <div class="text-nomada-gold mt-0.5 shrink-0">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                aria-hidden="true"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-sans text-nomada-gold text-[10px] tracking-[0.3em] uppercase mb-1">
+                Instagram
+              </p>
+              <p class="font-serif text-nomada-cream text-xl group-hover:text-nomada-gold transition-colors duration-200">
+                @{instagramHandle}
+              </p>
+              {instagramHint && (
+                <p class="font-sans text-nomada-cream/40 text-[12px] mt-1">{instagramHint}</p>
+              )}
+            </div>
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

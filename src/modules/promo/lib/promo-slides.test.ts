@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { aggregatePromoSlides } from "#/modules/promo/lib/promo-slides.ts";
-import type { Promo } from "#/modules/promo/promos.config.ts";
+import type { Promo } from "#/modules/promo/types.ts";
 
 describe("aggregatePromoSlides", () => {
   it("flattens images from multiple active promos, preserving config order", () => {

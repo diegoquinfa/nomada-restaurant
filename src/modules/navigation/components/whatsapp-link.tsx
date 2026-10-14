@@ -1,28 +1,30 @@
 import type { AnchorHTMLAttributes } from "react";
 import { useEffect, useState, useSyncExternalStore } from "react";
+import { whatsappHref } from "#/lib/media";
 import { cn } from "#/shared/ui/lib/utils";
 
-export const WHATSAPP_URL = new URL("https://wa.me/573242503301");
-
 type WhatsAppLinkProps = {
-  message?: string;
+  whatsappNumber: string;
+  whatsappMessage: string;
+  /** Overrides the prefilled message for this specific link. */
+  text?: string;
 } & AnchorHTMLAttributes<HTMLAnchorElement>;
 
 export const WhatsAppLink = ({
-  message = "Hola, quiero vivir la experiencia NÓMADA 🌎",
+  whatsappNumber,
+  whatsappMessage,
+  text,
   className,
   children,
   ...props
 }: WhatsAppLinkProps) => {
-  const queryParams = new URLSearchParams({
-    text: message,
-  });
+  const href = whatsappHref({ whatsappNumber, whatsappMessage }, text);
 
   return (
     <a
       target="_blank"
       rel="noopener noreferrer"
-      href={`${WHATSAPP_URL.toString()}?${queryParams.toString()}`}
+      href={href}
       aria-label="Pedir por WhatsApp"
       className={cn(className)}
       {...props}
@@ -45,7 +47,15 @@ function getSnapshot() {
   return document.body.classList.contains("nav-menu-open");
 }
 
-export function WhatsAppFAB() {
+type WhatsAppFABProps = {
+  whatsappNumber: string;
+  whatsappMessage: string;
+};
+
+export function WhatsAppFAB({
+  whatsappNumber,
+  whatsappMessage,
+}: WhatsAppFABProps) {
   const [visible, setVisible] = useState(false);
   const menuOpen = useSyncExternalStore(subscribe, getSnapshot, () => false);
 
@@ -57,6 +67,8 @@ export function WhatsAppFAB() {
 
   return (
     <WhatsAppLink
+      whatsappNumber={whatsappNumber}
+      whatsappMessage={whatsappMessage}
       className={cn(
         `fixed bottom-6 right-6 flex items-center gap-3 bg-nomada-gold text-nomada-deep px-4 py-3 shadow-lg hover:bg-nomada-cream transition-all duration-300 md:hidden ${
           menuOpen ? "z-30" : "z-50"

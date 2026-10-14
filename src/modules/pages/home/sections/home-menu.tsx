@@ -1,6 +1,5 @@
 import { Image } from "@unpic/react";
-import { useEffect, useRef, useState } from "react";
-import { WhatsAppLink } from "#/modules/navigation/components/whatsapp-link";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { cn } from "#/shared/ui/lib/utils";
 
 type Badge = "Favorito" | "Nuevo" | "Temporada" | null;
@@ -21,209 +20,18 @@ interface Category {
   dishes: Dish[];
 }
 
+export interface HomeMenuProps {
+  eyebrow: string;
+  heading: string;
+  intro: string;
+  categories: Category[];
+  whatsappUrl: string;
+}
+
 function formatPrice(price: number | null): string {
   if (price === null) return "";
   return `$${price.toLocaleString("es-CO")}`;
 }
-
-const categories: Category[] = [
-  {
-    id: "recomendados-del-chef",
-    label: "Recomendados del Chef",
-    dishes: [
-      {
-        name: "Hamburguesa de Camarón con papas",
-        description:
-          "Pan brioche artesanal, disco de camarón apanado súper crujiente, ensalada coleslaw, alioli de eneldo, pepinillos agridulces y cebolla encurtida artesanal. Bañada en nuestra salsa de la casa y acompañada de papas a la francesa.",
-        price: 35000,
-        badge: "Nuevo", // Badge destacado
-        is_coming_soon: false,
-        is_hidden: true,
-        image: "/images/dishes/recomendados-del-chef/hamburguesa-camaron.webp",
-      },
-      {
-        name: "Costilla BBQ Roadhouse",
-        description:
-          "Costillas de cerdo de cocción lenta, caramelizadas con nuestra salsa BBQ artesanal de café, logrando un equilibrio perfecto entre dulzor, ahumado y especias. Acompañadas de papas a la francesa y ensalada fresca de la casa.",
-        price: 45000,
-        badge: null,
-        is_coming_soon: false,
-        is_hidden: true,
-        image:
-          "/images/dishes/recomendados-del-chef/costilla-bbq-roadhouse.webp",
-      },
-      {
-        name: "Lomo Tres Pimientas",
-        description:
-          "Lomo fino en costra de pimientas acompañado de papas francesa y ensalada.",
-        price: 35000,
-        badge: null,
-        is_coming_soon: false,
-        is_hidden: true,
-        image: "/images/dishes/recomendados-del-chef/lomo-tres-pimientas.webp",
-      },
-      {
-        name: "Pescado Marinero",
-        description:
-          "Jugoso filete de pescado apanado bañado en una rica salsa marinera con mejillones y anillos de calamar, acompañado de auténtico arroz de coco frito, patacones y una ensalada fresca. Una verdadera experiencia caribeña para consentir tu paladar.",
-        price: 30000,
-        badge: null,
-        is_coming_soon: false,
-      },
-    ],
-  },
-  {
-    id: "reservas-del-chef",
-    label: "Reservas del Chef",
-    dishes: [
-      {
-        name: "Picada Gourmet de Pollo",
-        description:
-          "Tiernos bocados de pechuga de pollo bañados en una cremosa salsa de queso crema y eneldo, acompañados de papas en casco y chicharrón crocante. Servida con alioli de la casa, mayonesa de mango y pico de gallo fresco.",
-        price: 38000,
-        badge: "Nuevo",
-        is_coming_soon: false, // Cambiado a false porque ya está disponible
-        image: "/images/dishes/reservas-del-chef/picada-gourmet-pollo.webp",
-      },
-      {
-        name: "Picada Gourmet de Camarón",
-        description:
-          "Jugosos camarones en una cremosa salsa de queso crema y eneldo, acompañados de papas en casco, chorizo y chicharrón crocante. Servida con alioli de la casa, mayonesa de mango y pico de gallo fresco.",
-        price: 38000,
-        badge: "Nuevo",
-        is_coming_soon: false, // Cambiado a false porque ya está disponible
-        image: "/images/dishes/reservas-del-chef/picada-gourmet-camaron.webp",
-      },
-    ],
-  },
-  {
-    id: "bowls-fusion-fit",
-    label: "Bowls Fusión Fit",
-    dishes: [
-      {
-        name: "Bowl Tradición",
-        description:
-          "El equilibrio perfecto entre lo clásico y lo saludable. Pechuga de pollo al grill sobre una base de arroz del día, con un mix fresco de lechuga crespa, pepino, zanahoria, tomates cherry y maíz desgranado. Nutritivo, ligero y lleno de texturas. Acompañado de una vinagreta ligera de fresa y vinagre balsámico.",
-        price: 28000,
-        badge: null,
-        is_coming_soon: false,
-      },
-      {
-        name: "Bowl Criollo Crocante",
-        description:
-          "Un viaje de sabores contrastantes para consentirte. Chicharrón crujiente y dorado sobre una reconfortante base de arroz del día, acompañado de un mix fresco de lechuga crespa, tomates cherry, pepino, zanahoria y maíz desgranado. La combinación perfecta entre lo tradicional y lo ligero. Acompañado de una vinagreta ligera de fresa y vinagre balsámico.",
-        price: 28000,
-        badge: null,
-        is_coming_soon: false,
-      },
-      {
-        name: "Bowl Mar Caribe",
-        description:
-          "Un viaje directo a la costa con un toque sofisticado y fresco. Delicioso filete de pescado bañado en mantequilla de ajo y limón, servido sobre una base de arroz del día, lechuga crespa, tomates cherry, pepino crujiente, zanahoria y maíz desgranado. El toque final lo pone nuestra vinagreta de fresa y vinagre balsámico, que equilibra a la perfección los sabores dulces y ácidos.",
-        price: 30000,
-        badge: null,
-        is_coming_soon: false,
-      },
-    ],
-  },
-  {
-    id: "pastas",
-    label: "Pastas",
-    dishes: [
-      {
-        name: "Fettuccine Queso Azul",
-        description:
-          "Crujiente milanesa de cerdo apanada, coronada con fettuccine en una cremosa salsa de queso azul, terminada con queso parmesano y cebolla frita crujiente.",
-        price: 37000,
-        badge: "Nuevo", // Le agregamos el badge de 'Nuevo'
-        is_coming_soon: false,
-        image: "/images/dishes/pastas/fettuccine-queso-azul.webp", // Ruta de imagen sugerida
-      },
-      {
-        name: "Fettuccine Huancaína & Camarones",
-        description: "",
-        price: 35000,
-        badge: null,
-        is_coming_soon: false,
-        image: "/images/dishes/pastas/fettuccine-huancaina-camarones.webp",
-      },
-      {
-        name: "Pasta Cremosa Ajo & Parmesano con Pollo",
-        description: "",
-        price: 35000,
-        badge: null,
-        is_coming_soon: false,
-        image: "/images/dishes/pastas/pasta-cremosa-ajo-parmesano-pollo.webp",
-      },
-      {
-        name: "Fettuccine Carbonara con Pollo",
-        description:
-          "Un clásico reconfortante con el sello inconfundible de Nómada. Pasta fettuccine al dente envuelta en una cremosa y sedosa salsa carbonara, acompañada de tiernos trozos de pollo jugosos. Una combinación clásica y deliciosa.",
-        price: 35000,
-        badge: null,
-        is_coming_soon: false,
-      },
-    ],
-  },
-  {
-    id: "caseritos-del-chef",
-    label: "Caseritos del Chef (Lunes a Viernes)",
-    dishes: [
-      {
-        name: "Pollo & Champiñones",
-        description:
-          "Jugosos trozos de pollo en una cremosa salsa de champiñones, acompañados de arroz salteado, cascos de papa criolla y ensalada fresca de la casa.",
-        price: 23000,
-        badge: "Nuevo",
-        is_coming_soon: false,
-        image:
-          "/images/dishes/caseritos-del-chef/caserito-pollo-champinones.webp",
-      },
-      {
-        name: "Fusión Criolla",
-        description:
-          "Pechuga en salsa teriyaki, acompañada de Arroz salteado, cascos de papa criolla y ensalada de la casa.",
-        price: 23000,
-        badge: null,
-        is_coming_soon: false,
-        image: "/images/dishes/caseritos-del-chef/fusion-criolla.webp",
-      },
-      {
-        name: "Perú Urbano",
-        description:
-          "Fajitas de res salteado, acompañado de arroz salteado, cascos de papa criolla y ensalada de la casa.",
-        price: 23000,
-        badge: null,
-        is_coming_soon: false,
-        image: "/images/dishes/caseritos-del-chef/peru-urbano.webp",
-      },
-      {
-        name: "Galeón Caribe",
-        description:
-          "Cubos de pescado apanado, en salsa de mango picante, acompañado de arroz salteado, patacones y ensalada de la casa.",
-        price: 23000,
-        badge: null,
-        is_coming_soon: false,
-        image: "/images/dishes/caseritos-del-chef/galeon-caribe.webp",
-      },
-    ],
-  },
-  {
-    id: "entradas-y-arroces",
-    label: "Arroces",
-    dishes: [
-      {
-        name: "Arroz Salteado Caribeño",
-        description:
-          "Arroz de coco frito salteado, con vegetales, chorizo argentino, chicharrón, lomo fino, y pechuga.",
-        price: 37000,
-        badge: null,
-        is_coming_soon: false,
-        image: "/images/dishes/arroces/arroz-salteado-caribeno.webp",
-      },
-    ],
-  },
-];
 
 const badgeStyles: Record<NonNullable<Badge>, string> = {
   Favorito: "bg-nomada-gold text-nomada-deep",
@@ -389,15 +197,73 @@ function DishCard({ dish }: { dish: Dish }) {
   );
 }
 
+// ─── Intro with inline WhatsApp link ───────────────────────────────────────
+
+const WHATSAPP_WORD = "WhatsApp";
+
+function introSegments(intro: string) {
+  const segments: Array<{ start: number; text: string; link: boolean }> = [];
+  let cursor = 0;
+
+  while (cursor < intro.length) {
+    const index = intro.indexOf(WHATSAPP_WORD, cursor);
+    if (index === -1) {
+      segments.push({ start: cursor, text: intro.slice(cursor), link: false });
+      break;
+    }
+    if (index > cursor) {
+      segments.push({
+        start: cursor,
+        text: intro.slice(cursor, index),
+        link: false,
+      });
+    }
+    segments.push({ start: index, text: WHATSAPP_WORD, link: true });
+    cursor = index + WHATSAPP_WORD.length;
+  }
+
+  return segments;
+}
+
+function IntroWithWhatsAppLink({
+  intro,
+  whatsappUrl,
+}: {
+  intro: string;
+  whatsappUrl: string;
+}) {
+  return (
+    <>
+      {introSegments(intro).map((segment) =>
+        segment.link ? (
+          <a
+            key={segment.start}
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Pedir por WhatsApp"
+            className="text-nomada-gold hover:text-nomada-cream transition-colors underline underline-offset-2"
+          >
+            {segment.text}
+          </a>
+        ) : (
+          <Fragment key={segment.start}>{segment.text}</Fragment>
+        ),
+      )}
+    </>
+  );
+}
+
 // ─── Section ───────────────────────────────────────────────────────────────
 
-export function HomeMenu() {
-  const visibleCategories = categories
-    .map((cat) => ({
-      ...cat,
-      dishes: cat.dishes.filter((dish) => !dish.is_hidden),
-    }))
-    .filter((cat) => cat.dishes.length > 0);
+export function HomeMenu({
+  eyebrow,
+  heading,
+  intro,
+  categories,
+  whatsappUrl,
+}: HomeMenuProps) {
+  const visibleCategories = categories.filter((cat) => cat.dishes.length > 0);
 
   const categoryIds = visibleCategories.map((c) => c.id);
   const activeId = useScrollSpy(categoryIds);
@@ -445,21 +311,15 @@ export function HomeMenu() {
               id="menu"
               className="font-sans text-nomada-gold text-[10px] tracking-[0.4em] uppercase"
             >
-              Nuestra carta
+              {eyebrow}
             </span>
             <div className="w-8 h-px bg-nomada-gold/60" />
           </div>
           <h2 className="font-serif text-nomada-cream text-4xl md:text-5xl font-light leading-tight">
-            La carta
+            {heading}
           </h2>
           <p className="font-sans text-nomada-cream/50 text-[12px] md:text-[13px] leading-relaxed mt-4 max-w-xl text-balance">
-            Trabajamos bajo pedidos programados por franja horaria para asegurar
-            calidad, frescura y tiempos precisos. Más información en nuestro
-            canal de{" "}
-            <WhatsAppLink className="text-nomada-gold hover:text-nomada-cream transition-colors underline underline-offset-2">
-              WhatsApp
-            </WhatsAppLink>
-            .
+            <IntroWithWhatsAppLink intro={intro} whatsappUrl={whatsappUrl} />
           </p>
         </div>
 
@@ -558,9 +418,15 @@ export function HomeMenu() {
 
         {/* CTA */}
         <div className="flex justify-center mt-14">
-          <WhatsAppLink className="font-sans text-nomada-deep text-[11px] tracking-[0.25em] uppercase bg-nomada-gold px-10 py-4 hover:bg-nomada-cream transition-colors duration-300">
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Pedir por WhatsApp"
+            className="font-sans text-nomada-deep text-[11px] tracking-[0.25em] uppercase bg-nomada-gold px-10 py-4 hover:bg-nomada-cream transition-colors duration-300"
+          >
             Pedir domicilio por WhatsApp
-          </WhatsAppLink>
+          </a>
         </div>
       </div>
     </section>

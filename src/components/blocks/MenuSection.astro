@@ -1,0 +1,103 @@
+---
+import {
+  getEmDashCollection,
+  getTaxonomyTerms,
+  getTermsForEntries,
+} from "emdash";
+import {
+  getSiteInfo,
+  type MediaValue,
+  mediaUrl,
+  whatsappHref,
+} from "#/lib/site";
+import { HomeMenu } from "#/modules/pages/home/sections/home-menu";
+
+interface Props {
+  value: {
+    eyebrow?: string;
+    heading?: string;
+    intro?: string;
+  };
+}
+
+const { value } = Astro.props;
+
+type Badge = "Favorito" | "Nuevo" | "Temporada" | null;
+
+interface Dish {
+  name: string;
+  description: string;
+  price: number | null;
+  badge: Badge;
+  is_coming_soon: boolean;
+  image?: string;
+}
+
+interface Category {
+  id: string;
+  label: string;
+  dishes: Dish[];
+}
+
+function toBadge(raw: unknown): Badge {
+  return raw === "Favorito" || raw === "Nuevo" || raw === "Temporada"
+    ? raw
+    : null;
+}
+
+// Solo platos publicados; reemplaza el antiguo flag is_hidden.
+const { entries } = await getEmDashCollection("dishes", {
+  status: "published",
+  orderBy: { sort_order: "asc" },
+});
+
+// Categorías de la carta en su orden definido en el CMS.
+const terms = await getTaxonomyTerms("menu_category", { includeCounts: false });
+const termsByEntry = await getTermsForEntries(
+  "dishes",
+  entries.map((entry) => entry.id),
+  "menu_category",
+);
+
+const categoriesBySlug = new Map<string, Category>(
+  terms.map((term) => [
+    term.slug,
+    { id: term.slug, label: term.label, dishes: [] },
+  ]),
+);
+
+for (const entry of entries) {
+  const term = termsByEntry.get(entry.id)?.[0];
+  const category = term ? categoriesBySlug.get(term.slug) : undefined;
+  if (!category) continue;
+
+  const data = entry.data as Record<string, unknown>;
+  category.dishes.push({
+    name: String(data.title ?? ""),
+    description: typeof data.description === "string" ? data.description : "",
+    price: typeof data.price === "number" ? data.price : null,
+    badge: toBadge(data.badge),
+    is_coming_soon: data.coming_soon === true,
+    image: mediaUrl(data.image as MediaValue | null | undefined),
+  });
+}
+
+// Orden de términos, sin categorías vacías.
+const categories = terms
+  .map((term) => categoriesBySlug.get(term.slug))
+  .filter((category): category is Category =>
+    Boolean(category && category.dishes.length > 0),
+  );
+
+const info = await getSiteInfo();
+const whatsappUrl = whatsappHref(info);
+---
+
+<HomeMenu
+  client:load
+  eyebrow={value.eyebrow ?? ""}
+  heading={value.heading ?? ""}
+  intro={value.intro ?? ""}
+  categories={categories}
+  whatsappUrl={whatsappUrl}
+/>

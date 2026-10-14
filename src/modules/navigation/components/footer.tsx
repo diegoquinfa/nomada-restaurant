@@ -1,28 +1,40 @@
-import { Link } from "@tanstack/react-router";
 import { Image } from "@unpic/react";
 import { useState } from "react";
-import { scrollToHash } from "../utils/scroll-to-hash";
+import type { NavLink } from "#/modules/navigation/types";
+import {
+  hashFromUrl,
+  scrollToHash,
+} from "#/modules/navigation/utils/scroll-to-hash";
 import { WhatsAppLink } from "./whatsapp-link";
 
-export function Footer() {
+type FooterProps = {
+  links: NavLink[];
+  whatsappNumber: string;
+  whatsappMessage: string;
+  instagramHandle: string;
+  location: string;
+  legalName: string;
+};
+
+export function Footer({
+  links,
+  whatsappNumber,
+  whatsappMessage,
+  instagramHandle,
+  location,
+  legalName,
+}: FooterProps) {
   const [year] = useState(() => new Date().getFullYear());
+
+  const instagramUrl = `https://www.instagram.com/${instagramHandle.replace(
+    /^@/,
+    "",
+  )}`;
 
   return (
     <footer className="bg-nomada-deep border-t border-nomada-gold/15 pt-12 pb-20 md:pb-12">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Brand */}
-          {/*<div className="flex flex-col items-center md:items-start">
-            <span className="font-serif text-nomada-cream text-lg tracking-[0.25em] uppercase">
-              NÓMADA
-            </span>
-            <span className="font-sans text-nomada-gold text-[9px] tracking-[0.35em] uppercase mt-0.5">
-              Cocina Fusión
-            </span>
-            <p className="font-sans text-nomada-cream/30 text-[12px] mt-2">
-              Cartagena de Indias, Colombia
-            </p>
-          </div>*/}
           <Image
             layout="fixed"
             src="/images/logo-sm.webp"
@@ -37,37 +49,34 @@ export function Footer() {
             className="flex flex-wrap justify-center gap-6"
             aria-label="Footer navigation"
           >
-            {[
-              { label: "Nosotros", hash: "nosotros" },
-              { label: "Menú", hash: "menu" },
-              { label: "Cómo pedir", hash: "como-pedir" },
-              { label: "Horarios", hash: "horarios" },
-            ].map((link) => (
-              <Link
-                to="/"
-                key={link.hash}
-                hash={link.hash}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToHash(link.hash);
+            {links.map((link) => (
+              <a
+                key={link.url}
+                href={link.url}
+                onClick={(event) => {
+                  const hash = hashFromUrl(link.url);
+                  if (!hash) return;
+
+                  event.preventDefault();
+                  scrollToHash(hash);
                 }}
                 className="font-sans text-nomada-cream/50 text-[11px] tracking-[0.2em] uppercase hover:text-nomada-gold transition-colors duration-200"
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
           </nav>
 
           {/* Social links */}
           <div className="flex items-center gap-5">
             <a
-              href="https://www.instagram.com/nomadarestaurante"
+              href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-nomada-cream/40 hover:text-nomada-gold transition-colors duration-200"
             >
               <span className="sr-only">
-                Ir al perfil de Instagram de Nómada Cartagena
+                Ir al perfil de Instagram de {legalName} Cartagena
               </span>
               <svg
                 width="18"
@@ -83,9 +92,13 @@ export function Footer() {
                 <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
               </svg>
             </a>
-            <WhatsAppLink className="text-nomada-cream/40 hover:text-nomada-gold transition-colors duration-200">
+            <WhatsAppLink
+              whatsappNumber={whatsappNumber}
+              whatsappMessage={whatsappMessage}
+              className="text-nomada-cream/40 hover:text-nomada-gold transition-colors duration-200"
+            >
               <span className="sr-only">
-                Ir al chat de WhatsApp de Nómada Cartagena
+                Ir al chat de WhatsApp de {legalName} Cartagena
               </span>
               <svg
                 width="18"
@@ -105,7 +118,7 @@ export function Footer() {
         {/* Divider */}
         <div className="border-t border-nomada-gold/10 mt-8 pt-8 flex flex-col items-center gap-1">
           <p className="font-sans text-nomada-cream/25 text-[11px] tracking-[0.15em] text-center">
-            © {year} NÓMADA. Todos los derechos reservados.
+            © {year} {legalName} — {location}. Todos los derechos reservados.
           </p>
           <p className="font-sans text-nomada-cream/20 text-[10px] tracking-widest">
             Página desarrollada por{" "}

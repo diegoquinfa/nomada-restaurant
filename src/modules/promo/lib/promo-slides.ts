@@ -1,4 +1,4 @@
-import type { Promo, PromoImage } from "#/modules/promo/promos.config.ts";
+import type { Promo, PromoImage } from "#/modules/promo/types.ts";
 
 export type PromoSlide = {
   promoId: string;
@@ -7,7 +7,7 @@ export type PromoSlide = {
 
 /**
  * Flattens the images of every active promo into a single ordered slide
- * list. Order follows each promo's position in `promos.config.ts`, and
+ * list. Order follows each promo's position in the input array, and
  * each slide retains its source promo id for dismiss-all bookkeeping.
  */
 export function aggregatePromoSlides(promos: Promo[]): PromoSlide[] {

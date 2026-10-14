@@ -1,29 +1,36 @@
 /* Aviso "Plato de Temporada": barra global dorada que aparece al pasar el hero
    (TemporadaTopBar) más una franja editorial con reveal on-scroll entre el hero
    y "Nosotros" (TemporadaStrip). La barra comunica su altura al navbar mediante
-   la variable CSS --temporada-bar, definida sobre documentElement. */
+   la variable CSS --temporada-bar, definida sobre documentElement.
 
-import { useEffect, useRef, useState } from "react";
+   Los textos llegan desde la entrada de la colección `seasonal` del CMS. */
+
+import { Fragment, useEffect, useRef, useState } from "react";
 import { cn } from "#/shared/ui/lib/utils";
 
-const LABEL = "Plato de Temporada";
-const STATUS = "Muy pronto";
-const EYEBROW = "Edición mensual";
-const BAR_MSG =
-  "PLATO DE TEMPORADA — una creación exclusiva que cambia cada 30 días";
-const BODY_BEFORE =
-  "Una creación exclusiva que cambia cada mes para sorprenderte con lo mejor de la despensa y nuevas exploraciones culinarias. ";
-const BODY_HIGHLIGHT = "Cada 30 días";
-const BODY_AFTER =
-  " renovamos la receta con ingredientes de temporada y combinaciones inesperadas, disponibles solo por tiempo limitado. ";
-const BODY_SIGNOFF = "Espéralo";
+export interface TemporadaTopBarProps {
+  status_label: string;
+  bar_message: string;
+}
+
+export interface TemporadaStripProps {
+  title: string;
+  status_label: string;
+  eyebrow: string;
+  body: string;
+  highlight: string;
+  signoff: string;
+}
 
 /* Barra global dorada fija arriba. Se desliza hacia abajo justo después de
    pasar el hero (scrollY > 75% del viewport) y se retira al volver arriba.
    Mientras es visible publica su altura en la variable CSS --temporada-bar,
    que el <header> del navbar usa como offset (ver navbar.tsx), y ajusta
    scroll-padding-top para que los anclajes por hash no queden tapados. */
-export function TemporadaTopBar() {
+export function TemporadaTopBar({
+  status_label,
+  bar_message,
+}: TemporadaTopBarProps) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -62,21 +69,21 @@ export function TemporadaTopBar() {
     >
       <div className="relative flex h-full items-center justify-center gap-3 overflow-hidden whitespace-nowrap px-4">
         <span className="shrink-0 font-sans text-[10px] uppercase tracking-[0.25em] font-extrabold">
-          ✦ {STATUS}
+          ✦ {status_label}
         </span>
         {/* Móvil: cartel desplazante en bucle. Desktop: línea estática. */}
         <div className="relative min-w-0 max-w-[62vw] flex-1 overflow-hidden md:hidden">
           <div className="flex w-max animate-temporada-marquee will-change-transform motion-reduce:animate-none">
             <span className="shrink-0 px-6 font-sans text-[11px]">
-              {BAR_MSG}
+              {bar_message}
             </span>
             <span aria-hidden className="shrink-0 px-6 font-sans text-[11px]">
-              {BAR_MSG}
+              {bar_message}
             </span>
           </div>
         </div>
         <p className="hidden min-w-0 truncate font-sans text-[11px] md:block">
-          {BAR_MSG}
+          {bar_message}
         </p>
         <span aria-hidden className="shrink-0 text-xs">
           ✦
@@ -118,10 +125,78 @@ function useRevealOnScroll() {
   return { ref, shown };
 }
 
+type BodySegment = { start: number; text: string; gold: boolean };
+
+/* Divide el cuerpo en tramos, marcando cada aparición de `highlight` para
+   pintarla en dorado sin romper el resto del texto. */
+function bodySegments(body: string, highlight: string): BodySegment[] {
+  if (!highlight || !body.includes(highlight)) {
+    return [{ start: 0, text: body, gold: false }];
+  }
+
+  const segments: BodySegment[] = [];
+  let cursor = 0;
+
+  while (cursor < body.length) {
+    const index = body.indexOf(highlight, cursor);
+    if (index === -1) {
+      segments.push({ start: cursor, text: body.slice(cursor), gold: false });
+      break;
+    }
+    if (index > cursor) {
+      segments.push({
+        start: cursor,
+        text: body.slice(cursor, index),
+        gold: false,
+      });
+    }
+    segments.push({ start: index, text: highlight, gold: true });
+    cursor = index + highlight.length;
+  }
+
+  return segments;
+}
+
+/* Cuerpo editorial: resalta `highlight` en dorado y, cuando el texto termina
+   con `signoff`, lo cierra en dorado cursiva. */
+function TemporadaBody({
+  body,
+  highlight,
+  signoff,
+}: Pick<TemporadaStripProps, "body" | "highlight" | "signoff">) {
+  const hasSignoff = signoff.length > 0 && body.endsWith(signoff);
+  const main = hasSignoff ? body.slice(0, body.length - signoff.length) : body;
+  const segments = bodySegments(main, highlight);
+
+  return (
+    <>
+      {segments.map((segment) =>
+        segment.gold ? (
+          <span key={segment.start} className="text-nomada-gold">
+            {segment.text}
+          </span>
+        ) : (
+          <Fragment key={segment.start}>{segment.text}</Fragment>
+        ),
+      )}
+      {hasSignoff && (
+        <span className="font-serif italic text-nomada-gold">{signoff}</span>
+      )}
+    </>
+  );
+}
+
 /* Franja dedicada entre el hero y "Nosotros": sección editorial centrada que
    se anuncia a sí misma al entrar en viewport con reveal escalonado
    (0/150/300/450 ms), mismo patrón de animación que el hero. */
-export function TemporadaStrip() {
+export function TemporadaStrip({
+  title,
+  status_label,
+  eyebrow,
+  body,
+  highlight,
+  signoff,
+}: TemporadaStripProps) {
   const { ref, shown } = useRevealOnScroll();
 
   return (
@@ -156,12 +231,12 @@ export function TemporadaStrip() {
         >
           <div className="w-10 h-px bg-nomada-gold/60" />
           <span className="font-sans text-nomada-gold text-[10px] tracking-[0.4em] uppercase font-semibold">
-            {EYEBROW}
+            {eyebrow}
           </span>
           <div className="w-10 h-px bg-nomada-gold/60" />
         </div>
 
-        {/* 2 — Título + pill "Muy pronto" con pulso lento (150 ms) */}
+        {/* 2 — Título + pill de estado con pulso lento (150 ms) */}
         <div
           className={cn(
             "mt-5 flex flex-wrap items-center justify-center gap-4",
@@ -171,10 +246,10 @@ export function TemporadaStrip() {
           )}
         >
           <h2 className="font-serif text-nomada-cream text-3xl md:text-4xl font-light">
-            {LABEL}
+            {title}
           </h2>
           <span className="animate-temporada-pulse rounded-full border border-nomada-gold/60 px-3 py-1 font-sans text-[9px] uppercase tracking-[0.3em] text-nomada-gold">
-            {STATUS}
+            {status_label}
           </span>
         </div>
 
@@ -200,12 +275,7 @@ export function TemporadaStrip() {
               : "opacity-0 translate-y-6",
           )}
         >
-          {BODY_BEFORE}
-          <span className="text-nomada-gold">{BODY_HIGHLIGHT}</span>
-          {BODY_AFTER}
-          <span className="font-serif italic text-nomada-gold">
-            {BODY_SIGNOFF}
-          </span>
+          <TemporadaBody body={body} highlight={highlight} signoff={signoff} />
         </p>
       </div>
     </section>

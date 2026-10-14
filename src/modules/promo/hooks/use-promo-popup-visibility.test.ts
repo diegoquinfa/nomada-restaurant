@@ -7,6 +7,7 @@ import {
   PROMO_POPUP_REAPPEAR_MS,
   usePromoPopupVisibility,
 } from "#/modules/promo/hooks/use-promo-popup-visibility.ts";
+import type { Promo } from "#/modules/promo/types.ts";
 
 const DISMISS_KEY_PREFIX = "nomada:promo-dismissed:";
 
@@ -32,31 +33,29 @@ Object.defineProperty(window, "localStorage", {
   configurable: true,
 });
 
-vi.mock("#/modules/promo/promos.config.ts", () => ({
-  promos: [
-    {
-      id: "test-promo-a",
-      images: [{ src: "/a.webp", alt: "A" }],
-      startDate: "2026-07-01T10:00-05:00",
-      endDate: "2026-07-12T23:59-05:00",
-      activeDays: [0], // Monday
-    },
-    {
-      id: "test-promo-b",
-      images: [{ src: "/b.webp", alt: "B" }],
-      startDate: "2026-07-01T10:00-05:00",
-      endDate: "2026-07-12T23:59-05:00",
-      activeDays: [0], // Monday
-    },
-    {
-      id: "test-promo-tuesday",
-      images: [{ src: "/c.webp", alt: "C" }],
-      startDate: "2026-07-01T10:00-05:00",
-      endDate: "2026-07-12T23:59-05:00",
-      activeDays: [1], // Tuesday
-    },
-  ],
-}));
+const testPromos: Promo[] = [
+  {
+    id: "test-promo-a",
+    images: [{ src: "/a.webp", alt: "A" }],
+    startDate: "2026-07-01T10:00-05:00",
+    endDate: "2026-07-12T23:59-05:00",
+    activeDays: [0], // Monday
+  },
+  {
+    id: "test-promo-b",
+    images: [{ src: "/b.webp", alt: "B" }],
+    startDate: "2026-07-01T10:00-05:00",
+    endDate: "2026-07-12T23:59-05:00",
+    activeDays: [0], // Monday
+  },
+  {
+    id: "test-promo-tuesday",
+    images: [{ src: "/c.webp", alt: "C" }],
+    startDate: "2026-07-01T10:00-05:00",
+    endDate: "2026-07-12T23:59-05:00",
+    activeDays: [1], // Tuesday
+  },
+];
 
 describe("usePromoPopupVisibility", () => {
   beforeEach(() => {
@@ -69,14 +68,14 @@ describe("usePromoPopupVisibility", () => {
   });
 
   it("starts closed on initial render (SSR-safe)", () => {
-    const { result } = renderHook(() => usePromoPopupVisibility());
+    const { result } = renderHook(() => usePromoPopupVisibility(testPromos));
     expect(result.current.open).toBe(false);
   });
 
   it("opens after mount and aggregates every active promo for the day", () => {
     vi.setSystemTime(new Date("2026-07-06T12:00-05:00")); // Monday
 
-    const { result } = renderHook(() => usePromoPopupVisibility());
+    const { result } = renderHook(() => usePromoPopupVisibility(testPromos));
 
     act(() => {
       vi.runAllTimers();
@@ -92,7 +91,7 @@ describe("usePromoPopupVisibility", () => {
   it("aggregates a single promo when only one is active", () => {
     vi.setSystemTime(new Date("2026-07-07T12:00-05:00")); // Tuesday
 
-    const { result } = renderHook(() => usePromoPopupVisibility());
+    const { result } = renderHook(() => usePromoPopupVisibility(testPromos));
 
     act(() => {
       vi.runAllTimers();
@@ -107,7 +106,7 @@ describe("usePromoPopupVisibility", () => {
   it("stays closed when no promo is active for the current day", () => {
     vi.setSystemTime(new Date("2026-07-12T12:00-05:00")); // Sunday
 
-    const { result } = renderHook(() => usePromoPopupVisibility());
+    const { result } = renderHook(() => usePromoPopupVisibility(testPromos));
 
     act(() => {
       vi.runAllTimers();
@@ -120,7 +119,7 @@ describe("usePromoPopupVisibility", () => {
   it("stays closed when no promo is active for the current date", () => {
     vi.setSystemTime(new Date("2026-08-01T12:00-05:00"));
 
-    const { result } = renderHook(() => usePromoPopupVisibility());
+    const { result } = renderHook(() => usePromoPopupVisibility(testPromos));
 
     act(() => {
       vi.runAllTimers();
@@ -136,7 +135,7 @@ describe("usePromoPopupVisibility", () => {
     window.localStorage.setItem(`${DISMISS_KEY_PREFIX}test-promo-a`, recent);
     window.localStorage.setItem(`${DISMISS_KEY_PREFIX}test-promo-b`, recent);
 
-    const { result } = renderHook(() => usePromoPopupVisibility());
+    const { result } = renderHook(() => usePromoPopupVisibility(testPromos));
 
     act(() => {
       vi.runAllTimers();
@@ -151,7 +150,7 @@ describe("usePromoPopupVisibility", () => {
     window.localStorage.setItem(`${DISMISS_KEY_PREFIX}test-promo-a`, stale);
     window.localStorage.setItem(`${DISMISS_KEY_PREFIX}test-promo-b`, stale);
 
-    const { result } = renderHook(() => usePromoPopupVisibility());
+    const { result } = renderHook(() => usePromoPopupVisibility(testPromos));
 
     act(() => {
       vi.runAllTimers();
@@ -163,7 +162,7 @@ describe("usePromoPopupVisibility", () => {
   it("dismiss() closes the popup and writes the cadence timestamp for every active promo", () => {
     vi.setSystemTime(new Date("2026-07-06T12:00-05:00")); // Monday
 
-    const { result } = renderHook(() => usePromoPopupVisibility());
+    const { result } = renderHook(() => usePromoPopupVisibility(testPromos));
 
     act(() => {
       vi.runAllTimers();

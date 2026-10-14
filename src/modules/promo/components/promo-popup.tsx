@@ -1,6 +1,7 @@
 import { PromoStoriesCarousel } from "#/modules/promo/components/promo-stories-carousel.tsx";
 import { usePromoPopupVisibility } from "#/modules/promo/hooks/use-promo-popup-visibility.ts";
 import { aggregatePromoSlides } from "#/modules/promo/lib/promo-slides.ts";
+import type { Promo } from "#/modules/promo/types.ts";
 import {
   Dialog,
   DialogContent,
@@ -8,8 +9,8 @@ import {
   DialogTitle,
 } from "#/shared/ui/components/dialog.tsx";
 
-export function PromoPopup() {
-  const { open, activePromos, dismiss } = usePromoPopupVisibility();
+export function PromoPopup({ promos }: { promos: Promo[] }) {
+  const { open, activePromos, dismiss } = usePromoPopupVisibility(promos);
   const slides = aggregatePromoSlides(activePromos);
 
   if (slides.length === 0) return null;

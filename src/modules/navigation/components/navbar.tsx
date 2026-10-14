@@ -1,19 +1,25 @@
-import { Link } from "@tanstack/react-router";
 import { Image } from "@unpic/react";
+import type { MouseEvent } from "react";
 import { useEffect, useState } from "react";
+import type { NavLink } from "#/modules/navigation/types";
+import {
+  hashFromUrl,
+  scrollToHash,
+} from "#/modules/navigation/utils/scroll-to-hash";
 import { cn } from "#/shared/ui/lib/utils";
-import { scrollToHash } from "../utils/scroll-to-hash";
 import { WhatsAppLink } from "./whatsapp-link";
 
-const navLinks = [
-  { label: "Nosotros", href: "nosotros" },
-  { label: "Menú", href: "menu" },
-  { label: "Cómo pedir", href: "como-pedir" },
-  { label: "Horarios", href: "horarios" },
-  { label: "Contacto", href: "contacto" },
-];
+type NavbarProps = {
+  links: NavLink[];
+  whatsappNumber: string;
+  whatsappMessage: string;
+};
 
-export function Navbar() {
+export function Navbar({
+  links,
+  whatsappNumber,
+  whatsappMessage,
+}: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -30,6 +36,17 @@ export function Navbar() {
     document.body.classList.toggle("nav-menu-open", menuOpen);
   }, [menuOpen]);
 
+  const handleNavClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    url: string,
+  ) => {
+    const hash = hashFromUrl(url);
+    if (!hash) return;
+
+    event.preventDefault();
+    scrollToHash(hash);
+  };
+
   return (
     <>
       <header
@@ -44,14 +61,7 @@ export function Navbar() {
       >
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex flex-col leading-none">
-            {/*<span className="font-serif text-nomada-cream text-xl tracking-[0.25em] uppercase font-medium">
-              NÓMADA
-            </span>
-            <span className="font-sans text-nomada-gold text-[9px] tracking-[0.35em] uppercase mt-0.5">
-              Cocina Fusión
-            </span>*/}
-
+          <a href="/" className="flex flex-col leading-none">
             <Image
               layout="fixed"
               src="/images/logo-sm.webp"
@@ -63,28 +73,28 @@ export function Navbar() {
               height={39}
               width={158}
             />
-          </Link>
+          </a>
 
           {/* Desktop Nav */}
           <nav
             className="hidden md:flex items-center gap-8"
             aria-label="Navegación principal"
           >
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to="/"
-                hash={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToHash(link.href);
-                }}
+            {links.map((link) => (
+              <a
+                key={link.url}
+                href={link.url}
+                onClick={(event) => handleNavClick(event, link.url)}
                 className="font-sans text-nomada-cream/70 text-[11px] tracking-[0.2em] uppercase hover:text-nomada-gold transition-colors duration-200"
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
-            <WhatsAppLink className="font-arial font-extrabold! text-nomada-deep text-[11px] tracking-[0.2em] uppercase bg-nomada-gold px-5 py-2.5 hover:bg-nomada-cream transition-colors duration-200">
+            <WhatsAppLink
+              whatsappNumber={whatsappNumber}
+              whatsappMessage={whatsappMessage}
+              className="font-arial font-extrabold! text-nomada-deep text-[11px] tracking-[0.2em] uppercase bg-nomada-gold px-5 py-2.5 hover:bg-nomada-cream transition-colors duration-200"
+            >
               Pedir ahora
             </WhatsAppLink>
           </nav>
@@ -129,23 +139,23 @@ export function Navbar() {
           className="flex flex-col items-center gap-8"
           aria-label="Navegación móvil"
         >
-          {navLinks.map((link, i) => (
-            <Link
-              key={link.href}
-              to="/"
-              hash={link.href}
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToHash(link.href);
+          {links.map((link, i) => (
+            <a
+              key={link.url}
+              href={link.url}
+              onClick={(event) => {
+                handleNavClick(event, link.url);
                 handleClose();
               }}
               className="font-serif text-nomada-cream text-3xl italic tracking-wide hover:text-nomada-gold transition-colors duration-200"
               style={{ animationDelay: `${i * 80}ms` }}
             >
               {link.label}
-            </Link>
+            </a>
           ))}
           <WhatsAppLink
+            whatsappNumber={whatsappNumber}
+            whatsappMessage={whatsappMessage}
             onClick={handleClose}
             className="mt-4 font-sans text-white font-bold inline-block text-[12px] tracking-[0.2em] uppercase bg-nomada-gold px-8 py-4"
           >

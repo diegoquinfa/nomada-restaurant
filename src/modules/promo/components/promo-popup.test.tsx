@@ -2,6 +2,7 @@ import { act, cleanup, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { PromoPopup } from "#/modules/promo/components/promo-popup.tsx";
+import type { Promo } from "#/modules/promo/types.ts";
 
 const localStorageMock = (() => {
   let store: Record<string, string> = {};
@@ -25,27 +26,25 @@ Object.defineProperty(window, "localStorage", {
   configurable: true,
 });
 
-vi.mock("#/modules/promo/promos.config.ts", () => ({
-  promos: [
-    {
-      id: "promo-a",
-      images: [
-        { src: "/images/promo/1.webp", alt: "Promo A uno" },
-        { src: "/images/promo/2.webp", alt: "Promo A dos" },
-      ],
-      startDate: "2026-07-01T10:00-05:00",
-      endDate: "2026-07-12T23:59-05:00",
-      activeDays: [2], // Wednesday
-    },
-    {
-      id: "promo-b",
-      images: [{ src: "/images/promo/3.webp", alt: "Promo B" }],
-      startDate: "2026-07-01T10:00-05:00",
-      endDate: "2026-07-12T23:59-05:00",
-      activeDays: [2], // Wednesday
-    },
-  ],
-}));
+const promos: Promo[] = [
+  {
+    id: "promo-a",
+    images: [
+      { src: "/images/promo/1.webp", alt: "Promo A uno" },
+      { src: "/images/promo/2.webp", alt: "Promo A dos" },
+    ],
+    startDate: "2026-07-01T10:00-05:00",
+    endDate: "2026-07-12T23:59-05:00",
+    activeDays: [2], // Wednesday
+  },
+  {
+    id: "promo-b",
+    images: [{ src: "/images/promo/3.webp", alt: "Promo B" }],
+    startDate: "2026-07-01T10:00-05:00",
+    endDate: "2026-07-12T23:59-05:00",
+    activeDays: [2], // Wednesday
+  },
+];
 
 const DISMISS_KEY_A = "nomada:promo-dismissed:promo-a";
 const DISMISS_KEY_B = "nomada:promo-dismissed:promo-b";
@@ -75,7 +74,7 @@ describe("PromoPopup", () => {
   };
 
   it("renders the aggregated slides from every active promo, in config order", () => {
-    render(<PromoPopup />);
+    render(<PromoPopup promos={promos} />);
     openPopup();
 
     const images = screen.getAllByRole("img") as HTMLImageElement[];
@@ -94,7 +93,7 @@ describe("PromoPopup", () => {
       },
     );
 
-    render(<PromoPopup />);
+    render(<PromoPopup promos={promos} />);
     openPopup();
 
     act(() => {
@@ -118,7 +117,7 @@ describe("PromoPopup", () => {
       },
     );
 
-    render(<PromoPopup />);
+    render(<PromoPopup promos={promos} />);
     openPopup();
 
     act(() => {
@@ -132,7 +131,7 @@ describe("PromoPopup", () => {
   });
 
   it("exposes the dialog accessible name 'Promo Nómada'", () => {
-    render(<PromoPopup />);
+    render(<PromoPopup promos={promos} />);
     openPopup();
 
     const dialog = screen.getByRole("dialog");
@@ -140,7 +139,7 @@ describe("PromoPopup", () => {
   });
 
   it("has a close button with a descriptive aria-label", () => {
-    render(<PromoPopup />);
+    render(<PromoPopup promos={promos} />);
     openPopup();
 
     const closeButton = screen.getByRole("button", { name: /cerrar/i });
@@ -148,7 +147,7 @@ describe("PromoPopup", () => {
   });
 
   it("dismisses the popup and writes the cadence timestamp for every active promo when closed", () => {
-    render(<PromoPopup />);
+    render(<PromoPopup promos={promos} />);
     openPopup();
 
     expect(screen.queryByRole("dialog")).not.toBeNull();
@@ -164,7 +163,7 @@ describe("PromoPopup", () => {
   });
 
   it("renders navigation arrows with the expected Spanish accessible names", () => {
-    render(<PromoPopup />);
+    render(<PromoPopup promos={promos} />);
     openPopup();
 
     expect(

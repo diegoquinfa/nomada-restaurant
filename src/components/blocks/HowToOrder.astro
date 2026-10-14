@@ -1,0 +1,194 @@
+---
+import { getSiteInfo, whatsappHref } from "../../lib/site";
+
+type Step = {
+  title?: string;
+  description?: string;
+  icon?: string;
+};
+
+interface Props {
+  value?: {
+    eyebrow?: string;
+    heading?: string;
+    steps?: Step[];
+    notice?: string;
+  };
+}
+
+const { value } = Astro.props;
+
+const eyebrow = value?.eyebrow ?? "";
+const heading = value?.heading ?? "";
+const steps = value?.steps ?? [];
+const notice = value?.notice ?? "";
+
+const info = await getSiteInfo();
+const whatsapp = whatsappHref(info);
+
+// Legacy link split: only the first "WhatsApp" mention in the notice becomes a link.
+const WHATSAPP_WORD = "WhatsApp";
+const whatsappIndex = notice.indexOf(WHATSAPP_WORD);
+const noticeBefore =
+  whatsappIndex >= 0 ? notice.slice(0, whatsappIndex) : notice;
+const noticeAfter =
+  whatsappIndex >= 0 ? notice.slice(whatsappIndex + WHATSAPP_WORD.length) : "";
+
+// Step numbers are positional ("01", "02", ...): the CMS stores no explicit number.
+const stepNumber = (index: number) => String(index + 1).padStart(2, "0");
+
+// FAQ structured data carried over verbatim from the legacy section.
+const faq = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "¿Cómo hago un pedido en NÓMADA?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Explora nuestro menú, escríbenos por WhatsApp con tu pedido y dirección de entrega, y recibe en casa. Respondemos de inmediato.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Cuál es el horario de atención?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Lunes a sábado de 11:00 am a 3:00 pm, domingo descanso.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Hacen delivery en Cartagena?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Sí, ofrecemos delivery a domicilio en toda Cartagena. Los pedidos se reciben hasta 30 minutos antes del cierre. Trabajamos bajo pedido con antelación — consultanos por WhatsApp.",
+      },
+    },
+  ],
+};
+---
+
+<section id="como-pedir" class="bg-nomada-deep py-12">
+  <div class="max-w-6xl mx-auto px-6">
+    {/* Header */}
+    {(eyebrow || heading) && (
+      <div class="flex flex-col items-center text-center mb-10 md:mb-16">
+        {eyebrow && (
+          <div class="flex items-center gap-4 mb-4 md:mb-6">
+            <div class="w-8 h-px bg-nomada-gold/60" />
+            <span class="font-sans text-nomada-gold text-[10px] tracking-[0.4em] uppercase">
+              {eyebrow}
+            </span>
+            <div class="w-8 h-px bg-nomada-gold/60" />
+          </div>
+        )}
+        {heading && (
+          <h2 class="font-serif text-nomada-cream text-3xl md:text-5xl font-light leading-tight text-balance">
+            {heading}
+          </h2>
+        )}
+      </div>
+    )}
+
+    {/* Steps */}
+    {steps.length > 0 && (
+      <div class="grid md:grid-cols-3 gap-0 relative">
+        {/* Connecting line — desktop only */}
+        <div class="hidden md:block absolute top-10 left-[calc(16.66%)] right-[calc(16.66%)] h-px bg-nomada-gold/20" />
+
+        {steps.map((step, i) => (
+          <div class="flex flex-col items-center text-center px-6 py-4 md:py-8">
+            {/* Circle with number */}
+            <div class="relative z-10 size-20 border border-nomada-gold/40 flex items-center justify-center mb-4 md:mb-6 bg-nomada-deep">
+              <span class="text-nomada-gold">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                  aria-hidden="true"
+                >
+                  {step.icon === "menu" && (
+                    <Fragment>
+                      <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" />
+                      <rect x="9" y="3" width="6" height="4" rx="1" />
+                      <path d="M9 12h6M9 16h4" />
+                    </Fragment>
+                  )}
+                  {step.icon === "chat" && (
+                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                  )}
+                  {step.icon === "home" && (
+                    <Fragment>
+                      <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                      <polyline points="9 22 9 12 15 12 15 22" />
+                    </Fragment>
+                  )}
+                </svg>
+              </span>
+            </div>
+
+            <span class="font-sans text-nomada-gold/40 text-[10px] tracking-[0.4em] uppercase mb-2 md:mb-3">
+              {stepNumber(i)}
+            </span>
+            {step.title && (
+              <h3 class="font-serif text-nomada-cream text-2xl mb-2 md:mb-3">
+                {step.title}
+              </h3>
+            )}
+            {step.description && (
+              <p class="font-sans text-nomada-cream/50 text-[14px] leading-relaxed max-w-xs">
+                {step.description}
+              </p>
+            )}
+
+            {/* Arrow between steps — mobile */}
+            {i < steps.length - 1 && (
+              <div class="md:hidden mt-4 mb-0 text-nomada-gold/30">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  aria-hidden="true"
+                >
+                  <path d="M12 5v14M5 12l7 7 7-7" />
+                </svg>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    )}
+
+    {/* Pre-order notice */}
+    {notice && (
+      <div class="flex flex-col items-center text-center mt-8 md:mt-14 border-t border-nomada-gold/15 pt-8 md:pt-14">
+        <p class="font-sans text-nomada-cream/60 text-[13px] leading-relaxed max-w-xl text-balance">
+          {noticeBefore}{whatsappIndex >= 0 && <a href={whatsapp} target="_blank" rel="noopener noreferrer" class="text-nomada-gold hover:text-nomada-cream transition-colors underline underline-offset-2">WhatsApp</a>}{noticeAfter}
+        </p>
+      </div>
+    )}
+
+    {/* CTA */}
+    <div class="flex flex-col items-center gap-6 mt-8">
+      <a
+        href={whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="font-sans text-nomada-deep text-[12px] tracking-[0.3em] uppercase bg-nomada-gold px-12 py-5 hover:bg-nomada-cream transition-colors duration-300 w-full sm:w-auto text-center"
+      >
+        Hacer mi pedido
+      </a>
+    </div>
+
+    {/* FAQ Structured Data */}
+    <script type="application/ld+json" set:html={JSON.stringify(faq)} />
+  </div>
+</section>

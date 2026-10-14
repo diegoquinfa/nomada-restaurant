@@ -1,0 +1,152 @@
+---
+import {
+  getSiteInfo,
+  type MediaValue,
+  mediaUrl,
+  whatsappHref,
+} from "../../lib/site";
+
+type Highlight = { name?: string };
+
+interface Props {
+  value?: {
+    eyebrow?: string;
+    background?: MediaValue | null;
+    logo?: MediaValue | null;
+    headline?: string;
+    subheadline?: string;
+    primary_cta?: string;
+    secondary_cta?: string;
+    highlights?: Highlight[];
+  };
+}
+
+const { value } = Astro.props;
+
+const eyebrow = value?.eyebrow ?? "";
+const background = value?.background ?? null;
+const logo = value?.logo ?? null;
+const headline = value?.headline ?? "";
+const subheadline = value?.subheadline ?? "";
+const primaryCta = value?.primary_cta ?? "";
+const secondaryCta = value?.secondary_cta ?? "";
+const highlights = (value?.highlights ?? []).filter((item) => item?.name);
+
+const backgroundUrl = mediaUrl(background);
+const logoUrl = mediaUrl(logo);
+
+const info = await getSiteInfo();
+const whatsapp = whatsappHref(info);
+---
+
+<section
+  class="relative min-h-dvh flex flex-col items-center justify-center overflow-hidden"
+  aria-label="Hero NÓMADA Cocina Fusión"
+>
+  <div class="absolute inset-0 w-full h-min-dvh -z-10">
+    {backgroundUrl && (
+      <img
+        src={backgroundUrl}
+        alt={background?.alt ?? "Plato gourmet delivery NÓMADA — Cocina Fusión Cartagena"}
+        class="object-cover object-center w-full h-dvh blur-sm"
+        width={background?.width ?? 1920}
+        height={background?.height ?? 1080}
+        loading="eager"
+        fetchpriority="high"
+      />
+    )}
+    <div class="absolute inset-0 bg-nomada-primary/80"></div>
+  </div>
+
+  <div class="relative z-10 flex flex-col items-center text-center px-6 max-w-3xl mx-auto">
+    {/* Logo wordmark */}
+    {(eyebrow || logoUrl) && (
+      <div class="animate-fade-in [animation-delay:100ms] animation-duration-[600ms] mb-6">
+        {eyebrow && (
+          <p class="font-sans text-nomada-gold text-[10px] tracking-[0.5em] uppercase mb-2">
+            {eyebrow}
+          </p>
+        )}
+        {logoUrl && (
+          <img
+            src={logoUrl}
+            alt={logo?.alt ?? "NÓMADA Cocina Fusión"}
+            aria-label="NÓMADA Cocina Fusión"
+            class="w-max-full"
+            width={logo?.width ?? 280}
+            height={logo?.height ?? 90}
+            loading="eager"
+            fetchpriority="high"
+          />
+        )}
+      </div>
+    )}
+
+    {/* Gold divider */}
+    <div class="animate-fade-in [animation-delay:300ms] animation-duration-[600ms] w-10 h-px bg-nomada-gold/70 my-7" />
+
+    {/* Headline */}
+    {headline && (
+      <h1 class="animate-fade-in-up [animation-delay:400ms] animation-duration-[800ms] font-serif text-nomada-cream text-2xl md:text-3xl font-light leading-relaxed text-balance">
+        {headline}
+      </h1>
+    )}
+
+    {/* Subheadline */}
+    {subheadline && (
+      <p class="animate-fade-in-up [animation-delay:500ms] animation-duration-[800ms] font-serif italic text-nomada-cream/70 text-lg md:text-xl leading-relaxed mt-4 text-balance">
+        {subheadline}
+      </p>
+    )}
+
+    {/* CTAs */}
+    {(primaryCta || secondaryCta) && (
+      <div class="animate-fade-in-up [animation-delay:600ms] animation-duration-[800ms] flex flex-col sm:flex-row items-center gap-4 mt-10">
+        {primaryCta && (
+          <a
+            href={whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Pedir por WhatsApp"
+            class="font-sans text-nomada-deep text-[11px] tracking-[0.25em] uppercase bg-nomada-gold px-10 py-4 hover:bg-nomada-cream transition-colors duration-300 w-full sm:w-auto text-center"
+          >
+            {primaryCta}
+          </a>
+        )}
+
+        {secondaryCta && (
+          <a
+            href="/#menu"
+            class="font-sans text-nomada-cream text-[11px] tracking-[0.25em] uppercase border border-nomada-gold/50 px-10 py-4 hover:border-nomada-gold hover:text-nomada-gold transition-colors duration-300 w-full sm:w-auto text-center"
+          >
+            {secondaryCta}
+          </a>
+        )}
+      </div>
+    )}
+
+    {/* Categories */}
+    {highlights.length > 0 && (
+      <div class="animate-fade-in [animation-delay:800ms] animation-duration-[600ms] flex flex-wrap justify-center gap-x-5 gap-y-2 mt-12">
+        {highlights.map((cat, i) => (
+          <span class="flex items-center gap-5">
+            <span class="font-sans text-nomada-gold text-[10px] tracking-[0.35em] uppercase">
+              {cat.name}
+            </span>
+            {i < highlights.length - 1 && <span class="text-nomada-gold/40 text-xs">·</span>}
+          </span>
+        ))}
+      </div>
+    )}
+  </div>
+
+  {/* Scroll indicator */}
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-fade-in [animation-delay:800ms] animation-duration-[600ms]">
+    <div class="flex flex-col items-center gap-2">
+      <span class="font-sans text-nomada-cream/40 text-[9px] tracking-[0.3em] uppercase">
+        Explorar
+      </span>
+      <div class="w-px h-10 bg-nomada-gold/30" />
+    </div>
+  </div>
+</section>

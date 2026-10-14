@@ -1,0 +1,51 @@
+---
+import { getEmDashCollection } from "emdash";
+import {
+  TemporadaStrip,
+  TemporadaTopBar,
+} from "#/modules/pages/home/sections/home-temporada";
+
+interface Props {
+  value: {
+    show_top_bar?: boolean;
+  };
+}
+
+const { value } = Astro.props;
+
+function toSeasonalCopy(data: Record<string, unknown>) {
+  return {
+    title: String(data.title ?? ""),
+    status_label: String(data.status_label ?? ""),
+    eyebrow: String(data.eyebrow ?? ""),
+    bar_message: String(data.bar_message ?? ""),
+    body: typeof data.body === "string" ? data.body : "",
+    highlight: typeof data.highlight === "string" ? data.highlight : "",
+    signoff: typeof data.signoff === "string" ? data.signoff : "",
+  };
+}
+
+// Primer plato de temporada publicado; sin ninguno no se renderiza nada.
+const { entries } = await getEmDashCollection("seasonal", {
+  status: "published",
+});
+const entry = entries[0];
+const copy = entry
+  ? toSeasonalCopy(entry.data as Record<string, unknown>)
+  : null;
+---
+
+{
+  copy && (
+    <>
+      <TemporadaStrip client:visible {...copy} />
+      {value.show_top_bar && (
+        <TemporadaTopBar
+          client:load
+          status_label={copy.status_label}
+          bar_message={copy.bar_message}
+        />
+      )}
+    </>
+  )
+}

@@ -2,6 +2,7 @@ import { act, cleanup, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { PromoPopup } from "#/modules/promo/components/promo-popup.tsx";
+import type { Promo } from "#/modules/promo/types.ts";
 
 const localStorageMock = (() => {
   let store: Record<string, string> = {};
@@ -25,17 +26,15 @@ Object.defineProperty(window, "localStorage", {
   configurable: true,
 });
 
-vi.mock("#/modules/promo/promos.config.ts", () => ({
-  promos: [
-    {
-      id: "promo-solo",
-      images: [{ src: "/images/promo/solo.webp", alt: "Promo Solo" }],
-      startDate: "2026-07-01T10:00-05:00",
-      endDate: "2026-07-12T23:59-05:00",
-      activeDays: [2], // Wednesday
-    },
-  ],
-}));
+const promos: Promo[] = [
+  {
+    id: "promo-solo",
+    images: [{ src: "/images/promo/solo.webp", alt: "Promo Solo" }],
+    startDate: "2026-07-01T10:00-05:00",
+    endDate: "2026-07-12T23:59-05:00",
+    activeDays: [2], // Wednesday
+  },
+];
 
 describe("PromoPopup — single active promo", () => {
   beforeEach(() => {
@@ -56,7 +55,7 @@ describe("PromoPopup — single active promo", () => {
   });
 
   it("renders a bare image with no navigation controls or progress bars for a single slide", () => {
-    render(<PromoPopup />);
+    render(<PromoPopup promos={promos} />);
     act(() => {
       vi.advanceTimersByTime(1000);
     });
