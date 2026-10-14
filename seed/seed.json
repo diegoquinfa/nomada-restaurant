@@ -1,0 +1,1354 @@
+{
+  "$schema": "https://emdashcms.com/seed.schema.json",
+  "version": "1",
+  "defaultLocale": "es",
+  "meta": {
+    "name": "Nómada Cocina Fusión",
+    "description": "Sitio del restaurante Nómada, Cartagena",
+    "author": "Nómada"
+  },
+  "settings": {
+    "title": "NÓMADA Cocina Fusión",
+    "tagline": "Delivery gourmet en Cartagena",
+    "url": "https://nomadarestaurantectg.com"
+  },
+  "blockTypes": [
+    {
+      "slug": "hero",
+      "label": "Portada",
+      "category": "Secciones",
+      "currentVersion": 1,
+      "versions": [
+        {
+          "version": 1,
+          "fields": [
+            {
+              "slug": "eyebrow",
+              "label": "Texto superior",
+              "type": "string",
+              "required": true
+            },
+            {
+              "slug": "background",
+              "label": "Imagen de fondo",
+              "type": "image"
+            },
+            {
+              "slug": "logo",
+              "label": "Logo",
+              "type": "image"
+            },
+            {
+              "slug": "headline",
+              "label": "Título",
+              "type": "string",
+              "required": true
+            },
+            {
+              "slug": "subheadline",
+              "label": "Subtítulo",
+              "type": "text"
+            },
+            {
+              "slug": "primary_cta",
+              "label": "Botón principal (abre WhatsApp)",
+              "type": "string"
+            },
+            {
+              "slug": "secondary_cta",
+              "label": "Botón secundario (baja al menú)",
+              "type": "string"
+            },
+            {
+              "slug": "highlights",
+              "label": "Categorías destacadas",
+              "type": "repeater",
+              "validation": {
+                "subFields": [
+                  {
+                    "slug": "name",
+                    "label": "Nombre",
+                    "type": "string",
+                    "required": true
+                  }
+                ],
+                "maxItems": 8
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "about",
+      "label": "Nosotros",
+      "category": "Secciones",
+      "currentVersion": 1,
+      "versions": [
+        {
+          "version": 1,
+          "fields": [
+            {
+              "slug": "eyebrow",
+              "label": "Texto superior",
+              "type": "string"
+            },
+            {
+              "slug": "image",
+              "label": "Imagen",
+              "type": "image"
+            },
+            {
+              "slug": "badge",
+              "label": "Etiqueta sobre la imagen",
+              "type": "string"
+            },
+            {
+              "slug": "heading_line1",
+              "label": "Título (línea 1)",
+              "type": "string"
+            },
+            {
+              "slug": "heading_line2",
+              "label": "Título (línea 2, en cursiva)",
+              "type": "string"
+            },
+            {
+              "slug": "paragraph_intro",
+              "label": "Párrafo 1",
+              "type": "text"
+            },
+            {
+              "slug": "paragraph_highlight",
+              "label": "Párrafo 2 (destacado)",
+              "type": "text"
+            },
+            {
+              "slug": "paragraph_outro",
+              "label": "Párrafo 3",
+              "type": "text"
+            },
+            {
+              "slug": "stats",
+              "label": "Cifras",
+              "type": "repeater",
+              "validation": {
+                "subFields": [
+                  {
+                    "slug": "value",
+                    "label": "Valor",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "slug": "label",
+                    "label": "Etiqueta",
+                    "type": "string",
+                    "required": true
+                  }
+                ],
+                "maxItems": 4
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "menu_section",
+      "label": "Carta (platos)",
+      "category": "Secciones",
+      "currentVersion": 1,
+      "versions": [
+        {
+          "version": 1,
+          "fields": [
+            {
+              "slug": "eyebrow",
+              "label": "Texto superior",
+              "type": "string"
+            },
+            {
+              "slug": "heading",
+              "label": "Título",
+              "type": "string",
+              "required": true
+            },
+            {
+              "slug": "intro",
+              "label": "Texto introductorio",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "seasonal_strip",
+      "label": "Plato de temporada",
+      "category": "Secciones",
+      "currentVersion": 1,
+      "versions": [
+        {
+          "version": 1,
+          "fields": [
+            {
+              "slug": "show_top_bar",
+              "label": "Mostrar barra dorada al bajar",
+              "type": "boolean",
+              "defaultValue": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "how_to_order",
+      "label": "Cómo pedir",
+      "category": "Secciones",
+      "currentVersion": 1,
+      "versions": [
+        {
+          "version": 1,
+          "fields": [
+            {
+              "slug": "eyebrow",
+              "label": "Texto superior",
+              "type": "string"
+            },
+            {
+              "slug": "heading",
+              "label": "Título",
+              "type": "string",
+              "required": true
+            },
+            {
+              "slug": "steps",
+              "label": "Pasos",
+              "type": "repeater",
+              "validation": {
+                "subFields": [
+                  {
+                    "slug": "title",
+                    "label": "Título",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "slug": "description",
+                    "label": "Descripción",
+                    "type": "text",
+                    "required": true
+                  },
+                  {
+                    "slug": "icon",
+                    "label": "Icono",
+                    "type": "select",
+                    "options": [
+                      "menu",
+                      "chat",
+                      "home"
+                    ]
+                  }
+                ],
+                "minItems": 1,
+                "maxItems": 6
+              }
+            },
+            {
+              "slug": "notice",
+              "label": "Aviso final (la palabra WhatsApp se enlaza sola)",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "schedule",
+      "label": "Horarios",
+      "category": "Secciones",
+      "currentVersion": 1,
+      "versions": [
+        {
+          "version": 1,
+          "fields": [
+            {
+              "slug": "eyebrow",
+              "label": "Texto superior",
+              "type": "string"
+            },
+            {
+              "slug": "heading",
+              "label": "Título",
+              "type": "string",
+              "required": true
+            },
+            {
+              "slug": "hours_title",
+              "label": "Subtítulo de horarios",
+              "type": "string"
+            },
+            {
+              "slug": "rows",
+              "label": "Horarios",
+              "type": "repeater",
+              "validation": {
+                "subFields": [
+                  {
+                    "slug": "days",
+                    "label": "Días",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "slug": "hours",
+                    "label": "Horas",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "slug": "note",
+                    "label": "Nota",
+                    "type": "string"
+                  }
+                ],
+                "minItems": 1,
+                "maxItems": 7
+              }
+            },
+            {
+              "slug": "footnote",
+              "label": "Nota al pie",
+              "type": "text"
+            },
+            {
+              "slug": "coverage_title",
+              "label": "Subtítulo de cobertura",
+              "type": "string"
+            },
+            {
+              "slug": "coverage",
+              "label": "Zonas de cobertura",
+              "type": "repeater",
+              "validation": {
+                "subFields": [
+                  {
+                    "slug": "name",
+                    "label": "Zona",
+                    "type": "string",
+                    "required": true
+                  }
+                ],
+                "maxItems": 12
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "contact",
+      "label": "Contacto",
+      "category": "Secciones",
+      "currentVersion": 1,
+      "versions": [
+        {
+          "version": 1,
+          "fields": [
+            {
+              "slug": "eyebrow",
+              "label": "Texto superior",
+              "type": "string"
+            },
+            {
+              "slug": "heading",
+              "label": "Título",
+              "type": "string",
+              "required": true
+            },
+            {
+              "slug": "intro",
+              "label": "Texto introductorio",
+              "type": "text"
+            },
+            {
+              "slug": "whatsapp_hint",
+              "label": "Texto bajo el número de WhatsApp",
+              "type": "string"
+            },
+            {
+              "slug": "instagram_hint",
+              "label": "Texto bajo el usuario de Instagram",
+              "type": "string"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "collections": [
+    {
+      "slug": "pages",
+      "label": "Páginas",
+      "labelSingular": "Página",
+      "icon": "layout",
+      "supports": [
+        "drafts",
+        "revisions",
+        "preview",
+        "seo"
+      ],
+      "urlPattern": "/{slug}",
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Título interno",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "layout",
+          "label": "Secciones de la página",
+          "type": "blocks",
+          "validation": {
+            "allowedTypes": [
+              "hero",
+              "seasonal_strip",
+              "about",
+              "menu_section",
+              "how_to_order",
+              "schedule",
+              "contact"
+            ],
+            "maxItems": 30
+          }
+        }
+      ]
+    },
+    {
+      "slug": "dishes",
+      "label": "Platos",
+      "labelSingular": "Plato",
+      "icon": "fork-knife",
+      "routable": false,
+      "supports": [
+        "drafts"
+      ],
+      "titleField": "title",
+      "admin": {
+        "listColumns": [
+          "price",
+          "badge",
+          "coming_soon"
+        ]
+      },
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Nombre",
+          "type": "string",
+          "required": true,
+          "searchable": true
+        },
+        {
+          "slug": "description",
+          "label": "Descripción",
+          "type": "text"
+        },
+        {
+          "slug": "price",
+          "label": "Precio (COP)",
+          "type": "integer"
+        },
+        {
+          "slug": "badge",
+          "label": "Etiqueta",
+          "type": "select",
+          "validation": {
+            "options": [
+              "Favorito",
+              "Nuevo",
+              "Temporada"
+            ]
+          }
+        },
+        {
+          "slug": "coming_soon",
+          "label": "Muy pronto (sin precio)",
+          "type": "boolean",
+          "defaultValue": false
+        },
+        {
+          "slug": "image",
+          "label": "Foto",
+          "type": "image"
+        },
+        {
+          "slug": "sort_order",
+          "label": "Orden dentro de su categoría",
+          "type": "integer",
+          "indexed": true
+        }
+      ]
+    },
+    {
+      "slug": "promos",
+      "label": "Promociones",
+      "labelSingular": "Promoción",
+      "icon": "megaphone",
+      "routable": false,
+      "supports": [
+        "drafts"
+      ],
+      "titleField": "title",
+      "admin": {
+        "listColumns": [
+          "start_date",
+          "end_date"
+        ]
+      },
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Nombre interno",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "images",
+          "label": "Imágenes (cada una es una historia)",
+          "type": "repeater",
+          "validation": {
+            "subFields": [
+              {
+                "slug": "image",
+                "label": "Imagen",
+                "type": "image",
+                "required": true
+              },
+              {
+                "slug": "alt",
+                "label": "Texto alternativo",
+                "type": "string"
+              }
+            ],
+            "minItems": 1,
+            "maxItems": 8
+          }
+        },
+        {
+          "slug": "start_date",
+          "label": "Empieza (hora Colombia)",
+          "type": "datetime"
+        },
+        {
+          "slug": "end_date",
+          "label": "Termina (hora Colombia)",
+          "type": "datetime"
+        },
+        {
+          "slug": "active_days",
+          "label": "Días activos (vacío = todos)",
+          "type": "multiSelect",
+          "validation": {
+            "options": [
+              "Lunes",
+              "Martes",
+              "Miércoles",
+              "Jueves",
+              "Viernes",
+              "Sábado",
+              "Domingo"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "slug": "seasonal",
+      "label": "Plato de temporada",
+      "labelSingular": "Plato de temporada",
+      "icon": "star",
+      "routable": false,
+      "supports": [
+        "drafts"
+      ],
+      "titleField": "title",
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Título",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "status_label",
+          "label": "Estado (ej. Muy pronto)",
+          "type": "string"
+        },
+        {
+          "slug": "eyebrow",
+          "label": "Texto superior",
+          "type": "string"
+        },
+        {
+          "slug": "bar_message",
+          "label": "Mensaje de la barra dorada",
+          "type": "string"
+        },
+        {
+          "slug": "body",
+          "label": "Texto",
+          "type": "text"
+        },
+        {
+          "slug": "highlight",
+          "label": "Frase a resaltar en dorado (debe aparecer en el texto)",
+          "type": "string"
+        },
+        {
+          "slug": "signoff",
+          "label": "Cierre en cursiva",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "slug": "site_info",
+      "label": "Datos del sitio",
+      "labelSingular": "Datos del sitio",
+      "icon": "storefront",
+      "routable": false,
+      "supports": [],
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Nombre",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "whatsapp_number",
+          "label": "WhatsApp (solo dígitos, con código de país)",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "whatsapp_message",
+          "label": "Mensaje inicial de WhatsApp",
+          "type": "string"
+        },
+        {
+          "slug": "instagram_handle",
+          "label": "Usuario de Instagram (sin @)",
+          "type": "string"
+        },
+        {
+          "slug": "location",
+          "label": "Ubicación",
+          "type": "string"
+        },
+        {
+          "slug": "legal_name",
+          "label": "Nombre en el pie de página",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "taxonomies": [
+    {
+      "name": "menu_category",
+      "label": "Categorías de la carta",
+      "labelSingular": "Categoría",
+      "hierarchical": false,
+      "collections": [
+        "dishes"
+      ],
+      "terms": [
+        {
+          "slug": "recomendados-del-chef",
+          "label": "Recomendados del Chef"
+        },
+        {
+          "slug": "reservas-del-chef",
+          "label": "Reservas del Chef"
+        },
+        {
+          "slug": "bowls-fusion-fit",
+          "label": "Bowls Fusión Fit"
+        },
+        {
+          "slug": "pastas",
+          "label": "Pastas"
+        },
+        {
+          "slug": "caseritos-del-chef",
+          "label": "Caseritos del Chef (Lunes a Viernes)"
+        },
+        {
+          "slug": "entradas-y-arroces",
+          "label": "Arroces"
+        }
+      ]
+    }
+  ],
+  "menus": [
+    {
+      "name": "primary",
+      "label": "Navegación principal",
+      "items": [
+        {
+          "type": "custom",
+          "label": "Nosotros",
+          "url": "/#nosotros"
+        },
+        {
+          "type": "custom",
+          "label": "Menú",
+          "url": "/#menu"
+        },
+        {
+          "type": "custom",
+          "label": "Cómo pedir",
+          "url": "/#como-pedir"
+        },
+        {
+          "type": "custom",
+          "label": "Horarios",
+          "url": "/#horarios"
+        },
+        {
+          "type": "custom",
+          "label": "Contacto",
+          "url": "/#contacto"
+        }
+      ]
+    },
+    {
+      "name": "footer",
+      "label": "Pie de página",
+      "items": [
+        {
+          "type": "custom",
+          "label": "Nosotros",
+          "url": "/#nosotros"
+        },
+        {
+          "type": "custom",
+          "label": "Menú",
+          "url": "/#menu"
+        },
+        {
+          "type": "custom",
+          "label": "Cómo pedir",
+          "url": "/#como-pedir"
+        },
+        {
+          "type": "custom",
+          "label": "Horarios",
+          "url": "/#horarios"
+        }
+      ]
+    }
+  ],
+  "content": {
+    "pages": [
+      {
+        "id": "page-home",
+        "slug": "home",
+        "status": "published",
+        "data": {
+          "title": "Inicio",
+          "layout": [
+            {
+              "_type": "hero",
+              "_version": 1,
+              "_key": "home-hero",
+              "eyebrow": "Cartagena de Indias",
+              "background": {
+                "$media": {
+                  "url": "https://nomadarestaurantectg.com/images/assets/hero-bg.webp",
+                  "filename": "hero-bg.webp",
+                  "alt": "Plato gourmet delivery NÓMADA — Cocina Fusión Cartagena"
+                }
+              },
+              "logo": {
+                "$media": {
+                  "url": "https://nomadarestaurantectg.com/images/logo.webp",
+                  "filename": "logo.webp",
+                  "alt": "NÓMADA Cocina Fusión"
+                }
+              },
+              "headline": "Bienvenidos a la experiencia NÓMADA",
+              "subheadline": "Un restaurante cocina oculta creado para transformar el delivery en una experiencia gourmet en Cartagena",
+              "primary_cta": "Pedir ahora",
+              "secondary_cta": "Ver menú",
+              "highlights": [
+                {
+                  "name": "Entradas y Arroces"
+                },
+                {
+                  "name": "Recomendados del Chef"
+                },
+                {
+                  "name": "Pastas"
+                },
+                {
+                  "name": "Caseritos del Chef"
+                }
+              ]
+            },
+            {
+              "_type": "seasonal_strip",
+              "_version": 1,
+              "_key": "home-seasonal",
+              "show_top_bar": true
+            },
+            {
+              "_type": "about",
+              "_version": 1,
+              "_key": "home-about",
+              "eyebrow": "Nuestra historia",
+              "image": {
+                "$media": {
+                  "url": "https://nomadarestaurantectg.com/images/assets/banner-about.webp",
+                  "filename": "banner-about.webp",
+                  "alt": "Cocina artesanal NÓMADA — preparación gourmet en Cartagena"
+                }
+              },
+              "badge": "Cocina oculta · Cartagena",
+              "heading_line1": "Un sueño hecho",
+              "heading_line2": "con el corazón",
+              "paragraph_intro": "Después de meses de ideas, pruebas, esfuerzo y muchísima pasión por la cocina… nace NÓMADA.",
+              "paragraph_highlight": "Una cocina oculta creada para transformar el delivery en una experiencia: sabores intensos, cocina fusión y detalles pensados para disfrutarse desde casa.",
+              "paragraph_outro": "Este es apenas el comienzo de algo que soñamos construir con el corazón.",
+              "stats": [
+                {
+                  "value": "100%",
+                  "label": "Artesanal"
+                },
+                {
+                  "value": "4",
+                  "label": "Cocinas fusión"
+                },
+                {
+                  "value": "CTG",
+                  "label": "Solo Cartagena"
+                }
+              ]
+            },
+            {
+              "_type": "menu_section",
+              "_version": 1,
+              "_key": "home-menu",
+              "eyebrow": "Nuestra carta",
+              "heading": "La carta",
+              "intro": "Trabajamos bajo pedidos programados por franja horaria para asegurar calidad, frescura y tiempos precisos. Más información en nuestro canal de WhatsApp."
+            },
+            {
+              "_type": "how_to_order",
+              "_version": 1,
+              "_key": "home-how-to-order",
+              "eyebrow": "Es muy sencillo",
+              "heading": "Cómo hacer tu pedido",
+              "steps": [
+                {
+                  "title": "Explora el menú",
+                  "description": "Navega por nuestras categorías y elige los platos que más te llamen. Entradas y Arroces, Recomendados del Chef, Pastas, Caseritos del Chef y más.",
+                  "icon": "menu"
+                },
+                {
+                  "title": "Escríbenos por WhatsApp",
+                  "description": "Mándanos un mensaje con tu pedido, dirección de entrega y hora preferida. Respondemos de inmediato.",
+                  "icon": "chat"
+                },
+                {
+                  "title": "Recibe en casa",
+                  "description": "Tu pedido es una experiencia única, empacado con cuidado para que cada plato llegue perfecto.",
+                  "icon": "home"
+                }
+              ],
+              "notice": "Trabajamos bajo pedidos programados por franja horaria para asegurar calidad, frescura y tiempos precisos, más información en nuestro canal de WhatsApp."
+            },
+            {
+              "_type": "schedule",
+              "_version": 1,
+              "_key": "home-schedule",
+              "eyebrow": "Disponibilidad",
+              "heading": "Horarios de atención",
+              "hours_title": "Horario de atención",
+              "rows": [
+                {
+                  "days": "Lunes – Sábado",
+                  "hours": "11:00 am – 3:00 pm",
+                  "note": "Horario único"
+                }
+              ],
+              "footnote": "* Los pedidos se reciben hasta 30 minutos antes del cierre. Delivery a domicilio en toda Cartagena.",
+              "coverage_title": "Zona de cobertura",
+              "coverage": [
+                {
+                  "name": "Toda Cartagena"
+                }
+              ]
+            },
+            {
+              "_type": "contact",
+              "_version": 1,
+              "_key": "home-contact",
+              "eyebrow": "Hablemos",
+              "heading": "Contacto",
+              "intro": "Pedidos, consultas, pedidos especiales. Escríbenos cuando quieras - estamos aquí.",
+              "whatsapp_hint": "Pedidos y consultas",
+              "instagram_hint": "Fotos, novedades y más"
+            }
+          ]
+        }
+      }
+    ],
+    "dishes": [
+      {
+        "id": "dish-recomendados-del-chef-1",
+        "status": "draft",
+        "data": {
+          "title": "Hamburguesa de Camarón con papas",
+          "description": "Pan brioche artesanal, disco de camarón apanado súper crujiente, ensalada coleslaw, alioli de eneldo, pepinillos agridulces y cebolla encurtida artesanal. Bañada en nuestra salsa de la casa y acompañada de papas a la francesa.",
+          "sort_order": 10,
+          "coming_soon": false,
+          "price": 35000,
+          "badge": "Nuevo",
+          "image": {
+            "$media": {
+              "url": "https://nomadarestaurantectg.com/images/dishes/recomendados-del-chef/hamburguesa-camaron.webp",
+              "filename": "hamburguesa-camaron.webp",
+              "alt": "Hamburguesa de Camarón con papas"
+            }
+          }
+        },
+        "taxonomies": {
+          "menu_category": [
+            "recomendados-del-chef"
+          ]
+        }
+      },
+      {
+        "id": "dish-recomendados-del-chef-2",
+        "status": "draft",
+        "data": {
+          "title": "Costilla BBQ Roadhouse",
+          "description": "Costillas de cerdo de cocción lenta, caramelizadas con nuestra salsa BBQ artesanal de café, logrando un equilibrio perfecto entre dulzor, ahumado y especias. Acompañadas de papas a la francesa y ensalada fresca de la casa.",
+          "sort_order": 20,
+          "coming_soon": false,
+          "price": 45000,
+          "image": {
+            "$media": {
+              "url": "https://nomadarestaurantectg.com/images/dishes/recomendados-del-chef/costilla-bbq-roadhouse.webp",
+              "filename": "costilla-bbq-roadhouse.webp",
+              "alt": "Costilla BBQ Roadhouse"
+            }
+          }
+        },
+        "taxonomies": {
+          "menu_category": [
+            "recomendados-del-chef"
+          ]
+        }
+      },
+      {
+        "id": "dish-recomendados-del-chef-3",
+        "status": "draft",
+        "data": {
+          "title": "Lomo Tres Pimientas",
+          "description": "Lomo fino en costra de pimientas acompañado de papas francesa y ensalada.",
+          "sort_order": 30,
+          "coming_soon": false,
+          "price": 35000,
+          "image": {
+            "$media": {
+              "url": "https://nomadarestaurantectg.com/images/dishes/recomendados-del-chef/lomo-tres-pimientas.webp",
+              "filename": "lomo-tres-pimientas.webp",
+              "alt": "Lomo Tres Pimientas"
+            }
+          }
+        },
+        "taxonomies": {
+          "menu_category": [
+            "recomendados-del-chef"
+          ]
+        }
+      },
+      {
+        "id": "dish-recomendados-del-chef-4",
+        "status": "published",
+        "data": {
+          "title": "Pescado Marinero",
+          "description": "Jugoso filete de pescado apanado bañado en una rica salsa marinera con mejillones y anillos de calamar, acompañado de auténtico arroz de coco frito, patacones y una ensalada fresca. Una verdadera experiencia caribeña para consentir tu paladar.",
+          "sort_order": 40,
+          "coming_soon": false,
+          "price": 30000
+        },
+        "taxonomies": {
+          "menu_category": [
+            "recomendados-del-chef"
+          ]
+        }
+      },
+      {
+        "id": "dish-reservas-del-chef-1",
+        "status": "published",
+        "data": {
+          "title": "Picada Gourmet de Pollo",
+          "description": "Tiernos bocados de pechuga de pollo bañados en una cremosa salsa de queso crema y eneldo, acompañados de papas en casco y chicharrón crocante. Servida con alioli de la casa, mayonesa de mango y pico de gallo fresco.",
+          "sort_order": 10,
+          "coming_soon": false,
+          "price": 38000,
+          "badge": "Nuevo",
+          "image": {
+            "$media": {
+              "url": "https://nomadarestaurantectg.com/images/dishes/reservas-del-chef/picada-gourmet-pollo.webp",
+              "filename": "picada-gourmet-pollo.webp",
+              "alt": "Picada Gourmet de Pollo"
+            }
+          }
+        },
+        "taxonomies": {
+          "menu_category": [
+            "reservas-del-chef"
+          ]
+        }
+      },
+      {
+        "id": "dish-reservas-del-chef-2",
+        "status": "published",
+        "data": {
+          "title": "Picada Gourmet de Camarón",
+          "description": "Jugosos camarones en una cremosa salsa de queso crema y eneldo, acompañados de papas en casco, chorizo y chicharrón crocante. Servida con alioli de la casa, mayonesa de mango y pico de gallo fresco.",
+          "sort_order": 20,
+          "coming_soon": false,
+          "price": 38000,
+          "badge": "Nuevo",
+          "image": {
+            "$media": {
+              "url": "https://nomadarestaurantectg.com/images/dishes/reservas-del-chef/picada-gourmet-camaron.webp",
+              "filename": "picada-gourmet-camaron.webp",
+              "alt": "Picada Gourmet de Camarón"
+            }
+          }
+        },
+        "taxonomies": {
+          "menu_category": [
+            "reservas-del-chef"
+          ]
+        }
+      },
+      {
+        "id": "dish-bowls-fusion-fit-1",
+        "status": "published",
+        "data": {
+          "title": "Bowl Tradición",
+          "description": "El equilibrio perfecto entre lo clásico y lo saludable. Pechuga de pollo al grill sobre una base de arroz del día, con un mix fresco de lechuga crespa, pepino, zanahoria, tomates cherry y maíz desgranado. Nutritivo, ligero y lleno de texturas. Acompañado de una vinagreta ligera de fresa y vinagre balsámico.",
+          "sort_order": 10,
+          "coming_soon": false,
+          "price": 28000
+        },
+        "taxonomies": {
+          "menu_category": [
+            "bowls-fusion-fit"
+          ]
+        }
+      },
+      {
+        "id": "dish-bowls-fusion-fit-2",
+        "status": "published",
+        "data": {
+          "title": "Bowl Criollo Crocante",
+          "description": "Un viaje de sabores contrastantes para consentirte. Chicharrón crujiente y dorado sobre una reconfortante base de arroz del día, acompañado de un mix fresco de lechuga crespa, tomates cherry, pepino, zanahoria y maíz desgranado. La combinación perfecta entre lo tradicional y lo ligero. Acompañado de una vinagreta ligera de fresa y vinagre balsámico.",
+          "sort_order": 20,
+          "coming_soon": false,
+          "price": 28000
+        },
+        "taxonomies": {
+          "menu_category": [
+            "bowls-fusion-fit"
+          ]
+        }
+      },
+      {
+        "id": "dish-bowls-fusion-fit-3",
+        "status": "published",
+        "data": {
+          "title": "Bowl Mar Caribe",
+          "description": "Un viaje directo a la costa con un toque sofisticado y fresco. Delicioso filete de pescado bañado en mantequilla de ajo y limón, servido sobre una base de arroz del día, lechuga crespa, tomates cherry, pepino crujiente, zanahoria y maíz desgranado. El toque final lo pone nuestra vinagreta de fresa y vinagre balsámico, que equilibra a la perfección los sabores dulces y ácidos.",
+          "sort_order": 30,
+          "coming_soon": false,
+          "price": 30000
+        },
+        "taxonomies": {
+          "menu_category": [
+            "bowls-fusion-fit"
+          ]
+        }
+      },
+      {
+        "id": "dish-pastas-1",
+        "status": "published",
+        "data": {
+          "title": "Fettuccine Queso Azul",
+          "description": "Crujiente milanesa de cerdo apanada, coronada con fettuccine en una cremosa salsa de queso azul, terminada con queso parmesano y cebolla frita crujiente.",
+          "sort_order": 10,
+          "coming_soon": false,
+          "price": 37000,
+          "badge": "Nuevo",
+          "image": {
+            "$media": {
+              "url": "https://nomadarestaurantectg.com/images/dishes/pastas/fettuccine-queso-azul.webp",
+              "filename": "fettuccine-queso-azul.webp",
+              "alt": "Fettuccine Queso Azul"
+            }
+          }
+        },
+        "taxonomies": {
+          "menu_category": [
+            "pastas"
+          ]
+        }
+      },
+      {
+        "id": "dish-pastas-2",
+        "status": "published",
+        "data": {
+          "title": "Fettuccine Huancaína & Camarones",
+          "description": "",
+          "sort_order": 20,
+          "coming_soon": false,
+          "price": 35000,
+          "image": {
+            "$media": {
+              "url": "https://nomadarestaurantectg.com/images/dishes/pastas/fettuccine-huancaina-camarones.webp",
+              "filename": "fettuccine-huancaina-camarones.webp",
+              "alt": "Fettuccine Huancaína & Camarones"
+            }
+          }
+        },
+        "taxonomies": {
+          "menu_category": [
+            "pastas"
+          ]
+        }
+      },
+      {
+        "id": "dish-pastas-3",
+        "status": "published",
+        "data": {
+          "title": "Pasta Cremosa Ajo & Parmesano con Pollo",
+          "description": "",
+          "sort_order": 30,
+          "coming_soon": false,
+          "price": 35000,
+          "image": {
+            "$media": {
+              "url": "https://nomadarestaurantectg.com/images/dishes/pastas/pasta-cremosa-ajo-parmesano-pollo.webp",
+              "filename": "pasta-cremosa-ajo-parmesano-pollo.webp",
+              "alt": "Pasta Cremosa Ajo & Parmesano con Pollo"
+            }
+          }
+        },
+        "taxonomies": {
+          "menu_category": [
+            "pastas"
+          ]
+        }
+      },
+      {
+        "id": "dish-pastas-4",
+        "status": "published",
+        "data": {
+          "title": "Fettuccine Carbonara con Pollo",
+          "description": "Un clásico reconfortante con el sello inconfundible de Nómada. Pasta fettuccine al dente envuelta en una cremosa y sedosa salsa carbonara, acompañada de tiernos trozos de pollo jugosos. Una combinación clásica y deliciosa.",
+          "sort_order": 40,
+          "coming_soon": false,
+          "price": 35000
+        },
+        "taxonomies": {
+          "menu_category": [
+            "pastas"
+          ]
+        }
+      },
+      {
+        "id": "dish-caseritos-del-chef-1",
+        "status": "published",
+        "data": {
+          "title": "Pollo & Champiñones",
+          "description": "Jugosos trozos de pollo en una cremosa salsa de champiñones, acompañados de arroz salteado, cascos de papa criolla y ensalada fresca de la casa.",
+          "sort_order": 10,
+          "coming_soon": false,
+          "price": 23000,
+          "badge": "Nuevo",
+          "image": {
+            "$media": {
+              "url": "https://nomadarestaurantectg.com/images/dishes/caseritos-del-chef/caserito-pollo-champinones.webp",
+              "filename": "caserito-pollo-champinones.webp",
+              "alt": "Pollo & Champiñones"
+            }
+          }
+        },
+        "taxonomies": {
+          "menu_category": [
+            "caseritos-del-chef"
+          ]
+        }
+      },
+      {
+        "id": "dish-caseritos-del-chef-2",
+        "status": "published",
+        "data": {
+          "title": "Fusión Criolla",
+          "description": "Pechuga en salsa teriyaki, acompañada de Arroz salteado, cascos de papa criolla y ensalada de la casa.",
+          "sort_order": 20,
+          "coming_soon": false,
+          "price": 23000,
+          "image": {
+            "$media": {
+              "url": "https://nomadarestaurantectg.com/images/dishes/caseritos-del-chef/fusion-criolla.webp",
+              "filename": "fusion-criolla.webp",
+              "alt": "Fusión Criolla"
+            }
+          }
+        },
+        "taxonomies": {
+          "menu_category": [
+            "caseritos-del-chef"
+          ]
+        }
+      },
+      {
+        "id": "dish-caseritos-del-chef-3",
+        "status": "published",
+        "data": {
+          "title": "Perú Urbano",
+          "description": "Fajitas de res salteado, acompañado de arroz salteado, cascos de papa criolla y ensalada de la casa.",
+          "sort_order": 30,
+          "coming_soon": false,
+          "price": 23000,
+          "image": {
+            "$media": {
+              "url": "https://nomadarestaurantectg.com/images/dishes/caseritos-del-chef/peru-urbano.webp",
+              "filename": "peru-urbano.webp",
+              "alt": "Perú Urbano"
+            }
+          }
+        },
+        "taxonomies": {
+          "menu_category": [
+            "caseritos-del-chef"
+          ]
+        }
+      },
+      {
+        "id": "dish-caseritos-del-chef-4",
+        "status": "published",
+        "data": {
+          "title": "Galeón Caribe",
+          "description": "Cubos de pescado apanado, en salsa de mango picante, acompañado de arroz salteado, patacones y ensalada de la casa.",
+          "sort_order": 40,
+          "coming_soon": false,
+          "price": 23000,
+          "image": {
+            "$media": {
+              "url": "https://nomadarestaurantectg.com/images/dishes/caseritos-del-chef/galeon-caribe.webp",
+              "filename": "galeon-caribe.webp",
+              "alt": "Galeón Caribe"
+            }
+          }
+        },
+        "taxonomies": {
+          "menu_category": [
+            "caseritos-del-chef"
+          ]
+        }
+      },
+      {
+        "id": "dish-entradas-y-arroces-1",
+        "status": "published",
+        "data": {
+          "title": "Arroz Salteado Caribeño",
+          "description": "Arroz de coco frito salteado, con vegetales, chorizo argentino, chicharrón, lomo fino, y pechuga.",
+          "sort_order": 10,
+          "coming_soon": false,
+          "price": 37000,
+          "image": {
+            "$media": {
+              "url": "https://nomadarestaurantectg.com/images/dishes/arroces/arroz-salteado-caribeno.webp",
+              "filename": "arroz-salteado-caribeno.webp",
+              "alt": "Arroz Salteado Caribeño"
+            }
+          }
+        },
+        "taxonomies": {
+          "menu_category": [
+            "entradas-y-arroces"
+          ]
+        }
+      }
+    ],
+    "promos": [
+      {
+        "id": "promo-promo-costillas",
+        "status": "draft",
+        "data": {
+          "title": "promo-costillas",
+          "images": [
+            {
+              "image": {
+                "$media": {
+                  "url": "https://nomadarestaurantectg.com/images/promo/promo-costillas.webp",
+                  "filename": "promo-costillas.webp",
+                  "alt": "Costillas BBQ Roadhouse"
+                }
+              },
+              "alt": "Costillas BBQ Roadhouse"
+            }
+          ],
+          "start_date": "2026-07-01T10:00-05:00",
+          "end_date": "2026-07-28T23:59-05:00",
+          "active_days": [
+            "Sábado",
+            "Domingo"
+          ]
+        }
+      }
+    ],
+    "seasonal": [
+      {
+        "id": "seasonal-current",
+        "status": "published",
+        "data": {
+          "title": "Plato de Temporada",
+          "status_label": "Muy pronto",
+          "eyebrow": "Edición mensual",
+          "bar_message": "PLATO DE TEMPORADA — una creación exclusiva que cambia cada 30 días",
+          "body": "Una creación exclusiva que cambia cada mes para sorprenderte con lo mejor de la despensa y nuevas exploraciones culinarias. Cada 30 días renovamos la receta con ingredientes de temporada y combinaciones inesperadas, disponibles solo por tiempo limitado. Espéralo",
+          "highlight": "Cada 30 días",
+          "signoff": "Espéralo"
+        }
+      }
+    ],
+    "site_info": [
+      {
+        "id": "site-info-main",
+        "status": "published",
+        "data": {
+          "title": "NÓMADA Cocina Fusión",
+          "whatsapp_number": "573242503301",
+          "whatsapp_message": "Hola, quiero vivir la experiencia NÓMADA 🌎",
+          "instagram_handle": "nomadarestaurante",
+          "location": "Cartagena de Indias, Colombia",
+          "legal_name": "NÓMADA"
+        }
+      }
+    ]
+  }
+}
