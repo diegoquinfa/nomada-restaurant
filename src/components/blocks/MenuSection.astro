@@ -55,7 +55,7 @@ const { entries } = await getEmDashCollection("dishes", {
 const terms = await getTaxonomyTerms("menu_category", { includeCounts: false });
 const termsByEntry = await getTermsForEntries(
   "dishes",
-  entries.map((entry) => entry.id),
+  entries.map((entry) => entry.data.id),
   "menu_category",
 );
 
@@ -67,7 +67,7 @@ const categoriesBySlug = new Map<string, Category>(
 );
 
 for (const entry of entries) {
-  const term = termsByEntry.get(entry.id)?.[0];
+  const term = termsByEntry.get(entry.data.id)?.[0];
   const category = term ? categoriesBySlug.get(term.slug) : undefined;
   if (!category) continue;
 
