@@ -2,14 +2,16 @@ import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 import { d1, r2 } from "@emdash-cms/cloudflare";
-import { cloudflareEmail } from "@emdash-cms/cloudflare/plugins";
 import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
+import { nomadaEmail } from "./src/plugins/nomada-email.ts";
+
+const SITE_URL = "https://nomadarestaurantectg.com";
 
 export default defineConfig({
   output: "server",
   adapter: cloudflare(),
-  site: "https://nomadarestaurantectg.com",
+  site: SITE_URL,
   redirects: { "/home": "/" },
   // Single locale; default routing (no prefix) is required by the EmDash admin.
   i18n: { defaultLocale: "es", locales: ["es"] },
@@ -25,8 +27,14 @@ export default defineConfig({
         footerLabel: false,
       },
       plugins: [
-        cloudflareEmail({
+        nomadaEmail({
           from: { email: "cms@nomadarestaurantectg.com", name: "NÓMADA" },
+          brand: {
+            siteName: "NÓMADA",
+            siteUrl: SITE_URL,
+            logoUrl: `${SITE_URL}/images/email-logo.png`,
+            location: "Cartagena de Indias, Colombia",
+          },
         }),
       ],
     }),
